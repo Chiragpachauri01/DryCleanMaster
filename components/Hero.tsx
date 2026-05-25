@@ -164,11 +164,10 @@ export default function Hero() {
           />
 
           {/* Dark teal gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-teal-deep/90 via-teal-dark/70 to-teal-deep/92" />
-          <div className="absolute inset-0 bg-gradient-to-t from-teal-deep via-teal-deep/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-teal-deep/45 via-teal-dark/30 to-teal-deep/40" />
 
           {/* Teal texture overlay */}
-          <div className="absolute inset-0 teal-texture opacity-50" />
+          <div className="absolute inset-0 teal-texture opacity-20" />
 
           {/* Top service tag */}
           <motion.div

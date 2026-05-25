@@ -156,13 +156,7 @@ function ServiceCard({
           sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div
-          className={`absolute inset-0 transition-opacity duration-300 ${
-            dark
-              ? "bg-gradient-to-t from-teal-deep via-teal-deep/60 to-teal-deep/25 group-hover:from-teal-deep/95"
-              : "bg-gradient-to-t from-ivory-teal via-ivory-teal/30 to-transparent group-hover:from-ivory-teal/95"
-          }`}
-        />
+        <div className="absolute inset-0 bg-transparent" />
         {/* Floating number badge */}
         <div
           className={`absolute top-4 left-4 w-10 h-10 flex items-center justify-center backdrop-blur-sm border rounded-lg ${
