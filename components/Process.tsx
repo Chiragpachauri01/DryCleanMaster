@@ -42,7 +42,7 @@ export default function Process() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="process" className="bg-navy py-20 md:py-28" ref={ref}>
+    <section id="process" className="bg-teal-dark py-20 md:py-28 teal-texture" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
         {/* Header */}
         <div className="grid lg:grid-cols-[1fr_1.4fr] gap-10 mb-16">
@@ -52,8 +52,8 @@ export default function Process() {
               animate={inView ? { opacity: 1 } : {}}
               className="inline-flex items-center gap-2 mb-5"
             >
-              <span className="w-5 h-px bg-gold" />
-              <span className="text-gold font-sans text-xs uppercase tracking-[0.2em] font-semibold">
+              <span className="w-2 h-2 rounded-full bg-copper" />
+              <span className="text-copper font-sans text-xs uppercase tracking-[0.2em] font-semibold">
                 Our Process
               </span>
             </motion.span>
@@ -61,22 +61,22 @@ export default function Process() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.65, delay: 0.1 }}
-              className="font-serif text-cream text-3xl md:text-4xl xl:text-5xl font-bold leading-[1.1]"
+              className="font-serif text-ivory-warm text-3xl md:text-4xl xl:text-5xl font-bold leading-[1.1]"
             >
               How Our
               <br />
-              <span className="italic font-normal text-stone/50">
+              <span className="italic font-normal text-stone-teal/50">
                 Master Service
               </span>
               <br />
-              Works
+              <span className="text-teal-glow">Works</span>
             </motion.h2>
           </div>
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="self-end font-sans text-stone/55 text-base leading-relaxed border-l border-gold/20 pl-6"
+            className="self-end font-sans text-stone-teal/55 text-base leading-relaxed border-l-[3px] border-copper/30 pl-6"
           >
             Every visit follows a precise five-step methodology. Nothing is
             rushed. Every furnishing receives a bespoke treatment selected by
@@ -89,7 +89,7 @@ export default function Process() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.25 }}
-          className="relative h-52 md:h-64 mb-16 overflow-hidden"
+          className="relative h-52 md:h-64 mb-16 overflow-hidden rounded-2xl"
         >
           <Image
             src="/img/process-extraction-banner.png"
@@ -98,26 +98,26 @@ export default function Process() {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/60 to-navy/30" />
-          <div className="absolute inset-0 fabric-texture opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-teal-dark via-teal-dark/65 to-teal-dark/30" />
+          <div className="absolute inset-0 teal-texture opacity-40" />
 
           {/* Editorial overlay text */}
           <div className="absolute inset-0 flex items-center px-8 md:px-12">
             <div className="max-w-md">
-              <div className="w-6 h-px bg-gold mb-3" />
-              <p className="font-serif text-cream text-xl md:text-2xl font-medium leading-snug mb-2">
+              <div className="w-6 h-[2px] bg-copper mb-3 rounded-full" />
+              <p className="font-serif text-ivory-warm text-xl md:text-2xl font-medium leading-snug mb-2">
                 Every fiber, every stain,
                 <br />
-                <em className="text-gold/90 font-normal">handled with precision.</em>
+                <em className="text-copper-light font-normal">handled with precision.</em>
               </p>
-              <p className="font-sans text-stone/55 text-[11px] uppercase tracking-[0.2em]">
+              <p className="font-sans text-stone-teal/55 text-[11px] uppercase tracking-[0.2em]">
                 Industrial Extraction · European Equipment
               </p>
             </div>
           </div>
 
-          {/* Bottom gold accent */}
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold to-transparent opacity-50" />
+          {/* Bottom copper accent */}
+          <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-copper/60 to-transparent" />
         </motion.div>
 
         {/* Steps: staggered vertical layout with connecting line */}
@@ -127,7 +127,7 @@ export default function Process() {
             initial={{ scaleY: 0 }}
             animate={inView ? { scaleY: 1 } : {}}
             transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-            className="absolute left-[1.95rem] top-8 bottom-8 w-px bg-gold/15 origin-top hidden md:block"
+            className="absolute left-[1.95rem] top-8 bottom-8 w-px bg-copper/20 origin-top hidden md:block"
           />
 
           <div className="space-y-0">
@@ -137,14 +137,14 @@ export default function Process() {
                 initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.15 + i * 0.12 }}
-                className={`group flex gap-6 md:gap-10 items-start py-8 border-b border-stone/10 last:border-0 ${
+                className={`group flex gap-6 md:gap-10 items-start py-8 border-b border-teal/12 last:border-0 ${
                   i % 2 !== 0 ? "md:pl-16" : ""
                 }`}
               >
                 {/* Step circle */}
                 <div className="shrink-0 relative">
-                  <div className="w-16 h-16 rounded-full border border-gold/25 flex items-center justify-center bg-navy group-hover:border-gold/60 transition-colors duration-300">
-                    <span className="font-serif text-gold text-lg font-bold">
+                  <div className="w-16 h-16 rounded-full border-2 border-copper/25 flex items-center justify-center bg-teal-dark group-hover:border-copper/55 group-hover:bg-copper/10 transition-all duration-300">
+                    <span className="font-serif text-copper-light text-lg font-bold">
                       {step.num}
                     </span>
                   </div>
@@ -153,14 +153,14 @@ export default function Process() {
                 {/* Content */}
                 <div className="flex-1 pt-2">
                   <div className="flex flex-wrap items-baseline gap-3 mb-2">
-                    <h3 className="font-serif text-cream text-xl md:text-2xl font-semibold">
+                    <h3 className="font-serif text-ivory-warm text-xl md:text-2xl font-semibold">
                       {step.title}
                     </h3>
-                    <span className="font-sans text-[11px] text-gold/60 uppercase tracking-[0.15em] border border-gold/20 px-2 py-0.5">
+                    <span className="font-sans text-[11px] text-teal-glow/70 uppercase tracking-[0.12em] bg-teal/12 border border-teal/20 px-2.5 py-0.5 rounded-full">
                       {step.accent}
                     </span>
                   </div>
-                  <p className="font-sans text-stone/55 text-sm md:text-base leading-relaxed max-w-xl">
+                  <p className="font-sans text-stone-teal/55 text-sm md:text-base leading-relaxed max-w-xl">
                     {step.desc}
                   </p>
                 </div>

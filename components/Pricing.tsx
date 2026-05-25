@@ -54,7 +54,7 @@ export default function Pricing() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="pricing" className="bg-pearl py-20 md:py-28" ref={ref}>
+    <section id="pricing" className="bg-ivory py-20 md:py-28" ref={ref}>
       <div className="max-w-5xl mx-auto px-4 md:px-8 lg:px-12">
         {/* Header */}
         <div className="text-center mb-12">
@@ -63,21 +63,21 @@ export default function Pricing() {
             animate={inView ? { opacity: 1 } : {}}
             className="inline-flex items-center gap-2 mb-4 justify-center"
           >
-            <span className="w-5 h-px bg-gold-dark" />
-            <span className="text-gold-dark font-sans text-xs uppercase tracking-[0.2em] font-semibold">
+            <span className="w-5 h-[2px] bg-teal rounded-full" />
+            <span className="text-teal font-sans text-xs uppercase tracking-[0.2em] font-semibold">
               Indicative Pricing
             </span>
-            <span className="w-5 h-px bg-gold-dark" />
+            <span className="w-5 h-[2px] bg-teal rounded-full" />
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, delay: 0.1 }}
-            className="font-serif text-midnight text-3xl md:text-4xl xl:text-5xl font-bold leading-[1.1] mb-4"
+            className="font-serif text-teal-deep text-3xl md:text-4xl xl:text-5xl font-bold leading-[1.1] mb-4"
           >
             Transparent Rates
             <br />
-            <span className="italic font-normal text-charcoal/45">
+            <span className="italic font-normal text-charcoal/40">
               No Hidden Surcharges
             </span>
           </motion.h2>
@@ -85,7 +85,7 @@ export default function Pricing() {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ delay: 0.25 }}
-            className="font-sans text-charcoal/60 text-sm max-w-md mx-auto"
+            className="font-sans text-slate-teal/70 text-sm max-w-md mx-auto"
           >
             Indicative starting rates. Final pricing is confirmed on-site after
             the free inspection visit.
@@ -99,15 +99,15 @@ export default function Pricing() {
           transition={{ delay: 0.3 }}
           className="flex justify-center mb-10"
         >
-          <div className="inline-flex bg-stone/50 border border-stone p-1 rounded-sm">
+          <div className="inline-flex bg-mist border border-stone-teal/30 p-1 rounded-xl shadow-inner">
             {(["dry", "wet"] as Mode[]).map((m) => (
               <button
                 key={m}
                 onClick={() => setMode(m)}
-                className={`relative px-6 py-2.5 text-sm font-sans font-medium rounded-sm transition-all duration-300 ${
+                className={`relative px-6 py-2.5 text-sm font-sans font-semibold rounded-lg transition-all duration-300 ${
                   mode === m
-                    ? "bg-midnight text-cream"
-                    : "text-charcoal/60 hover:text-midnight"
+                    ? "bg-teal text-white shadow-md shadow-teal/35"
+                    : "text-slate-teal hover:text-teal"
                 }`}
               >
                 {m === "dry" ? "Dry Cleaning" : "Wet / Shampoo Cleaning"}
@@ -121,11 +121,11 @@ export default function Pricing() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.35 }}
-          className="overflow-hidden border border-stone rounded-sm"
+          className="overflow-hidden border border-stone-teal/25 rounded-2xl shadow-md shadow-teal/8"
         >
           {/* Table header */}
-          <div className="grid grid-cols-[1fr_auto] bg-midnight px-6 md:px-8 py-4">
-            <span className="font-sans text-xs text-stone/50 uppercase tracking-[0.15em]">
+          <div className="grid grid-cols-[1fr_auto] bg-teal-deep px-6 md:px-8 py-4">
+            <span className="font-sans text-xs text-stone-teal/50 uppercase tracking-[0.15em]">
               Furnishing / Service
             </span>
             <AnimatePresence mode="wait">
@@ -135,7 +135,7 @@ export default function Pricing() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 6 }}
                 transition={{ duration: 0.2 }}
-                className="font-sans text-xs text-gold/80 uppercase tracking-[0.15em] text-right"
+                className="font-sans text-xs text-copper-light/90 uppercase tracking-[0.15em] text-right"
               >
                 {mode === "dry" ? "Dry Cleaning" : "Wet / Shampoo"}
               </motion.span>
@@ -143,7 +143,7 @@ export default function Pricing() {
           </div>
 
           {/* Rows */}
-          <div className="divide-y divide-stone/40">
+          <div className="divide-y divide-mist">
             {pricingData.map((row, i) => (
               <motion.div
                 key={i}
@@ -151,7 +151,9 @@ export default function Pricing() {
                 animate={inView ? { opacity: 1 } : {}}
                 transition={{ delay: 0.4 + i * 0.06 }}
                 className={`grid grid-cols-[1fr_auto] items-center px-6 md:px-8 py-4 md:py-5 group transition-colors duration-200 ${
-                  row.popular ? "bg-cream" : "bg-pearl hover:bg-cream/80"
+                  row.popular
+                    ? "bg-teal/8 border-l-4 border-teal"
+                    : "bg-ivory hover:bg-ivory-teal"
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -159,7 +161,7 @@ export default function Pricing() {
                     {row.service}
                   </span>
                   {row.popular && (
-                    <span className="hidden sm:inline font-sans text-[10px] bg-gold/15 text-gold-dark border border-gold/25 px-2 py-0.5 uppercase tracking-[0.1em]">
+                    <span className="hidden sm:inline font-sans text-[10px] bg-teal/12 text-teal border border-teal/25 px-2.5 py-0.5 rounded-full uppercase tracking-[0.1em] font-semibold">
                       Most Popular
                     </span>
                   )}
@@ -173,7 +175,7 @@ export default function Pricing() {
                     transition={{ duration: 0.18 }}
                     className="text-right"
                   >
-                    <span className="font-serif text-midnight text-lg font-semibold">
+                    <span className="font-serif text-copper text-xl font-bold">
                       {mode === "dry" ? row.dry : row.wet}
                     </span>
                     <span className="font-sans text-charcoal/40 text-xs ml-1">
@@ -186,8 +188,8 @@ export default function Pricing() {
           </div>
 
           {/* Footer note */}
-          <div className="bg-stone/30 px-6 md:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <p className="font-sans text-xs text-charcoal/55">
+          <div className="bg-mist/60 px-6 md:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <p className="font-sans text-xs text-slate-teal/60">
               * Prices are indicative starting rates. Final quote after free
               on-site inspection.
             </p>
@@ -195,7 +197,7 @@ export default function Pricing() {
               href={WA_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 font-sans text-xs font-semibold text-midnight hover:text-gold transition-colors duration-200 shrink-0"
+              className="flex items-center gap-1.5 font-sans text-xs font-semibold text-teal hover:text-teal-mid transition-colors duration-200 shrink-0"
             >
               <MessageCircle size={13} />
               Get Exact Quote on WhatsApp

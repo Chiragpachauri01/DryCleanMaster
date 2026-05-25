@@ -12,6 +12,8 @@ const dryServices = [
     desc: "Specialized low-moisture treatment for luxury velvet, suede, and premium leather sofas to remove dust and stains without fabric damage.",
     tag: "Velvet · Leather · Suede",
     img: "/img/service-sofa-dry.png",
+    price: "₹299/seat",
+    popular: true,
   },
   {
     num: "02",
@@ -19,6 +21,8 @@ const dryServices = [
     desc: "Organic compound dry cleaning process designed for premium Persian, Oriental, and delicate wool rugs.",
     tag: "Persian · Oriental · Wool",
     img: "/img/service-carpet-dry.png",
+    price: "₹12/sq.ft",
+    popular: false,
   },
   {
     num: "03",
@@ -26,6 +30,8 @@ const dryServices = [
     desc: "Precision dry care for premium office chairs, dining chairs, headboards, and fabric panels without harsh chemicals.",
     tag: "Office · Dining · Headboard",
     img: "/img/service-chair-upholstery.png",
+    price: "₹149/chair",
+    popular: false,
   },
   {
     num: "04",
@@ -33,6 +39,8 @@ const dryServices = [
     desc: "Deep dust-mite and allergen extraction treatment for premium memory foam and latex mattresses.",
     tag: "Memory Foam · Latex · Spring",
     img: "/img/service-mattress-dry.png",
+    price: "₹1,199/king",
+    popular: false,
   },
   {
     num: "05",
@@ -40,6 +48,8 @@ const dryServices = [
     desc: "On-site low-moisture cleaning for heavy drapes, silk curtains, and blackout blinds without removing them from the rods.",
     tag: "Silk · Drapes · Blackout",
     img: "/img/service-curtain-dry.png",
+    price: "₹249/panel",
+    popular: false,
   },
   {
     num: "06",
@@ -47,6 +57,8 @@ const dryServices = [
     desc: "Complete internal restoration of premium car seats, roof fabric, door panels, and floor carpets.",
     tag: "Sedan · SUV · Luxury",
     img: "/img/service-car-dry.png",
+    price: "₹2,499/car",
+    popular: false,
   },
 ];
 
@@ -57,6 +69,8 @@ const wetServices = [
     desc: "High-foaming fabric shampoo treatment followed by powerful vacuum extraction to remove deep food stains, oil marks, and sweat odors.",
     tag: "Deep Stain · Oil · Odor",
     img: "/img/service-sofa-wet-shampoo.png",
+    price: "₹349/seat",
+    popular: true,
   },
   {
     num: "02",
@@ -64,6 +78,8 @@ const wetServices = [
     desc: "Deep wet injection cleaning that penetrates heavy traffic areas of your carpet to revive compressed fibers and colors.",
     tag: "Heavy Traffic · Color Revival",
     img: "/img/service-carpet-shampoo.png",
+    price: "₹15/sq.ft",
+    popular: false,
   },
   {
     num: "03",
@@ -71,6 +87,8 @@ const wetServices = [
     desc: "Specialized water-based stain-dissolving treatment for highly soiled fabric linings and cushions.",
     tag: "Fabric Lining · Cushions",
     img: "/img/service-upholstery-wet.png",
+    price: "₹199/chair",
+    popular: false,
   },
   {
     num: "04",
@@ -78,6 +96,8 @@ const wetServices = [
     desc: "pH-balanced conditioning shampoo application that restores the natural softness and shine of luxury furnishing fabrics.",
     tag: "pH-Balanced · Conditioning",
     img: "/img/service-fabric-shampoo.png",
+    price: "₹999+",
+    popular: false,
   },
 ];
 
@@ -90,6 +110,8 @@ function ServiceCard({
   desc,
   tag,
   img,
+  price,
+  popular = false,
   dark = false,
   index,
   inView,
@@ -99,6 +121,8 @@ function ServiceCard({
   desc: string;
   tag: string;
   img: string;
+  price: string;
+  popular?: boolean;
   dark?: boolean;
   index: number;
   inView: boolean;
@@ -108,14 +132,23 @@ function ServiceCard({
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.07 * index }}
-      className={`group relative border transition-all duration-300 cursor-default overflow-hidden h-full flex flex-col ${
+      className={`group relative border transition-all duration-300 cursor-default overflow-hidden h-full flex flex-col rounded-xl ${
         dark
-          ? "border-stone/10 hover:border-gold/30"
-          : "border-stone/40 hover:border-gold/50"
+          ? "border-teal/15 hover:border-copper/35 hover:shadow-lg hover:shadow-copper/12"
+          : "border-mist hover:border-teal/40 hover:shadow-lg hover:shadow-teal/12"
       }`}
     >
+      {/* Popular badge */}
+      {popular && (
+        <div className="absolute top-3 right-3 z-10">
+          <span className="font-sans text-[10px] bg-copper text-white font-semibold px-2.5 py-1 rounded-full shadow-sm">
+            Most Popular
+          </span>
+        </div>
+      )}
+
       {/* Image header */}
-      <div className="relative h-44 overflow-hidden">
+      <div className="relative h-44 overflow-hidden rounded-t-xl">
         <Image
           src={img}
           alt={title}
@@ -126,16 +159,16 @@ function ServiceCard({
         <div
           className={`absolute inset-0 transition-opacity duration-300 ${
             dark
-              ? "bg-gradient-to-t from-midnight via-midnight/60 to-midnight/30 group-hover:from-midnight/95"
-              : "bg-gradient-to-t from-pearl via-pearl/30 to-transparent group-hover:from-pearl/95"
+              ? "bg-gradient-to-t from-teal-deep via-teal-deep/60 to-teal-deep/25 group-hover:from-teal-deep/95"
+              : "bg-gradient-to-t from-ivory-teal via-ivory-teal/30 to-transparent group-hover:from-ivory-teal/95"
           }`}
         />
         {/* Floating number badge */}
         <div
-          className={`absolute top-4 left-4 w-10 h-10 flex items-center justify-center backdrop-blur-sm border ${
+          className={`absolute top-4 left-4 w-10 h-10 flex items-center justify-center backdrop-blur-sm border rounded-lg ${
             dark
-              ? "bg-midnight/60 border-gold/30 text-gold"
-              : "bg-pearl/80 border-gold-dark/40 text-gold-dark"
+              ? "bg-teal-deep/60 border-copper/30 text-copper-light"
+              : "bg-ivory/85 border-teal/30 text-teal"
           }`}
         >
           <span className="font-serif text-sm font-bold">{num}</span>
@@ -146,38 +179,47 @@ function ServiceCard({
       <div
         className={`p-6 md:p-7 flex-1 flex flex-col transition-colors duration-300 ${
           dark
-            ? "bg-midnight group-hover:bg-navy-light/30"
-            : "bg-pearl group-hover:bg-stone/30"
+            ? "bg-teal-dark group-hover:bg-teal/20"
+            : "bg-ivory-teal group-hover:bg-mist/50"
         }`}
       >
-        <div className="w-3 h-px bg-gold mb-4" />
+        <div className="w-4 h-[2px] bg-copper mb-4 rounded-full" />
         <h3
           className={`font-serif text-lg font-semibold mb-3 leading-snug ${
-            dark ? "text-cream" : "text-midnight"
+            dark ? "text-ivory-warm" : "text-teal-deep"
           }`}
         >
           {title}
         </h3>
         <p
           className={`font-sans text-sm leading-relaxed mb-5 flex-1 ${
-            dark ? "text-stone/55" : "text-charcoal/65"
+            dark ? "text-stone-teal/55" : "text-slate-teal/75"
           }`}
         >
           {desc}
         </p>
 
         <div className="flex items-center justify-between">
-          <span
-            className={`font-sans text-[11px] uppercase tracking-[0.15em] ${
-              dark ? "text-gold/50" : "text-gold-dark/60"
-            }`}
-          >
-            {tag}
-          </span>
+          <div className="flex flex-col gap-1">
+            <span
+              className={`font-sans text-[11px] uppercase tracking-[0.12em] ${
+                dark ? "text-stone-teal/40" : "text-muted-teal/60"
+              }`}
+            >
+              {tag}
+            </span>
+            <span
+              className={`font-sans text-xs font-semibold ${
+                dark ? "text-copper-light" : "text-copper"
+              }`}
+            >
+              Starting {price}
+            </span>
+          </div>
           <ArrowRight
-            size={13}
+            size={14}
             className={`opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0 ${
-              dark ? "text-gold" : "text-gold-dark"
+              dark ? "text-copper-light" : "text-teal"
             }`}
           />
         </div>
@@ -194,8 +236,8 @@ export default function Services() {
 
   return (
     <section id="services">
-      {/* ── Category A: Dry Cleaning (light) ── */}
-      <div className="bg-pearl py-20 md:py-28" ref={dryRef}>
+      {/* ── Category A: Dry Cleaning (light teal) ── */}
+      <div className="bg-ivory py-20 md:py-28" ref={dryRef}>
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           {/* Section header */}
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 mb-14">
@@ -205,8 +247,8 @@ export default function Services() {
                 animate={dryInView ? { opacity: 1 } : {}}
                 className="inline-flex items-center gap-2 mb-4"
               >
-                <span className="w-5 h-px bg-gold-dark" />
-                <span className="text-gold-dark font-sans text-xs uppercase tracking-[0.2em] font-semibold">
+                <span className="w-5 h-[2px] bg-teal rounded-full" />
+                <span className="text-teal font-sans text-xs uppercase tracking-[0.2em] font-semibold">
                   Category A
                 </span>
               </motion.span>
@@ -214,29 +256,27 @@ export default function Services() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={dryInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="font-serif text-midnight text-3xl md:text-4xl xl:text-5xl font-bold leading-[1.1]"
+                className="font-serif text-teal-deep text-3xl md:text-4xl xl:text-5xl font-bold leading-[1.1]"
               >
                 Luxury Dry
                 <br />
-                <span className="italic font-normal text-charcoal/50">Cleaning Services</span>
+                <span className="italic font-normal text-charcoal/45">Cleaning Services</span>
               </motion.h2>
             </div>
             <motion.p
               initial={{ opacity: 0, y: 18 }}
               animate={dryInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="self-end font-sans text-charcoal/60 text-sm leading-relaxed border-l border-gold/30 pl-5"
+              className="self-end font-sans text-slate-teal/70 text-sm leading-relaxed border-l-[3px] border-teal/25 pl-5"
             >
               Low-moisture, fabric-safe treatments engineered for delicate and
               luxury furnishing materials. Zero wet residue, zero fabric stress.
             </motion.p>
           </div>
 
-          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-px bg-stone/40">
+          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
             {dryServices.map((s, i) => (
-              <div key={i} className="bg-pearl">
-                <ServiceCard {...s} index={i} inView={dryInView} />
-              </div>
+              <ServiceCard key={i} {...s} index={i} inView={dryInView} />
             ))}
           </div>
 
@@ -250,7 +290,7 @@ export default function Services() {
               href={WA_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-midnight/25 text-midnight font-sans font-medium text-sm px-7 py-3 rounded-sm hover:bg-midnight hover:text-cream hover:border-midnight transition-all duration-300"
+              className="inline-flex items-center gap-2 btn-primary font-sans text-sm px-8 py-3.5"
             >
               Enquire About Dry Cleaning
               <ArrowRight size={14} />
@@ -259,8 +299,8 @@ export default function Services() {
         </div>
       </div>
 
-      {/* ── Category B: Wet Cleaning (dark) ── */}
-      <div className="bg-midnight py-20 md:py-28 fabric-texture" ref={wetRef}>
+      {/* ── Category B: Wet Cleaning (dark teal) ── */}
+      <div className="bg-teal-deep py-20 md:py-28 teal-texture" ref={wetRef}>
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 mb-14">
             <div>
@@ -269,8 +309,8 @@ export default function Services() {
                 animate={wetInView ? { opacity: 1 } : {}}
                 className="inline-flex items-center gap-2 mb-4"
               >
-                <span className="w-5 h-px bg-gold" />
-                <span className="text-gold font-sans text-xs uppercase tracking-[0.2em] font-semibold">
+                <span className="w-5 h-[2px] bg-copper rounded-full" />
+                <span className="text-copper font-sans text-xs uppercase tracking-[0.2em] font-semibold">
                   Category B
                 </span>
               </motion.span>
@@ -278,29 +318,27 @@ export default function Services() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={wetInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="font-serif text-cream text-3xl md:text-4xl xl:text-5xl font-bold leading-[1.1]"
+                className="font-serif text-ivory-warm text-3xl md:text-4xl xl:text-5xl font-bold leading-[1.1]"
               >
                 Advanced Wet
                 <br />
-                <span className="italic font-normal text-stone/40">Cleaning Services</span>
+                <span className="italic font-normal text-stone-teal/40">Cleaning Services</span>
               </motion.h2>
             </div>
             <motion.p
               initial={{ opacity: 0, y: 18 }}
               animate={wetInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="self-end font-sans text-stone/55 text-sm leading-relaxed border-l border-gold/20 pl-5"
+              className="self-end font-sans text-stone-teal/55 text-sm leading-relaxed border-l-[3px] border-copper/25 pl-5"
             >
               Deep-penetration shampoo and extraction treatments for heavily
               soiled furnishings. Industrial precision, zero chemical aftermath.
             </motion.p>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-px bg-stone/10">
+          <div className="grid sm:grid-cols-2 gap-5">
             {wetServices.map((s, i) => (
-              <div key={i} className="bg-midnight">
-                <ServiceCard {...s} dark index={i} inView={wetInView} />
-              </div>
+              <ServiceCard key={i} {...s} dark index={i} inView={wetInView} />
             ))}
           </div>
 
@@ -314,7 +352,7 @@ export default function Services() {
               href={WA_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-gold/30 text-gold font-sans font-medium text-sm px-7 py-3 rounded-sm hover:bg-gold hover:text-midnight transition-all duration-300"
+              className="inline-flex items-center gap-2 btn-whatsapp font-sans text-sm px-8 py-3.5"
             >
               Enquire About Wet Cleaning
               <ArrowRight size={14} />

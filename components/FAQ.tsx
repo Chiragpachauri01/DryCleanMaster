@@ -53,7 +53,7 @@ export default function FAQ() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="faq" className="bg-cream py-20 md:py-28" ref={ref}>
+    <section id="faq" className="bg-ivory-warm py-20 md:py-28" ref={ref}>
       <div className="max-w-3xl mx-auto px-4 md:px-8">
         {/* Header */}
         <div className="text-center mb-14">
@@ -62,21 +62,21 @@ export default function FAQ() {
             animate={inView ? { opacity: 1 } : {}}
             className="inline-flex items-center gap-2 mb-4 justify-center"
           >
-            <span className="w-5 h-px bg-gold-dark" />
-            <span className="text-gold-dark font-sans text-xs uppercase tracking-[0.2em] font-semibold">
+            <span className="w-5 h-[2px] bg-teal rounded-full" />
+            <span className="text-teal font-sans text-xs uppercase tracking-[0.2em] font-semibold">
               Frequently Asked
             </span>
-            <span className="w-5 h-px bg-gold-dark" />
+            <span className="w-5 h-[2px] bg-teal rounded-full" />
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, delay: 0.1 }}
-            className="font-serif text-midnight text-3xl md:text-4xl font-bold leading-[1.1]"
+            className="font-serif text-teal-deep text-3xl md:text-4xl font-bold leading-[1.1]"
           >
             Questions We
             <br />
-            <span className="italic font-normal text-charcoal/45">
+            <span className="italic font-normal text-charcoal/40">
               Get Asked Most
             </span>
           </motion.h2>
@@ -87,7 +87,7 @@ export default function FAQ() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.25 }}
-          className="space-y-0 border-t border-stone"
+          className="space-y-0 border-t border-stone-teal/20"
         >
           {faqs.map((faq, i) => {
             const isOpen = open === i;
@@ -97,7 +97,7 @@ export default function FAQ() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.05 * i + 0.3 }}
-                className="border-b border-stone"
+                className="border-b border-stone-teal/20"
               >
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
@@ -105,16 +105,16 @@ export default function FAQ() {
                 >
                   <span
                     className={`font-sans text-sm md:text-[0.95rem] font-medium leading-snug transition-colors duration-200 ${
-                      isOpen ? "text-midnight" : "text-charcoal/80 group-hover:text-midnight"
+                      isOpen ? "text-teal" : "text-charcoal/80 group-hover:text-teal"
                     }`}
                   >
                     {faq.q}
                   </span>
                   <span
-                    className={`shrink-0 w-6 h-6 border flex items-center justify-center transition-all duration-300 ${
+                    className={`shrink-0 w-7 h-7 border rounded-lg flex items-center justify-center transition-all duration-300 ${
                       isOpen
-                        ? "border-gold/60 bg-gold/10 text-gold-dark"
-                        : "border-stone/60 text-charcoal/40 group-hover:border-gold/40 group-hover:text-gold-dark"
+                        ? "border-teal/60 bg-teal/10 text-teal"
+                        : "border-stone-teal/40 text-charcoal/40 group-hover:border-teal/35 group-hover:text-teal"
                     }`}
                   >
                     {isOpen ? <Minus size={12} /> : <Plus size={12} />}
@@ -130,7 +130,7 @@ export default function FAQ() {
                       transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] as const }}
                       className="overflow-hidden"
                     >
-                      <p className="font-sans text-sm text-charcoal/65 leading-relaxed pb-6 pr-10">
+                      <p className="font-sans text-sm text-slate-teal leading-relaxed pb-6 pr-10">
                         {faq.a}
                       </p>
                     </motion.div>

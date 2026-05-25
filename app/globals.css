@@ -1,27 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand Colors */
-  --color-midnight: #05080F;
-  --color-navy: #1A2744;
-  --color-navy-light: #243460;
-  --color-cream: #F8F3EC;
-  --color-pearl: #FAF8F5;
-  --color-stone: #E8E0D4;
-  --color-gold: #C8A96E;
-  --color-gold-light: #DCC48A;
-  --color-gold-dark: #A8843C;
-  --color-charcoal: #2C2C2C;
-  --color-muted: #6B6460;
+  /* Brand Colors — Teal + Copper Indian Premium */
+  --color-teal-deep: #0D3330;
+  --color-teal-dark: #0F4440;
+  --color-teal: #0F766E;
+  --color-teal-mid: #0D9488;
+  --color-teal-light: #14B8A6;
+  --color-teal-glow: #2DD4BF;
+
+  --color-copper: #C2732C;
+  --color-copper-light: #D97B30;
+  --color-copper-dark: #9A5A1E;
+  --color-copper-pale: #F5E6D3;
+
+  --color-ivory: #F8FAFA;
+  --color-ivory-warm: #F4F8F7;
+  --color-ivory-teal: #EBF5F4;
+  --color-stone-teal: #C8DEDD;
+  --color-mist: #E2F0EF;
+
+  --color-charcoal: #1C2B2A;
+  --color-slate-teal: #2D4A48;
+  --color-muted-teal: #5E8B88;
 
   /* Typography */
   --font-serif: var(--font-playfair, "Playfair Display", Georgia, serif);
-  --font-sans: var(--font-inter, "Inter", system-ui, sans-serif);
+  --font-sans: var(--font-poppins, "Poppins", system-ui, sans-serif);
 }
 
 :root {
-  --background: #FAF8F5;
-  --foreground: #2C2C2C;
+  --background: #F8FAFA;
+  --foreground: #1C2B2A;
 }
 
 html {
@@ -36,29 +46,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Fabric texture overlay utility */
-.fabric-texture {
+/* Subtle teal mesh texture */
+.teal-texture {
   background-image:
     repeating-linear-gradient(
-      45deg,
+      60deg,
       transparent,
-      transparent 3px,
-      rgba(255, 255, 255, 0.018) 3px,
-      rgba(255, 255, 255, 0.018) 6px
+      transparent 4px,
+      rgba(20, 184, 166, 0.03) 4px,
+      rgba(20, 184, 166, 0.03) 8px
     ),
     repeating-linear-gradient(
-      -45deg,
+      -60deg,
       transparent,
-      transparent 3px,
-      rgba(255, 255, 255, 0.012) 3px,
-      rgba(255, 255, 255, 0.012) 6px
+      transparent 4px,
+      rgba(20, 184, 166, 0.02) 4px,
+      rgba(20, 184, 166, 0.02) 8px
     );
 }
 
-/* Gold horizontal rule */
-.divider-gold {
+/* Copper horizontal rule */
+.divider-copper {
   height: 1px;
-  background: linear-gradient(to right, transparent, #C8A96E, transparent);
+  background: linear-gradient(to right, transparent, #C2732C, transparent);
+}
+
+/* Teal horizontal rule */
+.divider-teal {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #0D9488, transparent);
 }
 
 /* Smooth underline animation */
@@ -71,12 +87,95 @@ body {
   bottom: -2px;
   left: 0;
   width: 0;
-  height: 1px;
-  background: #C8A96E;
+  height: 1.5px;
+  background: #0D9488;
   transition: width 0.3s ease;
 }
 .hover-underline:hover::after {
   width: 100%;
+}
+
+/* WhatsApp floating button pulse ring — keep green (WA brand) */
+@keyframes wa-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(22, 163, 74, 0.35), 0 0 0 0 rgba(22, 163, 74, 0.45);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(22, 163, 74, 0.35), 0 0 0 10px rgba(22, 163, 74, 0);
+  }
+}
+.wa-pulse {
+  animation: wa-pulse 2.4s ease-in-out infinite;
+}
+
+/* Teal pulse for live indicators */
+@keyframes teal-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.teal-dot-pulse {
+  animation: teal-pulse 2s ease-in-out infinite;
+}
+
+/* Primary CTA — deep teal gradient */
+.btn-primary {
+  background: linear-gradient(135deg, #0F766E 0%, #0D3330 100%);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(15, 118, 110, 0.32);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0D9488 0%, #0F4440 100%);
+  box-shadow: 0 6px 24px rgba(15, 118, 110, 0.48);
+  transform: translateY(-1px);
+}
+
+/* Copper accent CTA */
+.btn-copper {
+  background: linear-gradient(135deg, #C2732C 0%, #9A5A1E 100%);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(194, 115, 44, 0.28);
+}
+.btn-copper:hover {
+  background: linear-gradient(135deg, #D97B30 0%, #C2732C 100%);
+  box-shadow: 0 6px 24px rgba(194, 115, 44, 0.42);
+  transform: translateY(-1px);
+}
+
+/* Teal ghost button */
+.btn-teal-ghost {
+  background: transparent;
+  color: #0D9488;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: 2px solid #0D9488;
+  transition: all 0.25s ease;
+}
+.btn-teal-ghost:hover {
+  background: #0F766E;
+  color: white;
+  border-color: #0F766E;
+  transform: translateY(-1px);
+}
+
+/* WhatsApp / Emerald button */
+.btn-whatsapp {
+  background: #16A34A;
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.28);
+}
+.btn-whatsapp:hover {
+  background: #15803D;
+  box-shadow: 0 6px 22px rgba(22, 163, 74, 0.42);
+  transform: translateY(-1px);
 }
 
 /* Custom scrollbar */
@@ -84,9 +183,9 @@ body {
   width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8F3EC;
+  background: #EBF5F4;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C8A96E;
+  background: #0D9488;
   border-radius: 999px;
 }

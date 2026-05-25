@@ -56,21 +56,21 @@ export default function Header() {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-pearl/95 backdrop-blur-md shadow-sm border-b border-stone/60"
-          : "bg-pearl border-b border-stone/40"
+          ? "bg-ivory/97 backdrop-blur-md shadow-lg shadow-teal/8 border-b border-mist"
+          : "bg-ivory border-b border-mist"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16 md:h-18">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2.5 shrink-0">
-          <div className="w-8 h-8 rounded-sm bg-midnight flex items-center justify-center">
-            <span className="text-gold font-serif font-bold text-sm leading-none">D</span>
+          <div className="w-9 h-9 rounded-xl bg-teal flex items-center justify-center shadow-md shadow-teal/30">
+            <span className="text-copper-pale font-serif font-bold text-sm leading-none">D</span>
           </div>
           <div className="leading-tight">
-            <span className="font-serif font-bold text-midnight text-base tracking-tight block">
+            <span className="font-serif font-bold text-teal-deep text-base tracking-tight block">
               Dry Clean
             </span>
-            <span className="text-gold text-[10px] font-sans uppercase tracking-[0.18em] block -mt-0.5">
+            <span className="text-copper text-[10px] font-sans uppercase tracking-[0.18em] block -mt-0.5 font-semibold">
               Master
             </span>
           </div>
@@ -82,7 +82,7 @@ export default function Header() {
             <a
               key={link.label}
               href={link.href}
-              className="px-3.5 py-2 text-sm text-charcoal/80 hover:text-midnight font-sans hover-underline transition-colors duration-200"
+              className="px-3.5 py-2 text-sm text-charcoal/75 hover:text-teal font-sans hover-underline transition-colors duration-200"
             >
               {link.label}
             </a>
@@ -92,7 +92,7 @@ export default function Header() {
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setServicesOpen((v) => !v)}
-              className="flex items-center gap-1 px-3.5 py-2 text-sm text-charcoal/80 hover:text-midnight font-sans hover-underline transition-colors duration-200"
+              className="flex items-center gap-1 px-3.5 py-2 text-sm text-charcoal/75 hover:text-teal font-sans hover-underline transition-colors duration-200"
             >
               Services
               <ChevronDown
@@ -108,7 +108,7 @@ export default function Header() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 6, scale: 0.97 }}
                   transition={{ duration: 0.18, ease: "easeOut" }}
-                  className="absolute top-full left-0 mt-1.5 w-64 bg-pearl border border-stone rounded-sm shadow-xl overflow-hidden"
+                  className="absolute top-full left-0 mt-1.5 w-64 bg-ivory border border-mist rounded-xl shadow-xl shadow-teal/10 overflow-hidden"
                 >
                   <div className="py-1.5">
                     {services.map((s, i) => (
@@ -116,7 +116,7 @@ export default function Header() {
                         key={i}
                         href={s.href}
                         onClick={() => setServicesOpen(false)}
-                        className="block px-5 py-2.5 text-sm text-charcoal/80 hover:text-midnight hover:bg-stone/40 transition-colors duration-150 border-b border-stone/30 last:border-0"
+                        className="block px-5 py-2.5 text-sm text-charcoal/75 hover:text-teal hover:bg-teal/5 transition-colors duration-150 border-b border-mist last:border-0"
                       >
                         {s.label}
                       </a>
@@ -131,7 +131,7 @@ export default function Header() {
             <a
               key={link.label}
               href={link.href}
-              className="px-3.5 py-2 text-sm text-charcoal/80 hover:text-midnight font-sans hover-underline transition-colors duration-200"
+              className="px-3.5 py-2 text-sm text-charcoal/75 hover:text-teal font-sans hover-underline transition-colors duration-200"
             >
               {link.label}
             </a>
@@ -143,7 +143,7 @@ export default function Header() {
           href={WA_SCHEDULE}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden lg:flex items-center gap-2 bg-midnight text-cream font-sans font-semibold text-sm px-5 py-2.5 rounded-sm hover:bg-navy transition-all duration-200 group"
+          className="hidden lg:flex items-center gap-2 btn-primary font-sans text-sm px-5 py-2.5 group"
         >
           <CalendarCheck size={14} className="group-hover:scale-110 transition-transform duration-200" />
           Schedule Pickup
@@ -152,7 +152,7 @@ export default function Header() {
         {/* Mobile Toggle */}
         <button
           onClick={() => setMobileOpen((v) => !v)}
-          className="lg:hidden p-2 text-charcoal"
+          className="lg:hidden p-2 text-teal-deep"
           aria-label="Toggle menu"
         >
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -167,7 +167,7 @@ export default function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="lg:hidden overflow-hidden border-t border-stone/50 bg-pearl"
+            className="lg:hidden overflow-hidden border-t border-mist bg-ivory"
           >
             <nav className="px-4 py-4 flex flex-col gap-0">
               {navLinks.slice(0, 2).map((link) => (
@@ -175,14 +175,14 @@ export default function Header() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="py-3 text-sm text-charcoal border-b border-stone/40 hover:text-midnight"
+                  className="py-3 text-sm text-charcoal border-b border-mist hover:text-teal transition-colors duration-200"
                 >
                   {link.label}
                 </a>
               ))}
 
               {/* Mobile Services Accordion */}
-              <div className="border-b border-stone/40">
+              <div className="border-b border-mist">
                 <button
                   onClick={() => setMobileServicesOpen((v) => !v)}
                   className="w-full flex items-center justify-between py-3 text-sm text-charcoal"
@@ -208,7 +208,7 @@ export default function Header() {
                             key={i}
                             href={s.href}
                             onClick={() => setMobileOpen(false)}
-                            className="py-2 text-sm text-charcoal/70 hover:text-midnight border-b border-stone/20 last:border-0"
+                            className="py-2 text-sm text-charcoal/70 hover:text-teal border-b border-mist last:border-0 transition-colors duration-200"
                           >
                             {s.label}
                           </a>
@@ -224,7 +224,7 @@ export default function Header() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="py-3 text-sm text-charcoal border-b border-stone/40 hover:text-midnight last:border-0"
+                  className="py-3 text-sm text-charcoal border-b border-mist hover:text-teal last:border-0 transition-colors duration-200"
                 >
                   {link.label}
                 </a>
@@ -236,7 +236,7 @@ export default function Header() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full bg-midnight text-cream font-semibold text-sm px-5 py-3 rounded-sm"
+                  className="flex items-center justify-center gap-2 w-full btn-primary font-sans text-sm px-5 py-3.5"
                 >
                   <CalendarCheck size={14} />
                   Schedule Pickup

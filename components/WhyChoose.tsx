@@ -41,7 +41,7 @@ export default function WhyChoose() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="why" className="bg-navy py-20 md:py-28" ref={ref}>
+    <section id="why" className="bg-teal-dark py-20 md:py-28 teal-texture" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
         {/* Top: two-column intro */}
         <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 mb-16 md:mb-20">
@@ -53,8 +53,8 @@ export default function WhyChoose() {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 mb-5"
             >
-              <span className="w-5 h-px bg-gold" />
-              <span className="text-gold font-sans text-xs uppercase tracking-[0.2em] font-semibold">
+              <span className="w-2 h-2 rounded-full bg-copper" />
+              <span className="text-copper font-sans text-xs uppercase tracking-[0.2em] font-semibold">
                 Why Choose Us
               </span>
             </motion.span>
@@ -63,13 +63,13 @@ export default function WhyChoose() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.65, delay: 0.1 }}
-              className="font-serif text-cream text-4xl md:text-5xl font-bold leading-[1.1] mb-0"
+              className="font-serif text-ivory-warm text-4xl md:text-5xl font-bold leading-[1.1] mb-0"
             >
               Why Delhi Homes
               <br />
-              <span className="italic font-normal text-stone/60">trust our</span>
+              <span className="italic font-normal text-stone-teal/55">trust our</span>
               <br />
-              Master Care
+              <span className="text-teal-glow">Master Care</span>
             </motion.h2>
           </div>
 
@@ -80,7 +80,7 @@ export default function WhyChoose() {
             transition={{ duration: 0.65, delay: 0.2 }}
             className="flex items-end"
           >
-            <p className="font-sans text-stone/60 text-base leading-relaxed border-l border-gold/25 pl-6">
+            <p className="font-sans text-stone-teal/60 text-base leading-relaxed border-l-[3px] border-copper/40 pl-6">
               Delhi&apos;s heavy dust and pollution settle deep inside your sofas,
               carpets, and curtains, breeding dust mites and bacteria. Regular
               vacuuming is not enough. At Dry Clean Master, we don&apos;t just
@@ -90,7 +90,7 @@ export default function WhyChoose() {
           </motion.div>
         </div>
 
-        <div className="divider-gold mb-16 opacity-20" />
+        <div className="divider-copper mb-16 opacity-20" />
 
         {/* Feature list — editorial numbered grid */}
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-0">
@@ -100,7 +100,7 @@ export default function WhyChoose() {
               initial={{ opacity: 0, y: 28 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.08 * i }}
-              className="group relative p-7 border-b border-stone/10 md:border-r md:border-b last:border-b-0"
+              className="group relative p-7 border-b border-teal/15 md:border-r md:border-b last:border-b-0 hover:bg-teal/15 transition-colors duration-300"
               style={{
                 borderRight:
                   (i + 1) % 2 === 0 && (i + 1) % 3 !== 0
@@ -109,16 +109,16 @@ export default function WhyChoose() {
               }}
             >
               {/* Number accent */}
-              <span className="font-serif text-gold/20 text-6xl font-bold absolute top-4 right-5 leading-none select-none group-hover:text-gold/35 transition-colors duration-300">
+              <span className="font-serif text-teal-glow/12 text-6xl font-bold absolute top-4 right-5 leading-none select-none group-hover:text-teal-glow/22 transition-colors duration-300">
                 {f.num}
               </span>
 
               <div className="relative">
-                <div className="w-4 h-px bg-gold mb-5" />
-                <h3 className="font-serif text-cream text-lg font-semibold mb-3 leading-snug">
+                <div className="w-4 h-[2px] bg-copper mb-5 rounded-full" />
+                <h3 className="font-serif text-ivory-warm text-lg font-semibold mb-3 leading-snug">
                   {f.title}
                 </h3>
-                <p className="font-sans text-stone/55 text-sm leading-relaxed">
+                <p className="font-sans text-stone-teal/55 text-sm leading-relaxed">
                   {f.desc}
                 </p>
               </div>

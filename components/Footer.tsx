@@ -1,6 +1,6 @@
 "use client";
 
-import { Phone, Mail, MessageCircle, MapPin, ArrowRight } from "lucide-react";
+import { Phone, Mail, MessageCircle, MapPin, ArrowRight, Star } from "lucide-react";
 
 const WA_LINK =
   "https://wa.me/918882625522?text=Hi%2C%20I%20want%20to%20enquire%20about%20dry%20cleaning%20services";
@@ -31,22 +31,29 @@ const services = [
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-midnight fabric-texture">
+    <footer id="contact" className="bg-teal-deep teal-texture">
       {/* Top CTA bar */}
-      <div className="border-b border-stone/10">
+      <div className="border-b border-teal/15">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
-            <p className="font-sans text-stone/50 text-xs uppercase tracking-[0.2em] mb-1">
+            <div className="flex items-center gap-2 mb-2">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={11} className="text-copper-light fill-copper-light" />
+              ))}
+              <span className="font-sans text-copper-light text-xs font-semibold ml-1">4.9</span>
+              <span className="font-sans text-stone-teal/40 text-xs">· 400+ Google Reviews</span>
+            </div>
+            <p className="font-sans text-stone-teal/50 text-xs uppercase tracking-[0.2em] mb-1">
               Ready for a Master Clean?
             </p>
-            <h3 className="font-serif text-cream text-2xl md:text-3xl font-semibold">
+            <h3 className="font-serif text-ivory-warm text-2xl md:text-3xl font-semibold">
               Book a Free Inspection Today
             </h3>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
               href="#contact"
-              className="flex items-center gap-2 bg-gold text-midnight font-sans font-semibold text-sm px-6 py-3 rounded-sm hover:bg-gold-light transition-colors duration-200"
+              className="flex items-center gap-2 btn-primary font-sans font-semibold text-sm px-6 py-3.5"
             >
               Book Free Visit
               <ArrowRight size={14} />
@@ -55,7 +62,7 @@ export default function Footer() {
               href={WA_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 border border-stone/20 text-stone/70 font-sans font-medium text-sm px-6 py-3 rounded-sm hover:border-gold/40 hover:text-gold transition-all duration-200"
+              className="flex items-center gap-2 bg-[#16A34A] text-white font-sans font-medium text-sm px-6 py-3 rounded-lg hover:bg-[#15803D] transition-all duration-200 shadow-sm"
             >
               <MessageCircle size={14} />
               Chat on WhatsApp
@@ -70,33 +77,40 @@ export default function Footer() {
         <div className="lg:col-span-1">
           {/* Logo */}
           <div className="flex items-center gap-2.5 mb-5">
-            <div className="w-8 h-8 rounded-sm bg-navy border border-gold/20 flex items-center justify-center">
-              <span className="text-gold font-serif font-bold text-sm">D</span>
+            <div className="w-9 h-9 rounded-xl bg-teal border border-teal-light/20 flex items-center justify-center">
+              <span className="text-copper-pale font-serif font-bold text-sm">D</span>
             </div>
             <div className="leading-tight">
-              <span className="font-serif font-bold text-cream text-base block">
+              <span className="font-serif font-bold text-ivory-warm text-base block">
                 Dry Clean
               </span>
-              <span className="text-gold text-[10px] font-sans uppercase tracking-[0.18em] block -mt-0.5">
+              <span className="text-copper text-[10px] font-sans uppercase tracking-[0.18em] block -mt-0.5 font-semibold">
                 Master
               </span>
             </div>
           </div>
 
-          <p className="font-sans text-stone/50 text-sm leading-relaxed mb-6 max-w-[220px]">
+          <p className="font-sans text-stone-teal/50 text-sm leading-relaxed mb-5 max-w-[220px]">
             Delhi&apos;s elite choice for automated on-site sofa, carpet, and premium
             upholstery deep restoration services.
           </p>
 
-          <div className="flex items-center gap-1.5 text-stone/40 text-xs font-sans mb-2">
-            <MapPin size={11} />
-            <span>Serving all of Delhi NCR</span>
+          {/* Trust mini-badges */}
+          <div className="space-y-2 mb-4">
+            <div className="flex items-center gap-1.5 text-stone-teal/40 text-xs font-sans">
+              <MapPin size={11} />
+              <span>Serving all of Delhi NCR</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-stone-teal/40 text-xs font-sans">
+              <span className="w-1.5 h-1.5 rounded-full bg-teal-light" />
+              <span>12,000+ Families Trust Us</span>
+            </div>
           </div>
         </div>
 
         {/* Col 2: Quick Links */}
         <div>
-          <h4 className="font-sans text-cream text-xs uppercase tracking-[0.18em] font-semibold mb-5">
+          <h4 className="font-sans text-ivory-warm text-xs uppercase tracking-[0.18em] font-semibold mb-5">
             Quick Navigation
           </h4>
           <ul className="space-y-2.5">
@@ -104,9 +118,9 @@ export default function Footer() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="font-sans text-stone/50 text-sm hover:text-gold transition-colors duration-200 flex items-center gap-1.5 group"
+                  className="font-sans text-stone-teal/50 text-sm hover:text-teal-light transition-colors duration-200 flex items-center gap-1.5 group"
                 >
-                  <span className="w-2 h-px bg-stone/30 group-hover:bg-gold group-hover:w-3 transition-all duration-200 shrink-0" />
+                  <span className="w-2 h-px bg-stone-teal/30 group-hover:bg-teal-light group-hover:w-3 transition-all duration-200 shrink-0" />
                   {link.label}
                 </a>
               </li>
@@ -116,7 +130,7 @@ export default function Footer() {
 
         {/* Col 3: Services */}
         <div>
-          <h4 className="font-sans text-cream text-xs uppercase tracking-[0.18em] font-semibold mb-5">
+          <h4 className="font-sans text-ivory-warm text-xs uppercase tracking-[0.18em] font-semibold mb-5">
             Our Services
           </h4>
           <ul className="space-y-2.5">
@@ -124,9 +138,9 @@ export default function Footer() {
               <li key={s}>
                 <a
                   href="#services"
-                  className="font-sans text-stone/50 text-sm hover:text-gold transition-colors duration-200 flex items-center gap-1.5 group"
+                  className="font-sans text-stone-teal/50 text-sm hover:text-teal-light transition-colors duration-200 flex items-center gap-1.5 group"
                 >
-                  <span className="w-2 h-px bg-stone/30 group-hover:bg-gold group-hover:w-3 transition-all duration-200 shrink-0" />
+                  <span className="w-2 h-px bg-stone-teal/30 group-hover:bg-teal-light group-hover:w-3 transition-all duration-200 shrink-0" />
                   {s}
                 </a>
               </li>
@@ -136,7 +150,7 @@ export default function Footer() {
 
         {/* Col 4: Contact */}
         <div>
-          <h4 className="font-sans text-cream text-xs uppercase tracking-[0.18em] font-semibold mb-5">
+          <h4 className="font-sans text-ivory-warm text-xs uppercase tracking-[0.18em] font-semibold mb-5">
             Direct Support
           </h4>
           <div className="space-y-4">
@@ -144,14 +158,14 @@ export default function Footer() {
               href="tel:+918882625522"
               className="flex items-start gap-3 group"
             >
-              <div className="mt-0.5 w-7 h-7 border border-stone/15 flex items-center justify-center group-hover:border-gold/30 transition-colors duration-200 shrink-0">
-                <Phone size={12} className="text-stone/40 group-hover:text-gold transition-colors duration-200" />
+              <div className="mt-0.5 w-8 h-8 border border-teal/15 rounded-lg flex items-center justify-center group-hover:border-teal/40 group-hover:bg-teal/12 transition-all duration-200 shrink-0">
+                <Phone size={12} className="text-stone-teal/40 group-hover:text-teal-light transition-colors duration-200" />
               </div>
               <div>
-                <p className="font-sans text-stone/40 text-[11px] uppercase tracking-[0.12em]">
+                <p className="font-sans text-stone-teal/40 text-[11px] uppercase tracking-[0.12em]">
                   Call Us
                 </p>
-                <p className="font-sans text-cream/80 text-sm group-hover:text-gold transition-colors duration-200">
+                <p className="font-sans text-ivory-warm/80 text-sm group-hover:text-teal-glow transition-colors duration-200">
                   +91 8882625522
                 </p>
               </div>
@@ -161,14 +175,14 @@ export default function Footer() {
               href="mailto:Info@drycleanmaster.in"
               className="flex items-start gap-3 group"
             >
-              <div className="mt-0.5 w-7 h-7 border border-stone/15 flex items-center justify-center group-hover:border-gold/30 transition-colors duration-200 shrink-0">
-                <Mail size={12} className="text-stone/40 group-hover:text-gold transition-colors duration-200" />
+              <div className="mt-0.5 w-8 h-8 border border-teal/15 rounded-lg flex items-center justify-center group-hover:border-teal/40 group-hover:bg-teal/12 transition-all duration-200 shrink-0">
+                <Mail size={12} className="text-stone-teal/40 group-hover:text-teal-light transition-colors duration-200" />
               </div>
               <div>
-                <p className="font-sans text-stone/40 text-[11px] uppercase tracking-[0.12em]">
+                <p className="font-sans text-stone-teal/40 text-[11px] uppercase tracking-[0.12em]">
                   Email
                 </p>
-                <p className="font-sans text-cream/80 text-sm group-hover:text-gold transition-colors duration-200">
+                <p className="font-sans text-ivory-warm/80 text-sm group-hover:text-teal-glow transition-colors duration-200">
                   Info@drycleanmaster.in
                 </p>
               </div>
@@ -180,14 +194,14 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="flex items-start gap-3 group"
             >
-              <div className="mt-0.5 w-7 h-7 border border-stone/15 flex items-center justify-center group-hover:border-gold/30 transition-colors duration-200 shrink-0">
-                <MessageCircle size={12} className="text-stone/40 group-hover:text-gold transition-colors duration-200" />
+              <div className="mt-0.5 w-8 h-8 border border-teal/15 rounded-lg flex items-center justify-center group-hover:border-[#16A34A]/35 group-hover:bg-[#16A34A]/8 transition-all duration-200 shrink-0">
+                <MessageCircle size={12} className="text-stone-teal/40 group-hover:text-[#16A34A] transition-colors duration-200" />
               </div>
               <div>
-                <p className="font-sans text-stone/40 text-[11px] uppercase tracking-[0.12em]">
+                <p className="font-sans text-stone-teal/40 text-[11px] uppercase tracking-[0.12em]">
                   WhatsApp
                 </p>
-                <p className="font-sans text-cream/80 text-sm group-hover:text-gold transition-colors duration-200">
+                <p className="font-sans text-ivory-warm/80 text-sm group-hover:text-[#16A34A] transition-colors duration-200">
                   Chat with Us Now
                 </p>
               </div>
@@ -197,22 +211,22 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-stone/10">
+      <div className="border-t border-teal/12">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="font-sans text-stone/35 text-xs">
+          <p className="font-sans text-stone-teal/35 text-xs">
             © 2026 Dry Clean Master. All Rights Reserved.
           </p>
           <div className="flex items-center gap-4">
             <a
               href="#privacy"
-              className="font-sans text-stone/35 text-xs hover:text-stone/70 transition-colors duration-200"
+              className="font-sans text-stone-teal/35 text-xs hover:text-stone-teal/70 transition-colors duration-200"
             >
               Privacy Policy
             </a>
-            <span className="text-stone/20">·</span>
+            <span className="text-stone-teal/20">·</span>
             <a
               href="#terms"
-              className="font-sans text-stone/35 text-xs hover:text-stone/70 transition-colors duration-200"
+              className="font-sans text-stone-teal/35 text-xs hover:text-stone-teal/70 transition-colors duration-200"
             >
               Terms of Service
             </a>
