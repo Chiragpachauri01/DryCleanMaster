@@ -98,8 +98,8 @@ export default function Process() {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-teal-dark via-teal-dark/65 to-teal-dark/30" />
-          <div className="absolute inset-0 teal-texture opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-teal-dark via-teal-dark/35 to-teal-dark/15" />
+          <div className="absolute inset-0 teal-texture opacity-15" />
 
           {/* Editorial overlay text */}
           <div className="absolute inset-0 flex items-center px-8 md:px-12">

@@ -109,7 +109,7 @@ export default function About() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-teal-deep/45 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-teal-deep/25 via-transparent to-transparent" />
 
               {/* Floating attribution */}
               <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between">

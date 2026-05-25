@@ -53,15 +53,15 @@ body {
       60deg,
       transparent,
       transparent 4px,
-      rgba(20, 184, 166, 0.03) 4px,
-      rgba(20, 184, 166, 0.03) 8px
+      rgba(20, 184, 166, 0.015) 4px,
+      rgba(20, 184, 166, 0.015) 8px
     ),
     repeating-linear-gradient(
       -60deg,
       transparent,
       transparent 4px,
-      rgba(20, 184, 166, 0.02) 4px,
-      rgba(20, 184, 166, 0.02) 8px
+      rgba(20, 184, 166, 0.01) 4px,
+      rgba(20, 184, 166, 0.01) 8px
     );
 }
 
