@@ -109,7 +109,7 @@ export default function WhyChoose() {
               }}
             >
               {/* Number accent */}
-              <span className="font-serif text-teal-glow/12 text-6xl font-bold absolute top-4 right-5 leading-none select-none group-hover:text-teal-glow/22 transition-colors duration-300">
+              <span className="font-serif text-copper/30 text-6xl font-bold absolute top-4 right-5 leading-none select-none group-hover:text-copper/55 transition-colors duration-300">
                 {f.num}
               </span>
 
