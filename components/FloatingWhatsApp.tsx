@@ -3,7 +3,7 @@
 import { MessageCircle } from "lucide-react";
 
 const WA_LINK =
-  "https://wa.me/918882625522?text=Hi%2C%20I%20want%20to%20book%20a%20cleaning%20service";
+  "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20book%20a%20cleaning%20service";
 
 export default function FloatingWhatsApp() {
   return (

@@ -102,7 +102,7 @@ const wetServices = [
 ];
 
 const WA_LINK =
-  "https://wa.me/918882625522?text=Hi%2C%20I%20want%20to%20enquire%20about%20your%20cleaning%20services";
+  "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20enquire%20about%20your%20cleaning%20services";
 
 function ServiceCard({
   num,
