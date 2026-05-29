@@ -22,10 +22,7 @@ export const metadata: Metadata = {
     "Looking for professional dry cleaning services in Delhi? Dry Clean Master offers same-day dry clean service at home for sofas, carpets, etc. Contact us today!",
   keywords:
     "sofa dry cleaning Delhi, carpet cleaning Delhi, mattress cleaning, upholstery cleaning, wet cleaning, fabric shampoo, premium cleaning service",
-  icons: {
-    icon: "/img/Logo/DryCleanLogo-transparent.png",
-    apple: "/img/Logo/DryCleanLogo-transparent.png",
-  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({

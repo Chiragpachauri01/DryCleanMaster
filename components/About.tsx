@@ -104,7 +104,7 @@ export default function About() {
               className="relative h-72 md:h-80 overflow-hidden rounded-2xl"
             >
               <Image
-                src="/img/about-restored-living-room.png"
+                src="/img/about-restored-living-room.webp"
                 alt="Premium luxury living room interior — Dry Clean Master"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"

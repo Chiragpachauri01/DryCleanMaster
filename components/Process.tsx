@@ -87,7 +87,7 @@ export default function Process() {
           className="relative h-52 md:h-64 mb-16 overflow-hidden rounded-2xl"
         >
           <Image
-            src="/img/process-extraction-banner.png"
+            src="/img/process-extraction-banner.webp"
             alt="Master technician at work — precision extraction cleaning"
             fill
             sizes="100vw"
