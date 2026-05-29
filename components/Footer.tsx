@@ -13,7 +13,7 @@ const quickLinks = [
   { label: "Pricing", href: "#pricing" },
   { label: "Gallery", href: "#gallery" },
   { label: "Blog", href: "#blog" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Contact Us", href: "/contact" },
   { label: "Privacy Policy", href: "#privacy" },
   { label: "Terms of Service", href: "#terms" },
 ];
@@ -103,15 +103,48 @@ export default function Footer() {
           </p>
 
           {/* Trust mini-badges */}
-          <div className="space-y-2 mb-4">
-            <div className="flex items-center gap-1.5 text-stone-teal/40 text-xs font-sans">
+          <div className="space-y-2 mb-5">
+            <a
+              href="https://maps.app.goo.gl/WWBookpmg5rhxuma6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-stone-teal/40 text-xs font-sans hover:text-teal-light transition-colors duration-200"
+            >
               <MapPin size={11} />
               <span>Serving all of Delhi NCR</span>
-            </div>
+            </a>
             <div className="flex items-center gap-1.5 text-stone-teal/40 text-xs font-sans">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-light" />
               <span>12,000+ Families Trust Us</span>
             </div>
+          </div>
+
+          {/* Social media */}
+          <div className="flex items-center gap-2">
+            <a
+              href="https://www.facebook.com/DryCleanMasters/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-lg border border-[#1877F2]/50 bg-[#1877F2]/15 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2]/28 hover:border-[#1877F2]/70 transition-all duration-200"
+              aria-label="Facebook"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/drycleanmasters/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-lg border border-[#E1306C]/50 bg-[#E1306C]/15 flex items-center justify-center text-[#E1306C] hover:bg-[#E1306C]/28 hover:border-[#E1306C]/70 transition-all duration-200"
+              aria-label="Instagram"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
           </div>
         </div>
 

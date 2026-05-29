@@ -23,7 +23,7 @@ const navLinks = [
   { label: "About Us", href: "#about" },
   { label: "Gallery", href: "#gallery" },
   { label: "Blog", href: "#blog" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export default function Header() {
