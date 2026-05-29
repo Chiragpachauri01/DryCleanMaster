@@ -48,7 +48,7 @@ export default function Footer() {
               Ready for a Master Clean?
             </p>
             <h3 className="font-serif text-ivory-warm text-2xl md:text-3xl font-semibold">
-              Book a Free Inspection Today
+              Book an Inspection Today
             </h3>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
@@ -56,7 +56,7 @@ export default function Footer() {
               href="#contact"
               className="flex items-center gap-2 btn-primary font-sans font-semibold text-sm px-6 py-3.5"
             >
-              Book Free Visit
+              Book a Visit
               <ArrowRight size={14} />
             </a>
             <a
