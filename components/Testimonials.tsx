@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
@@ -8,28 +8,28 @@ const reviews = [
   {
     name: "Siddharth",
     location: "New Delhi",
-    text: "Our 7-seater fabric sofa had severe dust accumulation built up over two years. The Dry Clean Master team cleaned it via their wet extraction process. It looks completely brand new — I couldn't believe the transformation.",
+    text: "Our 7-seater fabric sofa had severe dust accumulation. The DryClean Master team cleaned it via their wet extraction process. It looks completely brand new!",
     service: "Sofa Wet Cleaning",
     avatarColor: "bg-teal/25 text-teal",
   },
   {
     name: "Pooja",
     location: "Rohini",
-    text: "They managed to remove a tough coffee stain from my premium imported wool carpet that I thought was permanent. Highly impressed by their fabric shampoo treatment and the technician's expertise.",
+    text: "They managed to remove a tough coffee stain from my premium imported wool carpet. Highly impressed by their fabric shampoo treatment.",
     service: "Carpet Shampoo Cleaning",
     avatarColor: "bg-copper/20 text-copper-dark",
   },
   {
     name: "Rahul",
     location: "West Delhi",
-    text: "Very professional team. They inspected the fabric first and suggested dry cleaning for my velvet headboard instead of harsh wet washing. Exceptional knowledge about fabric care — no one in Delhi offers this level of expertise.",
+    text: "Very professional team. They inspected the fabric first and suggested dry cleaning for my velvet headboard instead of harsh wet washing. Exceptional knowledge!",
     service: "Chair & Upholstery Dry Cleaning",
     avatarColor: "bg-teal-mid/20 text-teal-light",
   },
   {
     name: "Namit Yadav",
     location: "Karol Bagh",
-    text: "Booked them for car dry cleaning and mattress sanitization. Quick, seamless, on-time doorstep service with no messy water left behind. My car's fabric roof and seats feel like they just came from the showroom.",
+    text: "Booked them for car dry cleaning and mattress sanitisation. Quick, seamless, on-time doorstep service with no messy water left behind.",
     service: "Car Dry Cleaning + Mattress",
     avatarColor: "bg-slate-teal/40 text-ivory-warm",
   },
@@ -42,6 +42,11 @@ export default function Testimonials() {
 
   const prev = useCallback(() => setActive((a) => (a === 0 ? reviews.length - 1 : a - 1)), []);
   const next = useCallback(() => setActive((a) => (a === reviews.length - 1 ? 0 : a + 1)), []);
+
+  useEffect(() => {
+    const timer = setInterval(next, 4000);
+    return () => clearInterval(timer);
+  }, [next]);
 
   return (
     <section id="testimonials" className="bg-teal-deep py-20 md:py-28 teal-texture" ref={ref}>

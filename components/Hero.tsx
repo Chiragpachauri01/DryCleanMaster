@@ -1,17 +1,24 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { CalendarCheck, MessageCircle, Search, Sparkles, ShieldCheck, Truck } from "lucide-react";
+
+const banners = [
+  "/img/Banner%20Images/1.webp",
+  "/img/Banner%20Images/2.webp",
+  "/img/Banner%20Images/3.webp",
+];
 
 const WA_LINK =
   "https://wa.me/918882625522?text=Hi%2C%20I%20want%20to%20book%20a%20free%20inspection%20visit%20for%20cleaning%20service";
 
 const trustBadges = [
-  { icon: Search,      label: "Free In-Person",  sub: "Inspection Visit" },
-  { icon: Sparkles,    label: "Eco-Luxury Safe", sub: "Odorless Solvents" },
-  { icon: ShieldCheck, label: "100% Fabric &",   sub: "Color Protection" },
-  { icon: Truck,       label: "Same-Day",        sub: "On-Site Service" },
+  { icon: Search,      label: "Free In-Person",        sub: "Inspection Visit" },
+  { icon: Sparkles,    label: "Eco-Luxury Safe &",     sub: "Odourless Solvents" },
+  { icon: ShieldCheck, label: "100% Premium Fabric &", sub: "Colour Protection" },
+  { icon: Truck,       label: "Same-Day",              sub: "On-Site Service Available" },
 ];
 
 const fadeUp = {
@@ -24,19 +31,39 @@ const fadeUp = {
 };
 
 export default function Hero() {
+  const [activeBanner, setActiveBanner] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveBanner((i) => (i + 1) % banners.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section id="hero" className="relative flex flex-col min-h-screen">
 
       {/* ── Full-screen background ── */}
       <div className="absolute inset-0">
-        <Image
-          src="/img/hero-sofa-extraction.png"
-          alt="Premium sofa deep cleaning by Dry Clean Master Delhi"
-          fill
-          sizes="100vw"
-          priority
-          className="object-cover object-center"
-        />
+        <AnimatePresence mode="sync">
+          <motion.div
+            key={activeBanner}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2 }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={banners[activeBanner]}
+              alt="Premium sofa deep cleaning by Dry Clean Master Delhi"
+              fill
+              sizes="100vw"
+              priority={activeBanner === 0}
+              className="object-cover object-center"
+            />
+          </motion.div>
+        </AnimatePresence>
         {/* layered gradients: bottom-heavy for text legibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-teal-deep via-teal-deep/75 to-teal-deep/30" />
         {/* left-side extra darkening so headline pops */}
@@ -98,7 +125,9 @@ export default function Hero() {
           className="font-sans text-stone-teal/80 text-sm sm:text-base md:text-lg leading-relaxed mb-4 max-w-xl"
         >
           Give your luxury sofas, carpets, and mattresses a master-grade
-          rejuvenation — right at your home or office.
+          rejuvenation. We offer premium dry cleaning and advanced fabric shampoo
+          wet-cleaning treatments that eliminate dirt, stains, and allergens right
+          at your home or office.
         </motion.p>
 
         {/* Social proof strip */}

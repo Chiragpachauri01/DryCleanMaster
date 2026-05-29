@@ -17,11 +17,15 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Dry Clean Master | Premium Sofa, Carpet & Furnishing Deep Cleaning Delhi",
+  title: "Premium Sofa and Carpet Cleaning in Delhi: Dry Clean Master",
   description:
-    "Delhi's elite choice for premium on-site sofa, carpet, mattress, and upholstery dry cleaning and wet cleaning services. Doorstep service across Delhi NCR. Book a free inspection visit today.",
+    "Looking for professional dry cleaning services in Delhi? Dry Clean Master offers same-day dry clean service at home for sofas, carpets, etc. Contact us today!",
   keywords:
     "sofa dry cleaning Delhi, carpet cleaning Delhi, mattress cleaning, upholstery cleaning, wet cleaning, fabric shampoo, premium cleaning service",
+  icons: {
+    icon: "/img/Logo/DryCleanLogo-transparent.png",
+    apple: "/img/Logo/DryCleanLogo-transparent.png",
+  },
 };
 
 export default function RootLayout({

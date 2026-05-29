@@ -6,44 +6,44 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    q: "What is included in Sofa Dry Cleaning?",
-    a: "It includes deep high-power vacuuming, fabric type testing, application of low-moisture eco-solvents, subtle stain scrubbing, and a final fabric grooming and deodorizing step.",
+    q: "How long does it take for the sofa to dry after cleaning?",
+    a: "Drying time depends on the fabric and cleaning method used. Most sofas dry within 4–8 hours. We use a low-moisture process to avoid leaving the furniture wet for long.",
   },
   {
-    q: "How long does a sofa wet shampoo treatment take to dry?",
-    a: "After our high-power moisture extraction process, sofas typically take around 3 to 5 hours to dry completely under normal ceiling fans. We advise keeping fans running and avoiding sitting on the sofa during this period.",
+    q: "Do you provide doorstep service or take the furniture away?",
+    a: "We provide complete on-site cleaning services at your home or office. There is no need to move or transport your sofa, carpet, or mattress anywhere.",
   },
   {
-    q: "Is your fabric shampoo safe for silk or velvet upholstery?",
-    a: "Yes. We utilize custom pH-balanced, non-ionic fabric shampoos specifically engineered to protect luxury fibers like velvet and silk from color bleeding, fiber stress, and texture damage.",
+    q: "Are the cleaning products safe for children and pets?",
+    a: "Yes. We use fabric-safe and eco-friendly cleaning solutions that are generally safe for homes with children and pets. There is also no strong chemical smell left behind after cleaning.",
   },
   {
-    q: "Do you bring your own heavy cleaning machinery?",
-    a: "Yes, our technicians travel with professional industrial extraction systems, HEPA vacuum cleaners, and a complete premium chemical kit. You do not need to arrange anything.",
+    q: "Can old stains be removed completely?",
+    a: "Many common stains like coffee, food spills, dust marks, and sweat stains can be removed or significantly reduced. However, very old or deep stains depend on the fabric type and stain condition.",
   },
   {
-    q: "How often should I dry clean my carpets and mattresses?",
-    a: "For a healthy, dust-allergy-free home in a dust-heavy city like Delhi, we highly recommend professional cleaning once every 6 months — or every 3 months if you have young children or pets.",
+    q: "Can you safely clean delicate fabrics like velvet or suede?",
+    a: "Yes. Delicate fabrics such as velvet, suede, chenille, and premium upholstery require special care. Our team inspects the fabric first and then selects the most suitable cleaning method.",
   },
   {
-    q: "Will wet cleaning damage wooden parts of my chairs or sofas?",
-    a: "Absolutely not. Our technicians mask and protect all wooden, metallic, or chrome borders and legs before applying any fluid. The treatment is precision-targeted at fabric surfaces only.",
+    q: "Does mattress cleaning help with allergies and odours?",
+    a: "Professional mattress cleaning can help reduce dust, allergens, and unpleasant smells that build up over time, especially in mattresses that haven't been deep cleaned for a long period.",
   },
   {
-    q: "What is your Free Inspection Visit policy?",
-    a: "Our senior master technician visits your location to analyze the exact fabric parameters, age, and stain type, and provides an accurate quote with zero booking obligations. You decide after seeing the quote.",
+    q: "Is same-day service available in Delhi NCR?",
+    a: "Yes. Same-day service is available in many areas across Delhi NCR, depending on slot availability. Early bookings usually have a better chance of getting same-day service.",
   },
   {
-    q: "Can you remove deep-set pet urine odors from mattresses?",
-    a: "Yes. Our specialized deep wet cleaning extraction combined with bio-enzymatic deodorizers neutralizes extreme organic odors effectively, including pet urine, sweat, and food odors.",
+    q: "Will the furniture smell damp or feel sticky after cleaning?",
+    a: "No. Our extraction process removes excess moisture and residue properly, so the furniture feels fresh, clean, and comfortable after the service.",
   },
   {
-    q: "Are your cleaning chemicals safe for toddlers and pets?",
-    a: "Yes, we use strictly non-toxic, eco-luxury biodegradable solutions that leave zero hazardous fumes or sticky residues behind. All solutions are third-party certified safe.",
+    q: "Do carpets need to be removed for cleaning?",
+    a: "Not always. Many carpets and rugs can be cleaned directly at your location. Our team checks the carpet condition and recommends the best cleaning process accordingly.",
   },
   {
-    q: "How do I book an on-site service?",
-    a: "You can book instantly by using our website contact form, giving us a direct call at +91 8882625522, or tapping our WhatsApp button. We confirm slots within minutes.",
+    q: "How can I book a cleaning service?",
+    a: "You can book a service through a phone call or WhatsApp. Our team will check the fabric condition, and then proceed with the appropriate cleaning treatment.",
   },
 ];
 

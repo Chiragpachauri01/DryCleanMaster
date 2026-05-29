@@ -8,28 +8,28 @@ import { CalendarCheck } from "lucide-react";
 const steps = [
   {
     num: "01",
-    title: "Schedule Online",
-    desc: "Choose your service and book a slot in under 2 minutes — online or via WhatsApp.",
+    title: "Schedule Online or via WhatsApp",
+    desc: "Choose your service, pick a convenient time slot, and confirm your booking in under two minutes. Our WhatsApp booking line is always active.",
   },
   {
     num: "02",
-    title: "Free Inspection",
-    desc: "Our expert arrives at your door to assess fabric type, age, and stain severity. No obligations.",
+    title: "Free In-Person Inspection",
+    desc: "Before anything is cleaned, our expert arrives and physically inspects your furnishings — fabric type, furniture age, stain severity, moisture sensitivity, and upholstery condition. This gives you a transparent, accurate price quote with no obligation.",
   },
   {
     num: "03",
-    title: "Custom Treatment",
-    desc: "We prescribe either Low-Moisture Dry Cleaning or Deep Fabric Shampoo based on your furnishing.",
+    title: "Custom Treatment Selection",
+    desc: "Based on the inspection, we determine whether your furnishing needs low-moisture dry cleaning, deep fabric shampoo wet cleaning, specialised stain removal, odour neutralisation, or sanitisation treatments.",
   },
   {
     num: "04",
-    title: "Deep Extraction",
-    desc: "Industrial machinery pulls stains and embedded dirt from the fiber core — not just the surface.",
+    title: "Deep Extraction Cleaning",
+    desc: "Our team uses industrial-grade machinery specialised in lifting stains, embedded dirt, and residual cleaning agents cleanly and efficiently from the deepest layers of your upholstery.",
   },
   {
     num: "05",
-    title: "Sanitize & Handover",
-    desc: "A final moisture check, sanitization pass, and your furnishing is handed back crisp and germ-free.",
+    title: "Final Sanitise and Handover",
+    desc: "We do a final moisture check, a visual quality inspection, and hand over your freshly restored furnishing that is crisp, odour-free, and sanitised.",
   },
 ];
 
@@ -110,61 +110,53 @@ export default function Process() {
           <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-copper/60 to-transparent" />
         </motion.div>
 
-        {/* Steps — vertical on mobile, horizontal dashed timeline on desktop */}
-        <div className="relative">
-
-          {/* Desktop: horizontal dashed line through dot centers */}
-          <motion.div
-            className="absolute top-3 left-3 right-3 h-px hidden md:block"
-            style={{
-              backgroundImage: "repeating-linear-gradient(to right, #C2732C66 0px, #C2732C66 8px, transparent 8px, transparent 18px)",
-            }}
-            initial={{ scaleX: 0 }}
-            animate={inView ? { scaleX: 1 } : {}}
-            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-          />
-
-          {/* Mobile: vertical dashed line through dot centers */}
-          <motion.div
-            className="absolute left-3 top-3 bottom-3 w-px md:hidden"
-            style={{
-              backgroundImage: "repeating-linear-gradient(to bottom, #C2732C66 0px, #C2732C66 8px, transparent 8px, transparent 18px)",
-            }}
-            initial={{ scaleY: 0 }}
-            animate={inView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-          />
-
-          {/* Desktop: 5-column grid / Mobile: vertical list */}
-          <div className="grid md:grid-cols-5 gap-0">
-            {steps.map((step, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 16 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
-                className="group flex md:flex-col gap-5 md:gap-0 pb-8 md:pb-0 last:pb-0"
-              >
-                {/* Dot */}
-                <div className="relative z-10 shrink-0 w-6 h-6 rounded-full border-2 border-copper/55 bg-teal-dark group-hover:border-copper group-hover:bg-copper/15 transition-all duration-300 flex items-center justify-center md:mb-2.5">
-                  <div className="w-2 h-2 rounded-full bg-copper/65 group-hover:bg-copper transition-colors duration-300" />
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-col md:block">
-                  <span className="font-sans text-copper/50 text-[10px] font-bold uppercase tracking-[0.16em] mb-2 md:mb-3 group-hover:text-copper/85 transition-colors duration-300 block">
+        {/* Steps — vertical connected timeline */}
+        <div>
+          {steps.map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -20 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.15 + i * 0.12 }}
+              className="flex gap-5 md:gap-7"
+            >
+              {/* Left col: numbered circle + connector line */}
+              <div className="flex flex-col items-center shrink-0 pt-6 md:pt-7">
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={inView ? { scale: 1, opacity: 1 } : {}}
+                  transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.22 + i * 0.12 }}
+                  className="w-11 h-11 rounded-full bg-copper/15 border-2 border-copper/50 flex items-center justify-center shrink-0 group-hover:bg-copper/25"
+                >
+                  <span className="font-serif text-copper-light text-sm font-bold leading-none">
                     {step.num}
                   </span>
-                  <h3 className="font-serif text-ivory-warm text-base md:text-[1.05rem] font-semibold mb-1.5 leading-snug">
+                </motion.div>
+
+                {i < steps.length - 1 && (
+                  <motion.div
+                    className="w-[2px] flex-1 min-h-[32px] rounded-full mt-2"
+                    style={{ background: "linear-gradient(to bottom, #C2732C66, #C2732C18)" }}
+                    initial={{ scaleY: 0, transformOrigin: "top" }}
+                    animate={inView ? { scaleY: 1 } : {}}
+                    transition={{ duration: 0.7, delay: 0.38 + i * 0.12, ease: "easeOut" }}
+                  />
+                )}
+              </div>
+
+              {/* Right col: content card */}
+              <div className={`flex-1${i < steps.length - 1 ? " pb-6" : ""}`}>
+                <div className="group bg-white/[0.04] border border-teal/15 rounded-xl p-6 md:p-7 hover:bg-teal/12 hover:border-copper/28 transition-all duration-300">
+                  <h3 className="font-serif text-ivory-warm text-lg font-semibold mb-2.5 leading-snug">
                     {step.title}
                   </h3>
-                  <p className="font-sans text-stone-teal/50 text-sm leading-relaxed group-hover:text-stone-teal/75 transition-colors duration-300">
+                  <p className="font-sans text-stone-teal/55 text-sm leading-relaxed group-hover:text-stone-teal/75 transition-colors duration-300">
                     {step.desc}
                   </p>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         {/* Bottom CTA */}

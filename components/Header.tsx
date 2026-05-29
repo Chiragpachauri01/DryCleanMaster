@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, CalendarCheck } from "lucide-react";
 
@@ -62,9 +63,16 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16 md:h-18">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 shrink-0">
-          <div className="w-9 h-9 rounded-xl bg-teal flex items-center justify-center shadow-md shadow-teal/30">
-            <span className="text-copper-pale font-serif font-bold text-sm leading-none">D</span>
+        <a href="#" className="flex items-center gap-3 shrink-0">
+          <div className="h-14 w-14 rounded-full overflow-hidden shrink-0">
+            <Image
+              src="/img/Logo/DryCleanLogo-transparent.png"
+              alt="Dry Clean Master"
+              width={64}
+              height={64}
+              className="h-full w-full object-cover"
+              priority
+            />
           </div>
           <div className="leading-tight">
             <span className="font-serif font-bold text-teal-deep text-base tracking-tight block">

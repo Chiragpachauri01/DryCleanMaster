@@ -5,34 +5,28 @@ import { motion, useInView } from "framer-motion";
 
 const features = [
   {
-    num: "01",
-    title: "Certified Furnishing Masters",
-    desc: "Our technicians understand delicate fabrics — velvet, leather, suede, wool — and treat each one with precision protocols.",
+    title: "Certified Furnishing Masters on Every Job",
+    desc: "Our technicians aren't just 'cleaning guys'. They are trained and certified in handling delicate fabrics, including velvet, leather, suede, wool, and silk. They know exactly which treatment each material needs before a single drop of solution is applied.",
   },
   {
-    num: "02",
-    title: "Advanced Extraction Tech",
-    desc: "Industrial moisture-extraction machines pull embedded dirt from the deepest fiber layers that vacuums cannot reach.",
+    title: "Advanced Industrial Extraction Machines",
+    desc: "We don't use your home equipment or jerry-rig any pipes. Our equipment is industry-standard, pulling dirt and bacteria from the deepest layers of your furniture upholstery. A regular vacuum does not reach those layers.",
   },
   {
-    num: "03",
-    title: "Eco-Friendly Fabric Shampoos",
-    desc: "100% biodegradable, non-toxic solutions that are completely safe for children and pets in the household.",
+    title: "Eco-Friendly and Family-Safe Cleaning Solutions",
+    desc: "All our cleaning agents are 100% safe and biodegradable, suitable for children, pets, elderly family members, and family members with health conditions. No odour or sticky residue is left behind after cleaning.",
   },
   {
-    num: "04",
-    title: "Zero Chemical Residue",
-    desc: "Our wet cleaning and fabric treatments leave no sticky chemicals or strong synthetic odors behind.",
+    title: "Zero Residue Cleaning Process",
+    desc: "Many low-quality cleaning methods leave fabrics damp and sticky after cleaning. Our specialised extraction systems remove excess moisture and cleaning agents from deep inside the fabric, leaving them fresh, soft, and residue-free.",
   },
   {
-    num: "05",
-    title: "Transparent & Fixed Pricing",
-    desc: "Premium pricing based purely on seat count or square footage. No surprise surcharges on the day of service.",
+    title: "Transparent and Fixed Prices",
+    desc: "Our dry cleaning services prices are calculated based on square footage or seat count. We impose no hidden surcharges or spring up no surprise bills at the end. What you see in the quote is what you pay.",
   },
   {
-    num: "06",
-    title: "12,000+ Homes Restored",
-    desc: "Trusted by Delhi's premium high-rise apartments and corporate offices for consistent, showroom-quality results.",
+    title: "12,000+ Homes and Offices Restored Across Delhi",
+    desc: "From premium high-rise apartments in South Delhi to corporate offices in Connaught Place, we have restored furnishings across the entire city, with satisfied customers who hire us again and again.",
   },
 ];
 
@@ -81,11 +75,11 @@ export default function WhyChoose() {
             className="flex items-end"
           >
             <p className="font-sans text-stone-teal/60 text-base leading-relaxed border-l-[3px] border-copper/40 pl-6">
-              Delhi&apos;s heavy dust and pollution settle deep inside your sofas,
-              carpets, and curtains, breeding dust mites and bacteria. Regular
-              vacuuming is not enough. At Dry Clean Master, we don&apos;t just
-              clean — we restore your expensive upholstery to its pristine,
-              showroom-like glory using scientifically validated processes.
+              Despite there being plenty of cleaning companies in Delhi,
+              homeowners and corporate clients consistently choose us. Here&apos;s
+              what sets our service apart: certified masters, industrial-grade
+              machines, family-safe solutions, and a zero-residue process that
+              actually protects your expensive furnishings.
             </p>
           </motion.div>
         </div>
@@ -100,7 +94,7 @@ export default function WhyChoose() {
               initial={{ opacity: 0, y: 28 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.08 * i }}
-              className="group relative p-7 border-b border-teal/15 md:border-r md:border-b last:border-b-0 hover:bg-teal/15 transition-colors duration-300"
+              className="group p-7 border-b border-teal/15 md:border-r md:border-b last:border-b-0 hover:bg-teal/15 transition-colors duration-300"
               style={{
                 borderRight:
                   (i + 1) % 2 === 0 && (i + 1) % 3 !== 0
@@ -108,20 +102,13 @@ export default function WhyChoose() {
                     : undefined,
               }}
             >
-              {/* Number accent */}
-              <span className="font-serif text-copper/30 text-6xl font-bold absolute top-4 right-5 leading-none select-none group-hover:text-copper/55 transition-colors duration-300">
-                {f.num}
-              </span>
-
-              <div className="relative">
-                <div className="w-4 h-[2px] bg-copper mb-5 rounded-full" />
-                <h3 className="font-serif text-ivory-warm text-lg font-semibold mb-3 leading-snug">
-                  {f.title}
-                </h3>
-                <p className="font-sans text-stone-teal/55 text-sm leading-relaxed">
-                  {f.desc}
-                </p>
-              </div>
+              <div className="w-4 h-[2px] bg-copper mb-5 rounded-full" />
+              <h3 className="font-serif text-ivory-warm text-lg font-semibold mb-3 leading-snug">
+                {f.title}
+              </h3>
+              <p className="font-sans text-stone-teal/55 text-sm leading-relaxed">
+                {f.desc}
+              </p>
             </motion.div>
           ))}
         </div>

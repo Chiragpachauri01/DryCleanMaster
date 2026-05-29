@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Phone, Mail, MessageCircle, MapPin, ArrowRight, Star } from "lucide-react";
 
 const WA_LINK =
@@ -76,9 +77,15 @@ export default function Footer() {
         {/* Col 1: Brand */}
         <div className="lg:col-span-1">
           {/* Logo */}
-          <div className="flex items-center gap-2.5 mb-5">
-            <div className="w-9 h-9 rounded-xl bg-teal border border-teal-light/20 flex items-center justify-center">
-              <span className="text-copper-pale font-serif font-bold text-sm">D</span>
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-16 w-16 rounded-full overflow-hidden shrink-0">
+              <Image
+                src="/img/Logo/DryCleanLogo-transparent.png"
+                alt="Dry Clean Master"
+                width={64}
+                height={64}
+                className="h-full w-full object-cover"
+              />
             </div>
             <div className="leading-tight">
               <span className="font-serif font-bold text-ivory-warm text-base block">

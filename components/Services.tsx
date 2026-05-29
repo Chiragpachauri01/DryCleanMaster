@@ -9,8 +9,8 @@ const dryServices = [
   {
     num: "01",
     title: "Sofa Dry Cleaning",
-    desc: "Specialized low-moisture treatment for luxury velvet, suede, and premium leather sofas to remove dust and stains without fabric damage.",
-    tag: "Velvet · Leather · Suede",
+    desc: "Your sofa is one of the most used pieces of furniture in your home, and hence, the most exposed to dust, spills, body oils, and stains. Designed for luxury fabric sofas including velvet, chenille, and microfiber, we remove embedded dust without wetting the fabric deeply, protecting the material and internal foam structure.",
+    tag: "Velvet · Chenille · Microfiber",
     img: "/img/service-sofa-dry.png",
     price: "₹299/seat",
     popular: true,
@@ -18,7 +18,7 @@ const dryServices = [
   {
     num: "02",
     title: "Carpet Dry Cleaning",
-    desc: "Organic compound dry cleaning process designed for premium Persian, Oriental, and delicate wool rugs.",
+    desc: "Delicate Persian rugs, Oriental carpets, and premium wool floor coverings need specialised care. Our dry cleaning services clean your organic upholstery without causing colour bleed or fibre damage. Your carpets are bound to look like new.",
     tag: "Persian · Oriental · Wool",
     img: "/img/service-carpet-dry.png",
     price: "₹12/sq.ft",
@@ -26,8 +26,8 @@ const dryServices = [
   },
   {
     num: "03",
-    title: "Chair & Upholstery",
-    desc: "Precision dry care for premium office chairs, dining chairs, headboards, and fabric panels without harsh chemicals.",
+    title: "Chair & Upholstery Dry Cleaning",
+    desc: "Your office chairs, dining chairs, headboards, and any other fabric-covered surfaces are cleaned with our precision dry cleaning techniques. We ensure to protect the foam padding and frame while thoroughly cleaning the outer fabric.",
     tag: "Office · Dining · Headboard",
     img: "/img/service-chair-upholstery.png",
     price: "₹149/chair",
@@ -36,8 +36,8 @@ const dryServices = [
   {
     num: "04",
     title: "Mattress Dry Cleaning",
-    desc: "Deep dust-mite and allergen extraction treatment for premium memory foam and latex mattresses.",
-    tag: "Memory Foam · Latex · Spring",
+    desc: "Did you know that an uncleaned mattress can house millions of dust particles? Our deep extraction treatment targets dust mites and allergens from your premium foam and latex mattress. We clean memory foam, latex, orthopedic, hotel, and luxury bedroom mattresses.",
+    tag: "Memory Foam · Latex · Orthopedic",
     img: "/img/service-mattress-dry.png",
     price: "₹1,199/king",
     popular: false,
@@ -45,7 +45,7 @@ const dryServices = [
   {
     num: "05",
     title: "Curtain Dry Cleaning",
-    desc: "On-site low-moisture cleaning for heavy drapes, silk curtains, and blackout blinds without removing them from the rods.",
+    desc: "We clean your curtains right where they hang — no uninstalling, no transporting, no waiting for days. Our on-site low-moisture process works wonders for heavy drapes, silk curtains, blackout curtains, designer curtains, and office blinds.",
     tag: "Silk · Drapes · Blackout",
     img: "/img/service-curtain-dry.png",
     price: "₹249/panel",
@@ -53,8 +53,8 @@ const dryServices = [
   },
   {
     num: "06",
-    title: "Car Dry Cleaning",
-    desc: "Complete internal restoration of premium car seats, roof fabric, door panels, and floor carpets.",
+    title: "Car Interior Dry Cleaning",
+    desc: "Your car's interior is a fabric surface, just like your home, and it requires equal care. Our car dry cleaning service covers car seats, door panels, roof lining, floor carpets, and interior upholstery, giving your vehicle a fresh interior without leaving excessive moisture behind.",
     tag: "Sedan · SUV · Luxury",
     img: "/img/service-car-dry.png",
     price: "₹2,499/car",
@@ -66,8 +66,8 @@ const wetServices = [
   {
     num: "01",
     title: "Sofa Wet Cleaning & Shampooing",
-    desc: "High-foaming fabric shampoo treatment followed by powerful vacuum extraction to remove deep food stains, oil marks, and sweat odors.",
-    tag: "Deep Stain · Oil · Odor",
+    desc: "High-foaming fabric shampoo treatment followed by powerful vacuum extraction to remove deep food stains, oil marks, and sweat odours. Ideal for heavily soiled sofas that need deep penetration cleaning beyond what dry methods can achieve.",
+    tag: "Deep Stain · Oil · Odour",
     img: "/img/service-sofa-wet-shampoo.png",
     price: "₹349/seat",
     popular: true,
@@ -75,8 +75,8 @@ const wetServices = [
   {
     num: "02",
     title: "Carpet Shampoo Cleaning",
-    desc: "Deep wet injection cleaning that penetrates heavy traffic areas of your carpet to revive compressed fibers and colors.",
-    tag: "Heavy Traffic · Color Revival",
+    desc: "Deep wet injection cleaning that penetrates heavy traffic areas of your carpet to revive compressed fibres and colours. Recommended for carpets with stubborn stains, embedded grime, or significant foot-traffic wear.",
+    tag: "Heavy Traffic · Colour Revival",
     img: "/img/service-carpet-shampoo.png",
     price: "₹15/sq.ft",
     popular: false,
@@ -84,7 +84,7 @@ const wetServices = [
   {
     num: "03",
     title: "Deep Wet Upholstery Treatment",
-    desc: "Specialized water-based stain-dissolving treatment for highly soiled fabric linings and cushions.",
+    desc: "Specialised water-based stain-dissolving treatment for highly soiled fabric linings and cushions. Our extraction process removes residue cleanly, leaving upholstery fresh and dry within hours.",
     tag: "Fabric Lining · Cushions",
     img: "/img/service-upholstery-wet.png",
     price: "₹199/chair",
@@ -93,7 +93,7 @@ const wetServices = [
   {
     num: "04",
     title: "Fabric Shampoo Treatment",
-    desc: "pH-balanced conditioning shampoo application that restores the natural softness and shine of luxury furnishing fabrics.",
+    desc: "pH-balanced conditioning shampoo application that restores the natural softness and shine of luxury furnishing fabrics. Leaves no sticky residue and no harsh chemical smell after treatment.",
     tag: "pH-Balanced · Conditioning",
     img: "/img/service-fabric-shampoo.png",
     price: "₹999+",

@@ -55,20 +55,19 @@ export default function About() {
               className="space-y-4"
             >
               <p className="font-sans text-slate-teal text-base leading-relaxed">
-                Dry Clean Master was established to solve a massive problem: the
-                lack of expert care for high-end home and office furnishings. We
-                believe your expensive sofas, carpets, and upholstery
-                shouldn&apos;t just be washed — they should be{" "}
+                DryClean Master was established with one clear goal: to bring
+                expert-level care to your premium home and office furnishings.
+                We believe that your expensive sofas, carpets, and upholstery
+                deserve much more than basic washing; they need deep,{" "}
                 <span className="text-teal font-semibold">
-                  scientifically cleaned
-                </span>
-                .
+                  scientific cleaning methods
+                </span>{" "}
+                that actually protect the fabric while restoring freshness.
               </p>
               <p className="font-sans text-slate-teal text-base leading-relaxed">
-                Combining top-tier European extraction machinery with
-                fabric-safe eco-luxury solvents, we provide an unmatched
-                on-site cleaning experience across Delhi that no other local
-                provider can replicate.
+                By combining advanced European extraction machines with
+                fabric-safe, eco-friendly cleaning solutions, we deliver a
+                premium on-site furnishing cleaning experience across Delhi.
               </p>
             </motion.div>
 
@@ -80,10 +79,12 @@ export default function About() {
               className="mt-8 space-y-3"
             >
               {[
-                "10+ years of specialization in furnishing restoration",
-                "40+ certified on-site tech masters across Delhi",
-                "12,000+ sofas & carpets deep cleaned",
-                "Full coverage across Delhi NCR",
+                "10+ Years of Specialisation in Furnishing Restoration",
+                "40+ Certified On-Site Tech Masters",
+                "12,000+ Sofas & Carpets Deep Cleaned in Delhi",
+                "Full Coverage Across Delhi NCR",
+                "Advanced industrial-grade machinery",
+                "Safe and eco-friendly cleaning methods",
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <div className="mt-2 w-4 h-[2px] bg-copper shrink-0 rounded-full" />
