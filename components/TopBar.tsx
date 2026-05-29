@@ -3,7 +3,7 @@
 import { Phone, Clock, MapPin, MessageCircle, Star } from "lucide-react";
 
 const WA_LINK =
-  "https://wa.me/918882625522?text=Hi%2C%20I%20want%20to%20book%20a%20free%20pickup%20for%20dry%20cleaning%20service";
+  "https://wa.me/918882625522?text=Hi%2C%20I%20want%20to%20book%20a%20pickup%20for%20dry%20cleaning%20service";
 
 export default function TopBar() {
   return (
@@ -43,7 +43,7 @@ export default function TopBar() {
             className="flex items-center gap-1.5 bg-teal text-white text-xs font-semibold px-3.5 py-1.5 rounded-full hover:bg-teal-mid transition-all duration-200 shadow-sm"
           >
             <MessageCircle size={11} strokeWidth={2.5} />
-            <span>Book Free Pickup</span>
+            <span>Call Now</span>
           </a>
         </div>
       </div>

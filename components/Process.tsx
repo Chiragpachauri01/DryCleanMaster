@@ -13,7 +13,7 @@ const steps = [
   },
   {
     num: "02",
-    title: "Free In-Person Inspection",
+    title: "In-Person Inspection",
     desc: "Before anything is cleaned, our expert arrives and physically inspects your furnishings — fabric type, furniture age, stain severity, moisture sensitivity, and upholstery condition. This gives you a transparent, accurate price quote with no obligation.",
   },
   {
@@ -174,7 +174,7 @@ export default function Process() {
             className="btn-primary inline-flex items-center gap-2.5 px-7 py-3 rounded-xl text-sm font-semibold"
           >
             <CalendarCheck size={15} />
-            Book Free Inspection
+            Book Inspection
           </a>
         </motion.div>
 

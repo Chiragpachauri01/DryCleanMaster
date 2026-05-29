@@ -88,7 +88,7 @@ export default function Pricing() {
             className="font-sans text-slate-teal/70 text-sm max-w-md mx-auto"
           >
             Indicative starting rates. Final pricing is confirmed on-site after
-            the free inspection visit.
+            the inspection visit.
           </motion.p>
         </div>
 
@@ -190,7 +190,7 @@ export default function Pricing() {
           {/* Footer note */}
           <div className="bg-mist/60 px-6 md:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <p className="font-sans text-xs text-slate-teal/60">
-              * Prices are indicative starting rates. Final quote after free
+              * Prices are indicative starting rates. Final quote after
               on-site inspection.
             </p>
             <a

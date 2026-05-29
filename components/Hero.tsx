@@ -12,10 +12,10 @@ const banners = [
 ];
 
 const WA_LINK =
-  "https://wa.me/918882625522?text=Hi%2C%20I%20want%20to%20book%20a%20free%20inspection%20visit%20for%20cleaning%20service";
+  "https://wa.me/918882625522?text=Hi%2C%20I%20want%20to%20book%20an%20inspection%20visit%20for%20cleaning%20service";
 
 const trustBadges = [
-  { icon: Search,      label: "Free In-Person",        sub: "Inspection Visit" },
+  { icon: Search,      label: "In-Person",        sub: "Inspection Visit" },
   { icon: Sparkles,    label: "Eco-Luxury Safe &",     sub: "Odourless Solvents" },
   { icon: ShieldCheck, label: "100% Premium Fabric &", sub: "Colour Protection" },
   { icon: Truck,       label: "Same-Day",              sub: "On-Site Service Available" },
@@ -171,7 +171,7 @@ export default function Hero() {
             whileTap={{ scale: 0.97 }}
           >
             <CalendarCheck size={16} />
-            Book Free Inspection Visit
+            Book Inspection Visit
           </motion.a>
 
           {/* divider */}
