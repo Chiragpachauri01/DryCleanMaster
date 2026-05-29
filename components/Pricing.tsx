@@ -5,7 +5,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 
 const WA_LINK =
-  "https://wa.me/918882625522?text=Hi%2C%20I%20want%20to%20know%20the%20exact%20pricing%20for%20cleaning%20services";
+  "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20know%20the%20exact%20pricing%20for%20cleaning%20services";
 
 const pricingData = [
   {

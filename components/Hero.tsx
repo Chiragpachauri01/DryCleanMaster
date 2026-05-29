@@ -12,7 +12,7 @@ const banners = [
 ];
 
 const WA_LINK =
-  "https://wa.me/918882625522?text=Hi%2C%20I%20want%20to%20book%20an%20inspection%20visit%20for%20cleaning%20service";
+  "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20book%20an%20inspection%20visit%20for%20cleaning%20service";
 
 const trustBadges = [
   { icon: Search,      label: "In-Person",        sub: "Inspection Visit" },
@@ -56,7 +56,7 @@ export default function Hero() {
           >
             <Image
               src={banners[activeBanner]}
-              alt="Premium sofa deep cleaning by Dry Clean Master Delhi"
+              alt="Premium sofa deep cleaning by Dry Clean Masters Delhi"
               fill
               sizes="100vw"
               priority={activeBanner === 0}
@@ -192,7 +192,7 @@ export default function Hero() {
       </div>
 
       {/* ── Trust Badges Strip ── */}
-      <div className="relative z-10 bg-gradient-to-r from-teal-deep/95 via-teal-dark/95 to-teal-deep/95 backdrop-blur-md border-t border-copper/20">
+      <div className="relative z-10 bg-ivory-teal border-t border-copper/20">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-copper/12">
             {trustBadges.map(({ icon: Icon, label, sub }, i) => (
@@ -220,8 +220,8 @@ export default function Hero() {
                   />
                 </motion.div>
                 <div className="group-hover:translate-x-0.5 transition-transform duration-300">
-                  <p className="font-sans text-ivory-warm text-[13px] font-bold leading-snug">{label}</p>
-                  <p className="font-sans text-stone-teal/55 text-[11px] leading-snug mt-0.5">{sub}</p>
+                  <p className="font-sans text-teal-deep text-[13px] font-bold leading-snug">{label}</p>
+                  <p className="font-sans text-charcoal/50 text-[11px] leading-snug mt-0.5">{sub}</p>
                 </div>
               </motion.div>
             ))}

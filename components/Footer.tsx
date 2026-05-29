@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Phone, Mail, MessageCircle, MapPin, ArrowRight, Star } from "lucide-react";
 
 const WA_LINK =
-  "https://wa.me/918882625522?text=Hi%2C%20I%20want%20to%20enquire%20about%20dry%20cleaning%20services";
+  "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20enquire%20about%20dry%20cleaning%20services";
 
 const quickLinks = [
   { label: "Home", href: "#" },
@@ -53,11 +53,11 @@ export default function Footer() {
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
-              href="#contact"
+              href="tel:+918882631413"
               className="flex items-center gap-2 btn-primary font-sans font-semibold text-sm px-6 py-3.5"
             >
-              Book a Visit
-              <ArrowRight size={14} />
+              Call Now
+              <Phone size={14} />
             </a>
             <a
               href={WA_LINK}
@@ -81,7 +81,7 @@ export default function Footer() {
             <div className="h-16 w-16 rounded-full overflow-hidden shrink-0">
               <Image
                 src="/img/Logo/DryCleanLogo-transparent.png"
-                alt="Dry Clean Master"
+                alt="Dry Clean Masters"
                 width={64}
                 height={64}
                 className="h-full w-full object-cover"
@@ -162,7 +162,7 @@ export default function Footer() {
           </h4>
           <div className="space-y-4">
             <a
-              href="tel:+918882625522"
+              href="tel:+918882631413"
               className="flex items-start gap-3 group"
             >
               <div className="mt-0.5 w-8 h-8 border border-teal/15 rounded-lg flex items-center justify-center group-hover:border-teal/40 group-hover:bg-teal/12 transition-all duration-200 shrink-0">
@@ -173,13 +173,13 @@ export default function Footer() {
                   Call Us
                 </p>
                 <p className="font-sans text-ivory-warm/80 text-sm group-hover:text-teal-glow transition-colors duration-200">
-                  +91 8882625522
+                  +91 8882631413
                 </p>
               </div>
             </a>
 
             <a
-              href="mailto:Info@drycleanmaster.in"
+              href="mailto:info@drycleanmasters.com"
               className="flex items-start gap-3 group"
             >
               <div className="mt-0.5 w-8 h-8 border border-teal/15 rounded-lg flex items-center justify-center group-hover:border-teal/40 group-hover:bg-teal/12 transition-all duration-200 shrink-0">
@@ -190,7 +190,7 @@ export default function Footer() {
                   Email
                 </p>
                 <p className="font-sans text-ivory-warm/80 text-sm group-hover:text-teal-glow transition-colors duration-200">
-                  Info@drycleanmaster.in
+                  info@drycleanmasters.com
                 </p>
               </div>
             </a>
@@ -221,7 +221,7 @@ export default function Footer() {
       <div className="border-t border-teal/12">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-sans text-stone-teal/35 text-xs">
-            © 2026 Dry Clean Master. All Rights Reserved.
+            © 2026 Dry Clean Masters. All Rights Reserved.
           </p>
           <div className="flex items-center gap-4">
             <a

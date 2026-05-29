@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { CalendarCheck } from "lucide-react";
+import { CalendarCheck, Phone } from "lucide-react";
 
 const steps = [
   {
@@ -170,11 +170,11 @@ export default function Process() {
             Ready to restore your furnishings?
           </p>
           <a
-            href="#contact"
+            href="tel:+918882631413"
             className="btn-primary inline-flex items-center gap-2.5 px-7 py-3 rounded-xl text-sm font-semibold"
           >
-            <CalendarCheck size={15} />
-            Book Inspection
+            <Phone size={15} />
+            Call Now
           </a>
         </motion.div>
 

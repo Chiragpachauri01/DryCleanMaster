@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, CalendarCheck } from "lucide-react";
 
 const WA_SCHEDULE =
-  "https://wa.me/918882625522?text=Hi%2C%20I%20want%20to%20schedule%20a%20pickup%20for%20cleaning%20service";
+  "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20schedule%20a%20pickup%20for%20cleaning%20service";
 
 const services = [
   { label: "Sofa Dry Cleaning", href: "#services" },
@@ -16,10 +16,6 @@ const services = [
   { label: "Mattress Dry Cleaning", href: "#services" },
   { label: "Curtain Dry Cleaning", href: "#services" },
   { label: "Car Dry Cleaning", href: "#services" },
-  { label: "Wet Cleaning Services", href: "#services" },
-  { label: "Commercial Cleaning", href: "#services" },
-  { label: "Steam Sanitization", href: "#services" },
-  { label: "Stain & Odor Removal", href: "#services" },
 ];
 
 const navLinks = [
@@ -67,7 +63,7 @@ export default function Header() {
           <div className="h-14 w-14 rounded-full overflow-hidden shrink-0">
             <Image
               src="/img/Logo/DryCleanLogo-transparent.png"
-              alt="Dry Clean Master"
+              alt="Dry Clean Masters"
               width={64}
               height={64}
               className="h-full w-full object-cover"
@@ -79,7 +75,7 @@ export default function Header() {
               Dry Clean
             </span>
             <span className="text-copper text-[10px] font-sans uppercase tracking-[0.18em] block -mt-0.5 font-semibold">
-              Master
+              Masters
             </span>
           </div>
         </a>
@@ -148,13 +144,13 @@ export default function Header() {
 
         {/* Desktop CTA */}
         <a
-          href={WA_SCHEDULE}
+          href="tel:+918882631413"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden lg:flex items-center gap-2 btn-primary font-sans text-sm px-5 py-2.5 group"
         >
           <CalendarCheck size={14} className="group-hover:scale-110 transition-transform duration-200" />
-          Schedule Pickup
+          Call Now 
         </a>
 
         {/* Mobile Toggle */}
@@ -240,14 +236,14 @@ export default function Header() {
 
               <div className="pt-4 pb-2">
                 <a
-                  href={WA_SCHEDULE}
+                  href="tel:+918882631413"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileOpen(false)}
                   className="flex items-center justify-center gap-2 w-full btn-primary font-sans text-sm px-5 py-3.5"
                 >
                   <CalendarCheck size={14} />
-                  Schedule Pickup
+                  Call Now
                 </a>
               </div>
             </nav>
