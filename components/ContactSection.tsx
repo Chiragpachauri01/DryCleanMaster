@@ -3,10 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Phone, Mail, MessageCircle, MapPin, Clock, Send, CheckCircle } from "lucide-react";
+import { Phone, Mail, MessageCircle, MapPin, Send, CheckCircle } from "lucide-react";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
-const WA_NUMBER = "918449008612";
-const WA_LINK = `https://wa.me/${WA_NUMBER}`;
+const WA_LINK = `https://wa.me/918882631413`;
 
 const services = [
   "Sofa Dry Cleaning",
@@ -14,9 +15,6 @@ const services = [
   "Mattress Dry Cleaning",
   "Curtain Dry Cleaning",
   "Car Interior Cleaning",
-  "Wet / Shampoo Cleaning",
-  "Commercial Cleaning",
-  "Stain & Odour Removal",
   "Other",
 ];
 
@@ -43,13 +41,7 @@ const contactCards = [
     href: "mailto:info@drycleanmasters.com",
     color: "copper",
   },
-  {
-    icon: Clock,
-    label: "Working Hours",
-    value: "7 AM – 10 PM Daily",
-    href: null,
-    color: "teal",
-  },
+
 ];
 
 export default function ContactSection() {
@@ -61,6 +53,7 @@ export default function ContactSection() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -68,24 +61,24 @@ export default function ContactSection() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.BaseSyntheticEvent) {
     e.preventDefault();
-    const text = [
-      `Hi, I'd like to enquire about your cleaning services.`,
-      `*Name:* ${form.name}`,
-      `*Phone:* ${form.phone}`,
-      form.email ? `*Email:* ${form.email}` : null,
-      form.service ? `*Service Needed:* ${form.service}` : null,
-      form.message ? `*Message:* ${form.message}` : null,
-    ]
-      .filter(Boolean)
-      .join("\n");
-
-    window.open(
-      `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`,
-      "_blank"
-    );
-    setSubmitted(true);
+    setLoading(true);
+    try {
+      await addDoc(collection(db, "contacts"), {
+        ...form,
+        source: "contact_page",
+        createdAt: serverTimestamp(),
+      });
+      fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "contact", ...form }),
+      }).catch(console.error);
+      setSubmitted(true);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -94,7 +87,7 @@ export default function ContactSection() {
       <section className="relative bg-teal-deep pt-24 pb-16 overflow-hidden">
         <Image
           src="/img/Banner Images/1.webp"
-          alt="Dry Clean Masters technician at work"
+          alt="DryClean Masters technician at work"
           fill
           sizes="100vw"
           className="object-cover object-center opacity-25"
@@ -131,7 +124,7 @@ export default function ContactSection() {
             className="font-sans text-stone-teal/60 text-base max-w-xl mx-auto"
           >
             Book an inspection, ask about pricing, or just say hello. We&apos;re
-            available 7 AM – 10 PM every day across Delhi NCR.
+            available across Delhi NCR.
           </motion.p>
         </div>
       </section>
@@ -276,7 +269,7 @@ export default function ContactSection() {
                     Message Sent!
                   </h3>
                   <p className="font-sans text-slate-teal/60 text-sm max-w-xs">
-                    Your WhatsApp chat has opened. We&apos;ll get back to you
+                    We&apos;ve received your enquiry and will get back to you
                     within a few minutes.
                   </p>
                   <button
@@ -292,7 +285,7 @@ export default function ContactSection() {
                     Send Us a Message
                   </h2>
                   <p className="font-sans text-slate-teal/55 text-sm mb-7">
-                    Fill in the form and we&apos;ll reply via WhatsApp instantly.
+                    Fill in the form and our team will get back to you shortly.
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-3">
@@ -373,15 +366,13 @@ export default function ContactSection() {
 
                     <button
                       type="submit"
-                      className="w-full btn-primary flex items-center justify-center gap-2.5 py-3.5 font-sans font-semibold text-sm"
+                      disabled={loading}
+                      className="w-full btn-primary flex items-center justify-center gap-2.5 py-3.5 font-sans font-semibold text-sm disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       <Send size={15} />
-                      Send via WhatsApp
+                      {loading ? "Sending…" : "Send Message"}
                     </button>
 
-                    <p className="font-sans text-center text-slate-teal/40 text-xs">
-                      Submitting opens WhatsApp with your details pre-filled.
-                    </p>
                   </form>
                 </>
               )}

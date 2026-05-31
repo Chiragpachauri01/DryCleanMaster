@@ -56,7 +56,7 @@ export default function Hero() {
           >
             <Image
               src={banners[activeBanner]}
-              alt="Premium sofa deep cleaning by Dry Clean Masters Delhi"
+              alt="Premium sofa deep cleaning by DryClean Masters Delhi"
               fill
               sizes="100vw"
               priority={activeBanner === 0}
@@ -165,7 +165,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-0"
         >
           <motion.a
-            href="#contact"
+            href="#booking"
             className="btn-primary inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-semibold"
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}

@@ -105,7 +105,7 @@ export default function About() {
             >
               <Image
                 src="/img/about-restored-living-room.webp"
-                alt="Premium luxury living room interior — Dry Clean Masters"
+                alt="Premium luxury living room interior — DryClean Masters"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

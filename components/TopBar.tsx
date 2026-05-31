@@ -18,10 +18,7 @@ export default function TopBar() {
             <Phone size={11} strokeWidth={2} />
             <span className="tracking-wide">+91 8882631413</span>
           </a>
-          <span className="hidden sm:flex items-center gap-1.5">
-            <Clock size={11} strokeWidth={2} />
-            <span className="tracking-wide">7 AM – 10 PM Daily</span>
-          </span>
+
           {/* Google Rating badge */}
           <span className="hidden lg:flex items-center gap-1.5 bg-copper/15 border border-copper/30 px-2.5 py-1 rounded-full">
             <Star size={9} className="text-copper-light fill-copper-light" />

@@ -6,9 +6,9 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import ContactSection from "@/components/ContactSection";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Dry Clean Masters Delhi",
+  title: "Contact Us | DryClean Masters Delhi",
   description:
-    "Get in touch with Dry Clean Masters for professional sofa, carpet, and upholstery cleaning in Delhi NCR. Call, WhatsApp, or fill in the form.",
+    "Get in touch with DryClean Masters for professional sofa, carpet, and upholstery cleaning in Delhi NCR. Call, WhatsApp, or fill in the form.",
 };
 
 export default function ContactPage() {

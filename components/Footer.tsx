@@ -81,7 +81,7 @@ export default function Footer() {
             <div className="h-16 w-16 rounded-full overflow-hidden shrink-0">
               <Image
                 src="/img/Logo/DryCleanLogo-transparent.png"
-                alt="Dry Clean Masters"
+                alt="DryClean Masters"
                 width={64}
                 height={64}
                 className="h-full w-full object-cover"
@@ -254,7 +254,7 @@ export default function Footer() {
       <div className="border-t border-teal/12">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-sans text-stone-teal/35 text-xs">
-            © 2026 Dry Clean Masters. All Rights Reserved.
+            © 2026 DryClean Masters. All Rights Reserved.
           </p>
           <div className="flex items-center gap-4">
             <a
