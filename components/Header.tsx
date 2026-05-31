@@ -63,7 +63,7 @@ export default function Header() {
           <div className="h-14 w-14 rounded-full overflow-hidden shrink-0">
             <Image
               src="/img/Logo/DryCleanLogo-transparent.png"
-              alt="Dry Clean Masters"
+              alt="DryClean Masters"
               width={64}
               height={64}
               className="h-full w-full object-cover"
