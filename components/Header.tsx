@@ -5,9 +5,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, CalendarCheck } from "lucide-react";
 
-const WA_SCHEDULE =
-  "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20schedule%20a%20pickup%20for%20cleaning%20service";
-
 const services = [
   { label: "Sofa Dry Cleaning", href: "#services" },
   { label: "Carpet Dry Cleaning", href: "#services" },

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Phone, Mail, MessageCircle, MapPin, ArrowRight, Star } from "lucide-react";
+import { Phone, Mail, MessageCircle, MapPin, Star } from "lucide-react";
 
 const WA_LINK =
   "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20enquire%20about%20dry%20cleaning%20services";
