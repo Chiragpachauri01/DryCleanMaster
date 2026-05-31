@@ -63,6 +63,7 @@ export default function HomeContactForm() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -81,17 +82,26 @@ export default function HomeContactForm() {
   async function handleSubmit(e: React.BaseSyntheticEvent) {
     e.preventDefault();
     setLoading(true);
+    setError("");
     try {
       await addDoc(collection(db, "bookings"), {
         ...form,
         createdAt: serverTimestamp(),
       });
-      fetch("/api/send-email", {
+      const emailResponse = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: "booking", ...form }),
-      }).catch(console.error);
+      });
+
+      if (!emailResponse.ok) {
+        throw new Error("Email confirmation failed");
+      }
+
       setSubmitted(true);
+    } catch (err) {
+      console.error("[booking-submit]", err);
+      setError("We saved your booking, but the confirmation email could not be sent. Please call or WhatsApp us if you do not hear from us shortly.");
     } finally {
       setLoading(false);
     }
@@ -275,6 +285,22 @@ export default function HomeContactForm() {
                   </div>
                 </div>
 
+                {/* Email */}
+                <div>
+                  <label className={labelCls}>
+                    Email Address <span className="text-copper">*</span>
+                  </label>
+                  <input
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                    type="email"
+                    placeholder="rahul@example.com"
+                    className={inputCls}
+                  />
+                </div>
+
                 {/* Date + Time */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
@@ -366,6 +392,12 @@ export default function HomeContactForm() {
                   <CalendarCheck size={16} />
                   {loading ? "Booking…" : "Confirm Booking"}
                 </button>
+
+                {error && (
+                  <p className="font-sans text-center text-copper text-xs leading-relaxed">
+                    {error}
+                  </p>
+                )}
 
                 <p className="font-sans text-center text-slate-teal/40 text-xs">
                   No payment now — our team will confirm and share the quote.
