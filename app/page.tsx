@@ -19,6 +19,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <HomeContactForm />
         <WhyChoose />
         <Services />
         <About />
@@ -26,7 +27,7 @@ export default function Home() {
         <Pricing />
         <Testimonials />
         <FAQ />
-        <HomeContactForm />
+
       </main>
       <Footer />
       <FloatingWhatsApp />
