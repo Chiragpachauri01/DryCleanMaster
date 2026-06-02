@@ -5,24 +5,21 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, CalendarCheck } from "lucide-react";
 
-const WA_SCHEDULE =
-  "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20schedule%20a%20pickup%20for%20cleaning%20service";
-
 const services = [
-  { label: "Sofa Dry Cleaning", href: "#services" },
-  { label: "Carpet Dry Cleaning", href: "#services" },
-  { label: "Chair Dry Cleaning", href: "#services" },
-  { label: "Upholstery Dry Cleaning", href: "#services" },
-  { label: "Mattress Dry Cleaning", href: "#services" },
-  { label: "Curtain Dry Cleaning", href: "#services" },
-  { label: "Car Dry Cleaning", href: "#services" },
+  { label: "Sofa Dry Cleaning", href: "/#services" },
+  { label: "Carpet Dry Cleaning", href: "/#services" },
+  { label: "Chair Dry Cleaning", href: "/#services" },
+  { label: "Upholstery Dry Cleaning", href: "/#services" },
+  { label: "Mattress Dry Cleaning", href: "/#services" },
+  { label: "Curtain Dry Cleaning", href: "/#services" },
+  { label: "Car Dry Cleaning", href: "/#services" },
 ];
 
 const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "About Us", href: "#about" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Blog", href: "#blog" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Gallery", href: "/#gallery" },
+  { label: "Blog", href: "/#blog" },
   { label: "Contact Us", href: "/contact" },
 ];
 
@@ -59,7 +56,7 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16 md:h-18">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 shrink-0">
+        <a href="/" className="flex items-center gap-3 shrink-0">
           <div className="h-14 w-14 rounded-full overflow-hidden shrink-0">
             <Image
               src="/img/Logo/DryCleanLogo-transparent.png"

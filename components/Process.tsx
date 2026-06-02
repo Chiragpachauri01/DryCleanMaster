@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { CalendarCheck, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 
 const steps = [
   {
@@ -136,7 +136,7 @@ export default function Process() {
                 {i < steps.length - 1 && (
                   <motion.div
                     className="w-[2px] flex-1 min-h-[32px] rounded-full mt-2"
-                    style={{ background: "linear-gradient(to bottom, #C2732C66, #C2732C18)" }}
+                    style={{ background: "linear-gradient(to bottom, #22D3EE66, #22D3EE18)" }}
                     initial={{ scaleY: 0, transformOrigin: "top" }}
                     animate={inView ? { scaleY: 1 } : {}}
                     transition={{ duration: 0.7, delay: 0.38 + i * 0.12, ease: "easeOut" }}

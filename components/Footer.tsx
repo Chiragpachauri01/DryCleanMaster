@@ -1,18 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { Phone, Mail, MessageCircle, MapPin, ArrowRight, Star } from "lucide-react";
+import { Phone, Mail, MessageCircle, MapPin, Star } from "lucide-react";
 
 const WA_LINK =
   "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20enquire%20about%20dry%20cleaning%20services";
 
 const quickLinks = [
-  { label: "Home", href: "#" },
-  { label: "About Us", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Blog", href: "#blog" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Services", href: "/#services" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "Gallery", href: "/#gallery" },
+  { label: "Blog", href: "/#blog" },
   { label: "Contact Us", href: "/contact" },
   { label: "Privacy Policy", href: "#privacy" },
   { label: "Terms of Service", href: "#terms" },
@@ -177,7 +177,7 @@ export default function Footer() {
             {services.map((s) => (
               <li key={s}>
                 <a
-                  href="#services"
+                  href="/#services"
                   className="font-sans text-stone-teal/50 text-sm hover:text-teal-light transition-colors duration-200 flex items-center gap-1.5 group"
                 >
                   <span className="w-2 h-px bg-stone-teal/30 group-hover:bg-teal-light group-hover:w-3 transition-all duration-200 shrink-0" />

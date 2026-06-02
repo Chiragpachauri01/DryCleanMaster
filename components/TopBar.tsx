@@ -1,6 +1,6 @@
 "use client";
 
-import { Phone, Clock, MapPin, MessageCircle, Star } from "lucide-react";
+import { Phone, MapPin, MessageCircle, Star } from "lucide-react";
 
 const WA_LINK =
   "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20book%20a%20pickup%20for%20dry%20cleaning%20service";

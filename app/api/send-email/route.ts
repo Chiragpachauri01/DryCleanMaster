@@ -33,10 +33,10 @@ function layout(preheader: string, headingLine: string, bodyHtml: string) {
 <html lang="en">
 <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>${headingLine}</title></head>
-<body style="margin:0;padding:0;background:#eef4f4;">
-  <div style="display:none;max-height:0;overflow:hidden;font-size:1px;color:#eef4f4;">${preheader}</div>
+<body style="margin:0;padding:0;background:#eef8fc;">
+  <div style="display:none;max-height:0;overflow:hidden;font-size:1px;color:#eef8fc;">${preheader}</div>
   <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
-         style="background:#eef4f4;padding:40px 16px;">
+         style="background:#eef8fc;padding:40px 16px;">
     <tr><td align="center">
       <table width="560" cellpadding="0" cellspacing="0" role="presentation"
              style="background:#ffffff;border-radius:14px;overflow:hidden;
@@ -44,7 +44,7 @@ function layout(preheader: string, headingLine: string, bodyHtml: string) {
 
         <!-- Header -->
         <tr>
-          <td style="background:#0B5E5E;padding:28px 32px 24px;">
+          <td style="background:#061B3A;padding:28px 32px 24px;">
             <p style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:11px;
                       text-transform:uppercase;letter-spacing:2.5px;color:rgba(255,255,255,0.45);">
               ${BRAND}
@@ -59,13 +59,13 @@ function layout(preheader: string, headingLine: string, bodyHtml: string) {
 
         <!-- Footer -->
         <tr>
-          <td style="padding:18px 32px;border-top:1px solid #f1f5f9;background:#f8fafa;">
+          <td style="padding:18px 32px;border-top:1px solid #f1f5f9;background:#f8fcff;">
             <p style="margin:0;font-family:Arial,sans-serif;font-size:11px;
                       color:#94a3b8;text-align:center;line-height:1.8;">
               ${BRAND} &middot; Delhi NCR &middot;
-              <a href="tel:${PHONE.replace(/\s/g, "")}" style="color:#0B5E5E;text-decoration:none;">${PHONE}</a>
+              <a href="tel:${PHONE.replace(/\s/g, "")}" style="color:#0EA5E9;text-decoration:none;">${PHONE}</a>
               &middot;
-              <a href="mailto:${ADMIN_EMAIL}" style="color:#0B5E5E;text-decoration:none;">${ADMIN_EMAIL}</a>
+              <a href="mailto:${ADMIN_EMAIL}" style="color:#0EA5E9;text-decoration:none;">${ADMIN_EMAIL}</a>
             </p>
           </td>
         </tr>
@@ -79,7 +79,7 @@ function layout(preheader: string, headingLine: string, bodyHtml: string) {
 
 function ctaButton(href: string, label: string) {
   return `<a href="${href}"
-    style="display:inline-block;background:#B87333;color:#ffffff;text-decoration:none;
+    style="display:inline-block;background:#0EA5E9;color:#ffffff;text-decoration:none;
            font-family:Arial,sans-serif;font-size:13px;font-weight:700;
            padding:12px 26px;border-radius:8px;margin-top:20px;">${label}</a>`;
 }
@@ -118,7 +118,7 @@ function bookingUserHtml(d: Record<string, string>) {
     <p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:14px;
               color:#475569;line-height:1.75;">
       We&rsquo;ve received your booking request! Our team will call you at
-      <strong style="color:#0B5E5E;">${d.phone}</strong> shortly to confirm your appointment.
+      <strong style="color:#0EA5E9;">${d.phone}</strong> shortly to confirm your appointment.
     </p>
     <table cellpadding="0" cellspacing="0" width="100%"
            style="border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:20px;">
@@ -129,7 +129,7 @@ function bookingUserHtml(d: Record<string, string>) {
     </table>
     <p style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:13px;color:#64748b;line-height:1.7;">
       Need to reach us sooner? Call or WhatsApp:
-      <a href="tel:${PHONE.replace(/\s/g, "")}" style="color:#0B5E5E;font-weight:600;">${PHONE}</a>
+      <a href="tel:${PHONE.replace(/\s/g, "")}" style="color:#0EA5E9;font-weight:600;">${PHONE}</a>
     </p>
     <p style="margin:12px 0 0;font-family:Arial,sans-serif;font-size:13px;color:#64748b;">
       Thank you for choosing <strong>${BRAND}</strong>!
@@ -172,11 +172,11 @@ function contactUserHtml(d: Record<string, string>) {
     <p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:14px;
               color:#475569;line-height:1.75;">
       Thanks for reaching out! We&rsquo;ve received your message and our team will get back to you
-      at <strong style="color:#0B5E5E;">${d.phone}</strong> within a few minutes.
+      at <strong style="color:#0EA5E9;">${d.phone}</strong> within a few minutes.
     </p>
     <p style="margin:0 0 6px;font-family:Arial,sans-serif;font-size:13px;color:#64748b;line-height:1.7;">
       Can&rsquo;t wait? Call or WhatsApp us directly:
-      <a href="tel:${PHONE.replace(/\s/g, "")}" style="color:#0B5E5E;font-weight:600;">${PHONE}</a>
+      <a href="tel:${PHONE.replace(/\s/g, "")}" style="color:#0EA5E9;font-weight:600;">${PHONE}</a>
     </p>
     <p style="margin:12px 0 0;font-family:Arial,sans-serif;font-size:13px;color:#64748b;">
       Thank you for choosing <strong>${BRAND}</strong>!

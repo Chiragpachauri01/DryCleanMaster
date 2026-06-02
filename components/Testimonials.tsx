@@ -2,46 +2,146 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, Star } from "lucide-react";
 
-const reviews = [
+type Review = {
+  id: string;
+  authorName: string;
+  authorUrl: string;
+  photoUrl: string;
+  rating: number;
+  text: string;
+  relativeTime: string;
+  publishTime: string;
+  reviewUrl: string;
+  avatarColor: string;
+};
+
+type GoogleReviewsResponse = {
+  ok: boolean;
+  rating: number | null;
+  userRatingCount: number | null;
+  googleMapsUrl: string;
+  reviews: Omit<Review, "avatarColor">[];
+};
+
+const fallbackReviews: Review[] = [
   {
-    name: "Siddharth",
-    location: "New Delhi",
+    id: "fallback-1",
+    authorName: "Siddharth",
+    authorUrl: "",
+    photoUrl: "",
+    rating: 5,
     text: "Our 7-seater fabric sofa had severe dust accumulation. The DryClean Master team cleaned it via their wet extraction process. It looks completely brand new!",
-    service: "Sofa Wet Cleaning",
+    relativeTime: "Google review",
+    publishTime: "",
+    reviewUrl: "",
     avatarColor: "bg-teal/25 text-teal",
   },
   {
-    name: "Pooja",
-    location: "Rohini",
+    id: "fallback-2",
+    authorName: "Pooja",
+    authorUrl: "",
+    photoUrl: "",
+    rating: 5,
     text: "They managed to remove a tough coffee stain from my premium imported wool carpet. Highly impressed by their fabric shampoo treatment.",
-    service: "Carpet Shampoo Cleaning",
+    relativeTime: "Google review",
+    publishTime: "",
+    reviewUrl: "",
     avatarColor: "bg-copper/20 text-copper-dark",
   },
   {
-    name: "Rahul",
-    location: "West Delhi",
+    id: "fallback-3",
+    authorName: "Rahul",
+    authorUrl: "",
+    photoUrl: "",
+    rating: 5,
     text: "Very professional team. They inspected the fabric first and suggested dry cleaning for my velvet headboard instead of harsh wet washing. Exceptional knowledge!",
-    service: "Chair & Upholstery Dry Cleaning",
+    relativeTime: "Google review",
+    publishTime: "",
+    reviewUrl: "",
     avatarColor: "bg-teal-mid/20 text-teal-light",
   },
   {
-    name: "Namit Yadav",
-    location: "Karol Bagh",
+    id: "fallback-4",
+    authorName: "Namit Yadav",
+    authorUrl: "",
+    photoUrl: "",
+    rating: 5,
     text: "Booked them for car dry cleaning and mattress sanitisation. Quick, seamless, on-time doorstep service with no messy water left behind.",
-    service: "Car Dry Cleaning + Mattress",
+    relativeTime: "Google review",
+    publishTime: "",
+    reviewUrl: "",
     avatarColor: "bg-slate-teal/40 text-ivory-warm",
   },
 ];
 
+const avatarColors = [
+  "bg-teal/25 text-teal",
+  "bg-copper/20 text-copper-dark",
+  "bg-teal-mid/20 text-teal-light",
+  "bg-slate-teal/40 text-ivory-warm",
+  "bg-teal-light/20 text-teal-glow",
+];
+
+function getReviewInitial(name: string) {
+  return name.trim().charAt(0).toUpperCase() || "G";
+}
+
+function formatReviewCount(count: number | null) {
+  if (!count) return "Google Reviews";
+  return `${count.toLocaleString("en-IN")} Google Reviews`;
+}
+
 export default function Testimonials() {
   const [active, setActive] = useState(0);
+  const [reviews, setReviews] = useState<Review[]>(fallbackReviews);
+  const [rating, setRating] = useState<number | null>(4.9);
+  const [reviewCount, setReviewCount] = useState<number | null>(400);
+  const [googleMapsUrl, setGoogleMapsUrl] = useState("");
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
-  const prev = useCallback(() => setActive((a) => (a === 0 ? reviews.length - 1 : a - 1)), []);
-  const next = useCallback(() => setActive((a) => (a === reviews.length - 1 ? 0 : a + 1)), []);
+  const prev = useCallback(
+    () => setActive((a) => (a === 0 ? reviews.length - 1 : a - 1)),
+    [reviews.length]
+  );
+  const next = useCallback(
+    () => setActive((a) => (a === reviews.length - 1 ? 0 : a + 1)),
+    [reviews.length]
+  );
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function fetchGoogleReviews() {
+      try {
+        const response = await fetch("/api/google-reviews");
+        const data = (await response.json()) as GoogleReviewsResponse;
+
+        if (!isMounted || !data.ok || data.reviews.length === 0) return;
+
+        setReviews(
+          data.reviews.map((review, index) => ({
+            ...review,
+            avatarColor: avatarColors[index % avatarColors.length],
+          }))
+        );
+        setRating(data.rating);
+        setReviewCount(data.userRatingCount);
+        setGoogleMapsUrl(data.googleMapsUrl);
+        setActive(0);
+      } catch {
+        // Keep curated fallback reviews when Google Places is unavailable.
+      }
+    }
+
+    fetchGoogleReviews();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(next, 4000);
@@ -64,9 +164,13 @@ export default function Testimonials() {
                 <Star key={i} size={11} className="text-copper-light fill-copper-light" />
               ))}
             </div>
-            <span className="font-sans text-copper-light font-semibold text-xs">4.9</span>
+            <span className="font-sans text-copper-light font-semibold text-xs">
+              {rating?.toFixed(1) ?? "5.0"}
+            </span>
             <span className="text-stone-teal/50 text-xs">·</span>
-            <span className="font-sans text-stone-teal/60 text-xs">400+ Google Reviews</span>
+            <span className="font-sans text-stone-teal/60 text-xs">
+              {formatReviewCount(reviewCount)}
+            </span>
           </motion.div>
 
           <motion.span
@@ -118,7 +222,15 @@ export default function Testimonials() {
                 {/* Stars */}
                 <div className="flex gap-1 mb-5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} className="text-copper-light fill-copper-light" />
+                    <Star
+                      key={i}
+                      size={14}
+                      className={
+                        i < Math.round(reviews[active].rating)
+                          ? "text-copper-light fill-copper-light"
+                          : "text-stone-teal/30"
+                      }
+                    />
                   ))}
                 </div>
 
@@ -131,20 +243,37 @@ export default function Testimonials() {
                 <div className="flex items-center justify-between flex-wrap gap-4">
                   <div className="flex items-center gap-3">
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${reviews[active].avatarColor}`}>
-                      {reviews[active].name[0]}
+                      {getReviewInitial(reviews[active].authorName)}
                     </div>
                     <div>
-                      <p className="font-sans text-ivory-warm font-semibold text-sm">
-                        {reviews[active].name}
-                      </p>
+                      {reviews[active].authorUrl ? (
+                        <a
+                          href={reviews[active].authorUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-sans text-ivory-warm font-semibold text-sm hover:text-teal-glow transition-colors duration-200"
+                        >
+                          {reviews[active].authorName}
+                        </a>
+                      ) : (
+                        <p className="font-sans text-ivory-warm font-semibold text-sm">
+                          {reviews[active].authorName}
+                        </p>
+                      )}
                       <p className="font-sans text-stone-teal/50 text-xs mt-0.5">
-                        {reviews[active].location}
+                        {reviews[active].relativeTime || "Google review"}
                       </p>
                     </div>
                   </div>
-                  <span className="font-sans text-[11px] text-teal-glow/70 uppercase tracking-[0.12em] bg-teal/12 border border-teal/20 px-3 py-1 rounded-full">
-                    {reviews[active].service}
-                  </span>
+                  <a
+                    href={reviews[active].reviewUrl || googleMapsUrl || "#testimonials"}
+                    target={reviews[active].reviewUrl || googleMapsUrl ? "_blank" : undefined}
+                    rel={reviews[active].reviewUrl || googleMapsUrl ? "noopener noreferrer" : undefined}
+                    className="inline-flex items-center gap-1.5 font-sans text-[11px] text-teal-glow/70 uppercase tracking-[0.12em] bg-teal/12 border border-teal/20 px-3 py-1 rounded-full hover:border-copper/40 hover:text-copper-light transition-colors duration-200"
+                  >
+                    Original Google Review
+                    {(reviews[active].reviewUrl || googleMapsUrl) && <ExternalLink size={11} />}
+                  </a>
                 </div>
               </motion.div>
             </AnimatePresence>
