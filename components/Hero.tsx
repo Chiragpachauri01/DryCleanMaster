@@ -192,9 +192,9 @@ export default function Hero() {
       </div>
 
       {/* ── Trust Badges Strip ── */}
-      <div className="relative z-10 bg-ivory-teal border-t border-copper/20">
+      <div className="relative z-10 bg-teal-deep teal-texture border-t border-teal/25">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-copper/12">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-teal/15">
             {trustBadges.map(({ icon: Icon, label, sub }, i) => (
               <motion.div
                 key={i}
@@ -209,7 +209,7 @@ export default function Hero() {
                   className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center border transition-all duration-300 ${
                     i % 2 === 0
                       ? "bg-teal/20 border-teal-light/30 group-hover:bg-teal/35 group-hover:border-teal-glow/55"
-                      : "bg-copper/15 border-copper/28 group-hover:bg-copper/28 group-hover:border-copper-light/55"
+                      : "bg-copper/15 border-copper/30 group-hover:bg-copper/28 group-hover:border-copper-light/55"
                   }`}
                   whileHover={{ rotate: 6 }}
                 >
@@ -220,8 +220,8 @@ export default function Hero() {
                   />
                 </motion.div>
                 <div className="group-hover:translate-x-0.5 transition-transform duration-300">
-                  <p className="font-sans text-teal-deep text-[13px] font-bold leading-snug">{label}</p>
-                  <p className="font-sans text-charcoal/50 text-[11px] leading-snug mt-0.5">{sub}</p>
+                  <p className="font-sans text-ivory-warm text-[13px] font-bold leading-snug">{label}</p>
+                  <p className="font-sans text-stone-teal/60 text-[11px] leading-snug mt-0.5">{sub}</p>
                 </div>
               </motion.div>
             ))}
