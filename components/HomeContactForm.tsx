@@ -53,8 +53,8 @@ const emptyForm: FormState = {
 
 const inputCls =
   "w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 " +
-  "border border-stone-teal/30 rounded-lg px-4 py-3 bg-ivory " +
-  "focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200";
+  "border border-stone-teal/35 rounded-lg px-4 py-3 bg-ivory-warm shadow-sm " +
+  "focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/25 focus:bg-white transition-all duration-200";
 
 const labelCls =
   "font-sans text-[11px] text-slate-teal/55 uppercase tracking-[0.1em] font-semibold mb-1.5 block";
@@ -108,11 +108,11 @@ export default function HomeContactForm() {
   }
 
   return (
-    <section id="booking" className="bg-ivory py-20 md:py-28">
+    <section id="booking" className="bg-ivory-teal py-12 md:py-28 teal-texture">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
 
         {/* Section header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
           <span className="inline-flex items-center gap-2 mb-4">
             <span className="w-5 h-[2px] bg-copper rounded-full" />
             <span className="text-copper font-sans text-xs uppercase tracking-[0.2em] font-semibold">
@@ -131,7 +131,7 @@ export default function HomeContactForm() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-[1fr_1.75fr] gap-8 xl:gap-14 items-start">
+        <div className="grid lg:grid-cols-[1fr_1.75fr] gap-5 md:gap-8 xl:gap-14 items-start">
 
           {/* ── Left: dark info panel ── */}
           <motion.div
@@ -139,19 +139,19 @@ export default function HomeContactForm() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-teal-deep rounded-2xl p-8 md:p-10 text-ivory-warm"
+            className="bg-teal-deep rounded-2xl p-5 md:p-10 text-ivory-warm"
           >
-            <div className="w-12 h-12 rounded-xl bg-teal/20 border border-teal/30 flex items-center justify-center mb-6">
+            <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-teal/20 border border-teal/30 flex items-center justify-center mb-4 md:mb-6">
               <CalendarCheck size={22} className="text-teal-glow" />
             </div>
             <h3 className="font-serif text-2xl font-bold mb-2">
               Why Book With Us?
             </h3>
-            <p className="font-sans text-stone-teal/55 text-sm mb-8 leading-relaxed">
+            <p className="font-sans text-stone-teal/55 text-sm mb-5 md:mb-8 leading-relaxed">
               Professional furnishing care at your doorstep. No guesswork, no hassle.
             </p>
 
-            <ul className="space-y-4 mb-10">
+            <ul className="space-y-3 md:space-y-4 mb-6 md:mb-10">
               {benefits.map(({ text }) => (
                 <li key={text} className="flex items-start gap-3">
                   <span className="mt-[3px] w-4 h-4 rounded-full bg-copper/20 border border-copper/40 flex items-center justify-center shrink-0">
@@ -163,7 +163,7 @@ export default function HomeContactForm() {
             </ul>
 
             {/* trust strip */}
-            <div className="border-t border-white/10 pt-6 flex items-center gap-3">
+            <div className="border-t border-white/10 pt-4 md:pt-6 flex items-center gap-3">
               <div className="flex -space-x-2">
                 {["S", "P", "R", "N"].map((initial, i) => (
                   <div
@@ -188,8 +188,17 @@ export default function HomeContactForm() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.08 }}
-            className="bg-white border border-stone-teal/15 rounded-2xl shadow-sm shadow-teal/8 p-7 md:p-10"
+            className="relative overflow-hidden bg-white border-2 border-teal/35 rounded-2xl shadow-2xl shadow-teal/18 p-4 pt-6 md:p-10"
           >
+            <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-teal via-copper-light to-teal-deep" />
+            <div className="mb-4 md:mb-7 rounded-xl border border-teal/20 bg-ivory-teal px-4 md:px-5 py-3 md:py-4">
+              <p className="font-sans text-copper text-[11px] uppercase tracking-[0.18em] font-semibold mb-1">
+                Booking Form
+              </p>
+              <h3 className="font-serif text-teal-deep text-2xl font-bold leading-tight">
+                Tell us what needs cleaning
+              </h3>
+            </div>
             {submitted ? (
               <div className="flex flex-col items-center text-center py-10 gap-5">
                 <div className="w-16 h-16 rounded-full bg-teal/10 border border-teal/30 flex items-center justify-center">
@@ -215,14 +224,14 @@ export default function HomeContactForm() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5">
 
                 {/* Service picker */}
                 <div>
                   <label className={labelCls}>
                     Service Required <span className="text-copper">*</span>
                   </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 md:gap-2.5">
                     {services.map(({ value, icon: Icon }) => {
                       const active = form.service === value;
                       return (
@@ -230,7 +239,7 @@ export default function HomeContactForm() {
                           key={value}
                           type="button"
                           onClick={() => setService(value)}
-                          className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-left transition-all duration-200 ${
+                          className={`flex items-center gap-2 px-2.5 md:px-3 py-2 md:py-2.5 rounded-xl border text-left transition-all duration-200 ${
                             active
                               ? "border-teal bg-teal/8 text-teal"
                               : "border-stone-teal/25 bg-ivory text-slate-teal/70 hover:border-teal/40 hover:bg-teal/5"
@@ -255,7 +264,7 @@ export default function HomeContactForm() {
                 </div>
 
                 {/* Name + Phone */}
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-2 gap-3 md:gap-4">
                   <div>
                     <label className={labelCls}>
                       Full Name <span className="text-copper">*</span>
@@ -302,7 +311,7 @@ export default function HomeContactForm() {
                 </div>
 
                 {/* Date + Time */}
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-2 gap-3 md:gap-4">
                   <div>
                     <label className={labelCls}>
                       <CalendarCheck size={11} className="inline mr-1 mb-0.5" />
