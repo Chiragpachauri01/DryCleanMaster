@@ -133,21 +133,21 @@ export default function ContactSection() {
       <div className="h-[3px] bg-gradient-to-r from-transparent via-copper to-transparent" />
 
       {/* Main content */}
-      <section className="bg-ivory py-16 md:py-24">
+      <section className="bg-ivory py-10 md:py-24">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
-          <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 xl:gap-20">
+          <div className="grid lg:grid-cols-[1fr_1.4fr] gap-7 md:gap-12 xl:gap-20">
 
             {/* Left: contact info */}
             <div>
               <h2 className="font-serif text-teal-deep text-2xl md:text-3xl font-bold mb-2">
                 Reach Us Directly
               </h2>
-              <p className="font-sans text-slate-teal/60 text-sm mb-8 leading-relaxed">
+              <p className="font-sans text-slate-teal/60 text-sm mb-5 md:mb-8 leading-relaxed">
                 Prefer calling or chatting? Use any of the channels below —
                 our team responds within minutes.
               </p>
 
-              <div className="space-y-5 mb-10">
+              <div className="space-y-3 md:space-y-5 mb-6 md:mb-10">
                 {contactCards.map(({ icon: Icon, label, value, href, color, external }) => {
                   const colorMap: Record<string, string> = {
                     teal: "border-teal/20 bg-teal/8 group-hover:border-teal/40 group-hover:bg-teal/15",
@@ -160,7 +160,7 @@ export default function ContactSection() {
                     copper: "text-copper group-hover:text-copper-light",
                   };
                   const content = (
-                    <div className={`group flex items-center gap-4 mb-4 p-4 rounded-xl border transition-all duration-200 ${colorMap[color]}`}>
+                    <div className={`group flex items-center gap-3 md:gap-4 mb-3 md:mb-4 p-3 md:p-4 rounded-xl border transition-all duration-200 ${colorMap[color]}`}>
                       <div className={`w-11 h-11 rounded-xl border ${colorMap[color]} flex items-center justify-center shrink-0`}>
                         <Icon size={18} className={iconColorMap[color]} />
                       </div>
@@ -255,7 +255,8 @@ export default function ContactSection() {
             </div>
 
             {/* Right: form */}
-            <div className="bg-white border border-stone-teal/20 rounded-2xl shadow-sm shadow-teal/8 p-8 md:p-10">
+            <div className="relative overflow-hidden bg-white border-2 border-teal/35 rounded-2xl shadow-2xl shadow-teal/18 p-4 pt-6 md:p-10">
+              <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-teal via-copper-light to-teal-deep" />
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -281,15 +282,20 @@ export default function ContactSection() {
                 </motion.div>
               ) : (
                 <>
-                  <h2 className="font-serif text-teal-deep text-2xl font-bold mb-1">
-                    Send Us a Message
-                  </h2>
-                  <p className="font-sans text-slate-teal/55 text-sm mb-7">
+                  <div className="mb-4 md:mb-7 rounded-xl border border-teal/20 bg-ivory-teal px-4 md:px-5 py-3 md:py-4">
+                    <p className="font-sans text-copper text-[11px] uppercase tracking-[0.18em] font-semibold mb-1">
+                      Contact Form
+                    </p>
+                    <h2 className="font-serif text-teal-deep text-2xl font-bold leading-tight">
+                      Send Us a Message
+                    </h2>
+                  </div>
+                  <p className="font-sans text-slate-teal/55 text-sm mb-4 md:mb-7">
                     Fill in the form and our team will get back to you shortly.
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-3">
-                    <div className="grid sm:grid-cols-2 gap-5">
+                    <div className="grid sm:grid-cols-2 gap-3 md:gap-5">
                       <div>
                         <label className="font-sans text-xs text-slate-teal/60 uppercase tracking-[0.1em] font-semibold mb-1.5 block">
                           Full Name <span className="text-copper">*</span>
@@ -300,7 +306,7 @@ export default function ContactSection() {
                           onChange={handleChange}
                           required
                           placeholder="Rahul Sharma"
-                          className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/30 rounded-lg px-4 py-3 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200 bg-ivory"
+                          className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/35 rounded-lg px-4 py-3 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/25 focus:bg-white transition-all duration-200 bg-ivory-warm shadow-sm"
                         />
                       </div>
                       <div>
@@ -314,7 +320,7 @@ export default function ContactSection() {
                           required
                           type="tel"
                           placeholder="+91 98765 43210"
-                          className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/30 rounded-lg px-4 py-3 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200 bg-ivory"
+                          className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/35 rounded-lg px-4 py-3 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/25 focus:bg-white transition-all duration-200 bg-ivory-warm shadow-sm"
                         />
                       </div>
                     </div>
@@ -329,7 +335,7 @@ export default function ContactSection() {
                         onChange={handleChange}
                         type="email"
                         placeholder="rahul@example.com"
-                        className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/30 rounded-lg px-4 py-3 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200 bg-ivory"
+                        className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/35 rounded-lg px-4 py-3 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/25 focus:bg-white transition-all duration-200 bg-ivory-warm shadow-sm"
                       />
                     </div>
 
@@ -341,7 +347,7 @@ export default function ContactSection() {
                         name="service"
                         value={form.service}
                         onChange={handleChange}
-                        className="w-full font-sans text-sm text-charcoal border border-stone-teal/30 rounded-lg px-4 py-3 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200 bg-ivory appearance-none"
+                        className="w-full font-sans text-sm text-charcoal border border-stone-teal/35 rounded-lg px-4 py-3 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/25 focus:bg-white transition-all duration-200 bg-ivory-warm shadow-sm appearance-none"
                       >
                         <option value="">Select a service…</option>
                         {services.map((s) => (
@@ -360,7 +366,7 @@ export default function ContactSection() {
                         onChange={handleChange}
                         rows={4}
                         placeholder="Tell us about your furnishings, any stains, or specific concerns…"
-                        className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/30 rounded-lg px-4 py-3 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-all duration-200 bg-ivory resize-none"
+                        className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/35 rounded-lg px-4 py-3 focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/25 focus:bg-white transition-all duration-200 bg-ivory-warm shadow-sm resize-none"
                       />
                     </div>
 
