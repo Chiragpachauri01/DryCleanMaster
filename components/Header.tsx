@@ -83,7 +83,7 @@ export default function Header() {
           </div>
           <div className="leading-tight">
             <span className="font-serif font-bold text-teal-deep text-base tracking-tight block">
-              Dry Clean
+              DryClean
             </span>
             <span className="text-copper text-[10px] font-sans uppercase tracking-[0.18em] block -mt-0.5 font-semibold">
               Masters

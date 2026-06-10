@@ -15,7 +15,12 @@ import {
   Award,
   Users,
   AlertCircle,
+  CalendarCheck,
 } from "lucide-react";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+
+const todayISO = new Date().toISOString().split("T")[0];
 
 const PHONE = "tel:+918882625522";
 const PHONE_DISPLAY = "+91 8882625522";
@@ -98,6 +103,38 @@ const faqs = [
 
 export default function SofaDryCleaningContent() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [heroExpanded, setHeroExpanded] = useState(false);
+  const [bookingForm, setBookingForm] = useState({
+    name: "", phone: "", email: "", date: "", timeSlot: "", address: "", notes: "",
+  });
+  const [bookingSubmitted, setBookingSubmitted] = useState(false);
+  const [bookingLoading, setBookingLoading] = useState(false);
+  const [bookingError, setBookingError] = useState("");
+
+  async function handleBookingSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setBookingLoading(true);
+    setBookingError("");
+    try {
+      await addDoc(collection(db, "bookings"), {
+        ...bookingForm,
+        service: "Sofa Dry Cleaning",
+        createdAt: serverTimestamp(),
+      });
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "booking", ...bookingForm, service: "Sofa Dry Cleaning" }),
+      });
+      if (!res.ok) throw new Error("email failed");
+      setBookingSubmitted(true);
+    } catch (err) {
+      console.error("[sofa-booking]", err);
+      setBookingError("Booking saved! But confirmation email failed — we'll call you shortly.");
+    } finally {
+      setBookingLoading(false);
+    }
+  }
 
   const heroRef = useRef<HTMLDivElement>(null);
   const problemRef = useRef<HTMLDivElement>(null);
@@ -113,6 +150,7 @@ export default function SofaDryCleaningContent() {
   const whyRef = useRef<HTMLDivElement>(null);
   const areasRef = useRef<HTMLDivElement>(null);
   const addonsRef = useRef<HTMLDivElement>(null);
+  const bookingFormRef = useRef<HTMLDivElement>(null);
   const faqRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
@@ -130,6 +168,7 @@ export default function SofaDryCleaningContent() {
   const whyInView = useInView(whyRef, { once: true, margin: "-60px" });
   const areasInView = useInView(areasRef, { once: true, margin: "-60px" });
   const addonsInView = useInView(addonsRef, { once: true, margin: "-60px" });
+  const bookingFormInView = useInView(bookingFormRef, { once: true, margin: "-60px" });
   const faqInView = useInView(faqRef, { once: true, margin: "-60px" });
   const ctaInView = useInView(ctaRef, { once: true, margin: "-60px" });
 
@@ -184,19 +223,47 @@ export default function SofaDryCleaningContent() {
           </motion.h1>
 
           {/* Intro */}
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2 }}
-            className="font-sans text-stone-teal/70 text-sm md:text-base leading-relaxed mb-8 max-w-3xl"
+            className="mb-8 max-w-3xl"
           >
-            Your sofa is the most-used piece of furniture in your home and, mostly, the least properly
-            cleaned. If you&apos;re looking for professional sofa dry cleaning services in Delhi that genuinely
-            restore your sofa&apos;s health rather than just surface cleaning, you&apos;ve come to the right place.
-            DryClean Masters offers certified, doorstep sofa dry cleaning services in Delhi with fabric-safe
-            treatments that eliminate dirt, allergens, stains, and odours without excess moisture or any
-            damage to your upholstery.
-          </motion.p>
+            <p className="font-sans text-stone-teal/70 text-sm md:text-base leading-relaxed">
+              Your sofa is the most-used piece of furniture in your home and, mostly, the least properly
+              cleaned. If you&apos;re looking for professional sofa dry cleaning services in Delhi that genuinely
+              restore your sofa&apos;s health rather than just surface cleaning, you&apos;ve come to the right place.
+              {!heroExpanded && (
+                <button
+                  onClick={() => setHeroExpanded(true)}
+                  className="ml-1 font-semibold text-copper-light hover:text-copper underline underline-offset-2 transition-colors text-sm"
+                >
+                  Read more
+                </button>
+              )}
+            </p>
+            <AnimatePresence>
+              {heroExpanded && (
+                <motion.p
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.35 }}
+                  className="font-sans text-stone-teal/70 text-sm md:text-base leading-relaxed mt-2 overflow-hidden"
+                >
+                  DryClean Masters offers certified, doorstep sofa dry cleaning services in Delhi with
+                  fabric-safe treatments that eliminate dirt, allergens, stains, and odours without excess
+                  moisture or any damage to your upholstery.{" "}
+                  <button
+                    onClick={() => setHeroExpanded(false)}
+                    className="font-semibold text-copper-light hover:text-copper underline underline-offset-2 transition-colors text-sm"
+                  >
+                    Read less
+                  </button>
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </motion.div>
 
           {/* Trust badges */}
           <motion.div
@@ -226,13 +293,13 @@ export default function SofaDryCleaningContent() {
             className="flex flex-col sm:flex-row flex-wrap gap-4 items-start sm:items-center"
           >
             <a
-              href={WA_LINK}
+              href="#booking"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 btn-whatsapp font-sans text-sm px-7 py-3.5"
             >
               <MessageCircle size={16} />
-              Book Free Inspection Visit
+              Book Now
             </a>
             <a
               href={PHONE}
@@ -553,7 +620,7 @@ export default function SofaDryCleaningContent() {
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
                     <CheckCircle size={12} className="text-copper mt-0.5 shrink-0" />
-                    <span className="font-sans text-stone-teal/60 text-xs">{item}</span>
+                    <span className="font-sans text-stone-teal/60 text-sm">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -569,7 +636,7 @@ export default function SofaDryCleaningContent() {
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
                     <span className="text-stone-teal/40 shrink-0 text-xs mt-0.5">✕</span>
-                    <span className="font-sans text-stone-teal/50 text-xs">{item}</span>
+                    <span className="font-sans text-stone-teal/50 text-sm">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -608,7 +675,7 @@ export default function SofaDryCleaningContent() {
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
                     <CheckCircle size={12} className="text-copper mt-0.5 shrink-0" />
-                    <span className="font-sans text-stone-teal/60 text-xs">{item}</span>
+                    <span className="font-sans text-stone-teal/60 text-sm">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -621,7 +688,7 @@ export default function SofaDryCleaningContent() {
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
                     <span className="text-stone-teal/40 shrink-0 text-xs mt-0.5">✕</span>
-                    <span className="font-sans text-stone-teal/50 text-xs">{item}</span>
+                    <span className="font-sans text-stone-teal/50 text-sm">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -1341,7 +1408,203 @@ export default function SofaDryCleaningContent() {
         </div>
       </section>
 
-      {/* ── 15. FAQ ───────────────────────────────────────────────────────────── */}
+      {/* ── 15. BOOKING FORM ─────────────────────────────────────────────────── */}
+      <section ref={bookingFormRef} id="book-sofa" className="bg-ivory py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left: Info */}
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              animate={bookingFormInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6 }}
+            >
+              <SectionTag>Book Now</SectionTag>
+              <h2 className="font-serif text-teal-deep text-3xl md:text-4xl font-bold mb-4 max-w-xl leading-tight">
+                Book Your Free Sofa{" "}
+                <span className="italic font-normal text-charcoal/40">Inspection Visit</span>
+              </h2>
+              <p className="font-sans text-slate-teal/70 text-sm leading-relaxed mb-8 max-w-md">
+                Fill in your details and our certified technician will visit, assess your sofa, and give
+                you a transparent quote — no obligation, completely free.
+              </p>
+              <div className="space-y-4">
+                {[
+                  "Free in-person fabric inspection",
+                  "Transparent pricing before cleaning begins",
+                  "Same-day slots available",
+                  "Serving all Delhi areas",
+                ].map((text) => (
+                  <div key={text} className="flex items-center gap-2.5">
+                    <CheckCircle size={14} className="text-teal shrink-0" />
+                    <span className="font-sans text-slate-teal/70 text-sm">{text}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right: Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              animate={bookingFormInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-white rounded-2xl border border-mist shadow-lg overflow-hidden"
+            >
+              <div className="h-1 bg-gradient-to-r from-teal via-copper-light to-teal-deep" />
+              <div className="p-7">
+                {bookingSubmitted ? (
+                  <div className="flex flex-col items-center text-center py-8 gap-4">
+                    <div className="w-14 h-14 rounded-full bg-teal/10 border border-teal/30 flex items-center justify-center">
+                      <CheckCircle size={26} className="text-teal" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-teal-deep text-xl font-bold mb-1.5">
+                        Booking Confirmed!
+                      </h3>
+                      <p className="font-sans text-slate-teal/60 text-sm max-w-xs">
+                        We&apos;ve received your request for sofa cleaning on{" "}
+                        <span className="font-semibold text-charcoal">{bookingForm.date}</span>. Our
+                        team will call you shortly to confirm.
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setBookingSubmitted(false);
+                        setBookingForm({ name: "", phone: "", email: "", date: "", timeSlot: "", address: "", notes: "" });
+                      }}
+                      className="font-sans text-xs text-teal hover:text-teal-mid font-semibold transition-colors duration-200"
+                    >
+                      Book another visit
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleBookingSubmit} className="space-y-4">
+                    {/* Name + Phone */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="font-sans text-[11px] text-slate-teal/55 uppercase tracking-[0.1em] font-semibold mb-1.5 block">
+                          Full Name <span className="text-copper">*</span>
+                        </label>
+                        <input
+                          name="name" value={bookingForm.name} required placeholder="Rahul Sharma"
+                          onChange={(e) => setBookingForm((p) => ({ ...p, name: e.target.value }))}
+                          className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/35 rounded-lg px-4 py-2.5 bg-ivory-warm shadow-sm focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/25 focus:bg-white transition-all duration-200"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-sans text-[11px] text-slate-teal/55 uppercase tracking-[0.1em] font-semibold mb-1.5 block">
+                          Phone <span className="text-copper">*</span>
+                        </label>
+                        <input
+                          name="phone" value={bookingForm.phone} required type="tel" placeholder="+91 98765 43210"
+                          onChange={(e) => setBookingForm((p) => ({ ...p, phone: e.target.value }))}
+                          className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/35 rounded-lg px-4 py-2.5 bg-ivory-warm shadow-sm focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/25 focus:bg-white transition-all duration-200"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Email */}
+                    <div>
+                      <label className="font-sans text-[11px] text-slate-teal/55 uppercase tracking-[0.1em] font-semibold mb-1.5 block">
+                        Email <span className="text-copper">*</span>
+                      </label>
+                      <input
+                        name="email" value={bookingForm.email} required type="email" placeholder="rahul@example.com"
+                        onChange={(e) => setBookingForm((p) => ({ ...p, email: e.target.value }))}
+                        className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/35 rounded-lg px-4 py-2.5 bg-ivory-warm shadow-sm focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/25 focus:bg-white transition-all duration-200"
+                      />
+                    </div>
+
+                    {/* Date + Time */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="font-sans text-[11px] text-slate-teal/55 uppercase tracking-[0.1em] font-semibold mb-1.5 block">
+                          <CalendarCheck size={11} className="inline mr-1 mb-0.5" />
+                          Date <span className="text-copper">*</span>
+                        </label>
+                        <input
+                          name="date" value={bookingForm.date} required type="date" min={todayISO}
+                          onChange={(e) => setBookingForm((p) => ({ ...p, date: e.target.value }))}
+                          className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/35 rounded-lg px-4 py-2.5 bg-ivory-warm shadow-sm focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/25 focus:bg-white transition-all duration-200"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-sans text-[11px] text-slate-teal/55 uppercase tracking-[0.1em] font-semibold mb-1.5 block">
+                          <Clock size={11} className="inline mr-1 mb-0.5" />
+                          Time Slot <span className="text-copper">*</span>
+                        </label>
+                        <div className="flex gap-1.5 h-[42px]">
+                          {[
+                            { label: "Morning", sub: "9–12 pm" },
+                            { label: "Afternoon", sub: "12–4 pm" },
+                            { label: "Evening", sub: "4–7 pm" },
+                          ].map(({ label, sub }) => {
+                            const active = bookingForm.timeSlot === label;
+                            return (
+                              <button
+                                key={label} type="button"
+                                onClick={() => setBookingForm((p) => ({ ...p, timeSlot: label }))}
+                                className={`flex-1 flex flex-col items-center justify-center rounded-lg border text-center transition-all duration-200 ${active ? "border-teal bg-teal/8 text-teal" : "border-stone-teal/25 bg-ivory text-slate-teal/60 hover:border-teal/40"}`}
+                              >
+                                <span className="font-sans text-[9px] font-bold leading-none">{label}</span>
+                                <span className="font-sans text-[8px] opacity-60 leading-none mt-0.5">{sub}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                        <input type="text" name="timeSlot" value={bookingForm.timeSlot} required readOnly className="sr-only" tabIndex={-1} />
+                      </div>
+                    </div>
+
+                    {/* Address */}
+                    <div>
+                      <label className="font-sans text-[11px] text-slate-teal/55 uppercase tracking-[0.1em] font-semibold mb-1.5 block">
+                        <MapPin size={11} className="inline mr-1 mb-0.5" />
+                        Address / Locality <span className="text-copper">*</span>
+                      </label>
+                      <input
+                        name="address" value={bookingForm.address} required placeholder="e.g. South Extension, Delhi"
+                        onChange={(e) => setBookingForm((p) => ({ ...p, address: e.target.value }))}
+                        className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/35 rounded-lg px-4 py-2.5 bg-ivory-warm shadow-sm focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/25 focus:bg-white transition-all duration-200"
+                      />
+                    </div>
+
+                    {/* Notes */}
+                    <div>
+                      <label className="font-sans text-[11px] text-slate-teal/55 uppercase tracking-[0.1em] font-semibold mb-1.5 block">
+                        Special Instructions
+                      </label>
+                      <textarea
+                        name="notes" value={bookingForm.notes} rows={2}
+                        placeholder="Fabric type, stain details, sofa size…"
+                        onChange={(e) => setBookingForm((p) => ({ ...p, notes: e.target.value }))}
+                        className="w-full font-sans text-sm text-charcoal placeholder:text-slate-teal/30 border border-stone-teal/35 rounded-lg px-4 py-2.5 bg-ivory-warm shadow-sm focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/25 focus:bg-white transition-all duration-200 resize-none"
+                      />
+                    </div>
+
+                    <button
+                      type="submit" disabled={bookingLoading}
+                      className="w-full btn-primary flex items-center justify-center gap-2 py-3.5 font-sans font-semibold text-sm disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      <CalendarCheck size={15} />
+                      {bookingLoading ? "Booking…" : "Confirm Booking"}
+                    </button>
+
+                    {bookingError && (
+                      <p className="font-sans text-center text-copper text-xs leading-relaxed">{bookingError}</p>
+                    )}
+
+                    <p className="font-sans text-center text-slate-teal/40 text-xs">
+                      No payment now — our team will confirm and share the quote.
+                    </p>
+                  </form>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 16. FAQ ───────────────────────────────────────────────────────────── */}
       <section ref={faqRef} className="bg-teal-deep teal-texture py-20 md:py-28">
         <div className="max-w-4xl mx-auto px-4 md:px-8 lg:px-12">
           <motion.div
@@ -1456,7 +1719,7 @@ export default function SofaDryCleaningContent() {
                 className="inline-flex items-center gap-2.5 btn-whatsapp font-sans text-sm px-8 py-3.5"
               >
                 <MessageCircle size={16} />
-                Book Free Inspection Visit
+                Book Now
               </a>
               <a
                 href={PHONE}

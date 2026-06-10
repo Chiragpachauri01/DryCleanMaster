@@ -20,11 +20,6 @@ const outfit = Outfit({
 // ── SEO Metadata ──────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Premium Sofa and Carpet Cleaning in Delhi: DryClean Masters",
-  description:
-    "Looking for professional dry cleaning services in Delhi? DryClean Masters offers same-day dry clean service at home for sofas, carpets, etc. Contact us today!",
-  keywords:
-    "sofa dry cleaning Delhi, carpet cleaning Delhi, mattress cleaning, upholstery cleaning, wet cleaning, fabric shampoo, premium cleaning service",
   manifest: "/site.webmanifest",
   verification: {
     google: "By-kRE7r8hD7_QdRpW9ag0POYy6CbcPEzFjFTuJOiLk",
