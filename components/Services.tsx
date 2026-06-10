@@ -51,15 +51,6 @@ const dryServices = [
     price: "₹249/panel",
     popular: false,
   },
-  {
-    num: "06",
-    title: "Car Interior Dry Cleaning",
-    desc: "Your car's interior is a fabric surface, just like your home, and it requires equal care. Our car dry cleaning service covers car seats, door panels, roof lining, floor carpets, and interior upholstery, giving your vehicle a fresh interior without leaving excessive moisture behind.",
-    tag: "Sedan · SUV · Luxury",
-    img: "/img/service-car-dry.webp",
-    price: "₹2,499/car",
-    popular: false,
-  },
 ];
 
 const wetServices = [

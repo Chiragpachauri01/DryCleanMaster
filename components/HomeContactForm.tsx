@@ -14,7 +14,6 @@ const services = [
   { value: "Carpet Dry Cleaning",   icon: Layers },
   { value: "Mattress Dry Cleaning", icon: Bed },
   { value: "Curtain Dry Cleaning",  icon: SprayCan },
-  { value: "Car Interior Cleaning", icon: Car },
   { value: "Other / Multiple",      icon: Sparkles },
 ];
 
@@ -25,7 +24,7 @@ const timeSlots = [
 ];
 
 const benefits = [
-  { text: "Free at-home inspection visit" },
+  { text: "In-Person Visit" },
   { text: "No hidden charges — transparent pricing" },
   { text: "Same-day service available" },
   { text: "Eco-safe, odourless solvents" },

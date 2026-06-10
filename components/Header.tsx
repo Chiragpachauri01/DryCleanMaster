@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, CalendarCheck } from "lucide-react";
+import { usePathname } from "next/navigation";
+import BookingModal from "./BookingModal";
 
 const services = [
   { label: "Sofa Dry Cleaning", href: "/#services" },
@@ -12,7 +14,6 @@ const services = [
   { label: "Upholstery Dry Cleaning", href: "/#services" },
   { label: "Mattress Dry Cleaning", href: "/#services" },
   { label: "Curtain Dry Cleaning", href: "/#services" },
-  { label: "Car Dry Cleaning", href: "/#services" },
 ];
 
 const navLinks = [
@@ -28,7 +29,18 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  function handleBookNow() {
+    setMobileOpen(false);
+    if (pathname === "/") {
+      document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      setBookingOpen(true);
+    }
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -47,6 +59,7 @@ export default function Header() {
   }, []);
 
   return (
+    <>
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
@@ -140,15 +153,13 @@ export default function Header() {
         </nav>
 
         {/* Desktop CTA */}
-        <a
-          href="tel:+918882631413"
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={handleBookNow}
           className="hidden lg:flex items-center gap-2 btn-primary font-sans text-sm px-5 py-2.5 group"
         >
           <CalendarCheck size={14} className="group-hover:scale-110 transition-transform duration-200" />
-          Call Now 
-        </a>
+          Book Now
+        </button>
 
         {/* Mobile Toggle */}
         <button
@@ -232,21 +243,21 @@ export default function Header() {
               ))}
 
               <div className="pt-4 pb-2">
-                <a
-                  href="tel:+918882631413"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMobileOpen(false)}
+                <button
+                  onClick={handleBookNow}
                   className="flex items-center justify-center gap-2 w-full btn-primary font-sans text-sm px-5 py-3.5"
                 >
                   <CalendarCheck size={14} />
-                  Call Now
-                </a>
+                  Book Now
+                </button>
               </div>
             </nav>
           </motion.div>
         )}
       </AnimatePresence>
     </header>
+
+    <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
+    </>
   );
 }

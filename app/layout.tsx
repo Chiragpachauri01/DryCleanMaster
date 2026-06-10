@@ -29,6 +29,12 @@ export const metadata: Metadata = {
   verification: {
     google: "By-kRE7r8hD7_QdRpW9ag0POYy6CbcPEzFjFTuJOiLk",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  authors: [{ name: "DryClean Masters" }],
+  publisher: "DryClean Masters",
   other: {
     "geo.region": "IN",
     "geo.placename": "New Delhi",

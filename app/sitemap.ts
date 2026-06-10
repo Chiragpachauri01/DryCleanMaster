@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 const siteUrl = "https://www.drycleanmasters.com";
-const lastModified = new Date("2026-06-02");
+const lastModified = new Date("2026-06-10");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -22,6 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly",
       priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/sofa-dry-cleaning-delhi`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
     },
   ];
 }

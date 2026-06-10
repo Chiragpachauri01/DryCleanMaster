@@ -23,11 +23,6 @@ const services = [
   "Carpet Dry Cleaning",
   "Mattress Dry Cleaning",
   "Curtain Dry Cleaning",
-  "Car Dry Cleaning",
-  "Wet Cleaning Services",
-  "Commercial Cleaning",
-  "Steam Sanitization",
-  "Stain & Odor Removal",
 ];
 
 export default function Footer() {
@@ -48,7 +43,7 @@ export default function Footer() {
               Ready for a Master Clean?
             </p>
             <h3 className="font-serif text-ivory-warm text-2xl md:text-3xl font-semibold">
-              Book an Inspection Today
+              Book Professional Cleaning Services Today
             </h3>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
