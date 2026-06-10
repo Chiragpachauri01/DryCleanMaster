@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Phone, Mail, MessageCircle, MapPin, Star } from "lucide-react";
 
 const WA_LINK =
@@ -19,10 +20,10 @@ const quickLinks = [
 ];
 
 const services = [
-  "Sofa Dry Cleaning",
-  "Carpet Dry Cleaning",
-  "Mattress Dry Cleaning",
-  "Curtain Dry Cleaning",
+  { label: "Sofa Dry Cleaning", href: "/sofa-dry-cleaning-delhi" },
+  { label: "Carpet Dry Cleaning", href: "/#services" },
+  { label: "Mattress Dry Cleaning", href: "/#services" },
+  { label: "Curtain Dry Cleaning", href: "/#services" },
 ];
 
 export default function Footer() {
@@ -151,13 +152,13 @@ export default function Footer() {
           <ul className="space-y-2.5">
             {quickLinks.map((link) => (
               <li key={link.label}>
-                <a
+                <Link
                   href={link.href}
                   className="font-sans text-stone-teal/50 text-sm hover:text-teal-light transition-colors duration-200 flex items-center gap-1.5 group"
                 >
                   <span className="w-2 h-px bg-stone-teal/30 group-hover:bg-teal-light group-hover:w-3 transition-all duration-200 shrink-0" />
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -170,14 +171,14 @@ export default function Footer() {
           </h4>
           <ul className="space-y-2.5">
             {services.map((s) => (
-              <li key={s}>
-                <a
-                  href="/#services"
+              <li key={s.label}>
+                <Link
+                  href={s.href}
                   className="font-sans text-stone-teal/50 text-sm hover:text-teal-light transition-colors duration-200 flex items-center gap-1.5 group"
                 >
                   <span className="w-2 h-px bg-stone-teal/30 group-hover:bg-teal-light group-hover:w-3 transition-all duration-200 shrink-0" />
-                  {s}
-                </a>
+                  {s.label}
+                </Link>
               </li>
             ))}
           </ul>

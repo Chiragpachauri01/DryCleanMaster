@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -14,6 +15,7 @@ const dryServices = [
     img: "/img/service-sofa-dry.webp",
     price: "₹299/seat",
     popular: true,
+    href: "/sofa-dry-cleaning-delhi",
   },
   {
     num: "02",
@@ -104,6 +106,7 @@ function ServiceCard({
   price,
   popular = false,
   dark = false,
+  href,
   index,
   inView,
 }: {
@@ -115,21 +118,20 @@ function ServiceCard({
   price: string;
   popular?: boolean;
   dark?: boolean;
+  href?: string;
   index: number;
   inView: boolean;
 }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: 0.07 * index }}
-      className={`group relative border transition-all duration-300 cursor-default overflow-hidden h-full flex flex-col rounded-xl ${
-        dark
-          ? "border-teal/15 hover:border-copper/35 hover:shadow-lg hover:shadow-copper/12"
-          : "border-mist hover:border-teal/40 hover:shadow-lg hover:shadow-teal/12"
-      }`}
-    >
-      {/* Popular badge */}
+  const cls = `group relative border transition-all duration-300 overflow-hidden h-full flex flex-col rounded-xl ${
+    href ? "cursor-pointer" : "cursor-default"
+  } ${
+    dark
+      ? "border-teal/15 hover:border-copper/35 hover:shadow-lg hover:shadow-copper/12"
+      : "border-mist hover:border-teal/40 hover:shadow-lg hover:shadow-teal/12"
+  }`;
+
+  const content = (
+    <>
       {popular && (
         <div className="absolute top-3 right-3 z-10">
           <span className="font-sans text-[10px] bg-copper text-white font-semibold px-2.5 py-1 rounded-full shadow-sm">
@@ -137,8 +139,6 @@ function ServiceCard({
           </span>
         </div>
       )}
-
-      {/* Image header */}
       <div className="relative h-44 overflow-hidden rounded-t-xl">
         <Image
           src={img}
@@ -148,7 +148,6 @@ function ServiceCard({
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-transparent" />
-        {/* Floating number badge */}
         <div
           className={`absolute top-4 left-4 w-10 h-10 flex items-center justify-center backdrop-blur-sm border rounded-lg ${
             dark
@@ -159,8 +158,6 @@ function ServiceCard({
           <span className="font-serif text-sm font-bold">{num}</span>
         </div>
       </div>
-
-      {/* Content */}
       <div
         className={`p-6 md:p-7 flex-1 flex flex-col transition-colors duration-300 ${
           dark
@@ -169,46 +166,41 @@ function ServiceCard({
         }`}
       >
         <div className="w-4 h-[2px] bg-copper mb-4 rounded-full" />
-        <h3
-          className={`font-serif text-lg font-semibold mb-3 leading-snug ${
-            dark ? "text-ivory-warm" : "text-teal-deep"
-          }`}
-        >
+        <h3 className={`font-serif text-lg font-semibold mb-3 leading-snug ${dark ? "text-ivory-warm" : "text-teal-deep"}`}>
           {title}
         </h3>
-        <p
-          className={`font-sans text-sm leading-relaxed mb-5 flex-1 ${
-            dark ? "text-stone-teal/55" : "text-slate-teal/75"
-          }`}
-        >
+        <p className={`font-sans text-sm leading-relaxed mb-5 flex-1 ${dark ? "text-stone-teal/55" : "text-slate-teal/75"}`}>
           {desc}
         </p>
-
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-1">
-            <span
-              className={`font-sans text-[11px] uppercase tracking-[0.12em] ${
-                dark ? "text-stone-teal/40" : "text-muted-teal/60"
-              }`}
-            >
+            <span className={`font-sans text-[11px] uppercase tracking-[0.12em] ${dark ? "text-stone-teal/40" : "text-muted-teal/60"}`}>
               {tag}
             </span>
-            <span
-              className={`font-sans text-xs font-semibold ${
-                dark ? "text-copper-light" : "text-copper"
-              }`}
-            >
+            <span className={`font-sans text-xs font-semibold ${dark ? "text-copper-light" : "text-copper"}`}>
               Starting {price}
             </span>
           </div>
           <ArrowRight
             size={14}
-            className={`opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0 ${
-              dark ? "text-copper-light" : "text-teal"
-            }`}
+            className={`opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0 ${dark ? "text-copper-light" : "text-teal"}`}
           />
         </div>
       </div>
+    </>
+  );
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: 0.07 * index }}
+    >
+      {href ? (
+        <Link href={href} className={cls}>{content}</Link>
+      ) : (
+        <div className={cls}>{content}</div>
+      )}
     </motion.div>
   );
 }
