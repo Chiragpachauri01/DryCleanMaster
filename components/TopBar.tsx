@@ -16,7 +16,7 @@ export default function TopBar() {
             className="flex items-center gap-1.5 hover:text-teal-glow transition-colors duration-200"
           >
             <Phone size={11} strokeWidth={2} />
-            <span className="tracking-wide">+91 8882631413</span>
+            <span className="tracking-wide">Call Now</span>
           </a>
 
           {/* Google Rating badge */}

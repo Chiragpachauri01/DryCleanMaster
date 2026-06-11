@@ -2,17 +2,19 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, CalendarCheck } from "lucide-react";
+import { usePathname } from "next/navigation";
+import BookingModal from "./BookingModal";
 
 const services = [
-  { label: "Sofa Dry Cleaning", href: "/#services" },
+  { label: "Sofa Dry Cleaning", href: "/sofa-dry-cleaning-delhi" },
   { label: "Carpet Dry Cleaning", href: "/#services" },
   { label: "Chair Dry Cleaning", href: "/#services" },
   { label: "Upholstery Dry Cleaning", href: "/#services" },
   { label: "Mattress Dry Cleaning", href: "/#services" },
   { label: "Curtain Dry Cleaning", href: "/#services" },
-  { label: "Car Dry Cleaning", href: "/#services" },
 ];
 
 const navLinks = [
@@ -28,7 +30,18 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  function handleBookNow() {
+    setMobileOpen(false);
+    if (pathname === "/") {
+      document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      setBookingOpen(true);
+    }
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -47,6 +60,7 @@ export default function Header() {
   }, []);
 
   return (
+    <>
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
@@ -56,7 +70,7 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16 md:h-18">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-3 shrink-0">
+        <Link href="/" className="flex items-center gap-3 shrink-0">
           <div className="h-14 w-14 rounded-full overflow-hidden shrink-0">
             <Image
               src="/img/Logo/DryCleanLogo-transparent.png"
@@ -69,24 +83,24 @@ export default function Header() {
           </div>
           <div className="leading-tight">
             <span className="font-serif font-bold text-teal-deep text-base tracking-tight block">
-              Dry Clean
+              DryClean
             </span>
             <span className="text-copper text-[10px] font-sans uppercase tracking-[0.18em] block -mt-0.5 font-semibold">
               Masters
             </span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-1">
           {navLinks.slice(0, 2).map((link) => (
-            <a
+            <Link
               key={link.label}
               href={link.href}
               className="px-3.5 py-2 text-sm text-charcoal/75 hover:text-teal font-sans hover-underline transition-colors duration-200"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
 
           {/* Services Dropdown */}
@@ -113,14 +127,14 @@ export default function Header() {
                 >
                   <div className="py-1.5">
                     {services.map((s, i) => (
-                      <a
+                      <Link
                         key={i}
                         href={s.href}
                         onClick={() => setServicesOpen(false)}
                         className="block px-5 py-2.5 text-sm text-charcoal/75 hover:text-teal hover:bg-teal/5 transition-colors duration-150 border-b border-mist last:border-0"
                       >
                         {s.label}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </motion.div>
@@ -129,26 +143,24 @@ export default function Header() {
           </div>
 
           {navLinks.slice(2).map((link) => (
-            <a
+            <Link
               key={link.label}
               href={link.href}
               className="px-3.5 py-2 text-sm text-charcoal/75 hover:text-teal font-sans hover-underline transition-colors duration-200"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         {/* Desktop CTA */}
-        <a
-          href="tel:+918882631413"
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={handleBookNow}
           className="hidden lg:flex items-center gap-2 btn-primary font-sans text-sm px-5 py-2.5 group"
         >
           <CalendarCheck size={14} className="group-hover:scale-110 transition-transform duration-200" />
-          Call Now 
-        </a>
+          Book Now
+        </button>
 
         {/* Mobile Toggle */}
         <button
@@ -172,14 +184,14 @@ export default function Header() {
           >
             <nav className="px-4 py-4 flex flex-col gap-0">
               {navLinks.slice(0, 2).map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   className="py-3 text-sm text-charcoal border-b border-mist hover:text-teal transition-colors duration-200"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
 
               {/* Mobile Services Accordion */}
@@ -205,14 +217,14 @@ export default function Header() {
                     >
                       <div className="pb-2 pl-4 flex flex-col gap-0">
                         {services.map((s, i) => (
-                          <a
+                          <Link
                             key={i}
                             href={s.href}
                             onClick={() => setMobileOpen(false)}
                             className="py-2 text-sm text-charcoal/70 hover:text-teal border-b border-mist last:border-0 transition-colors duration-200"
                           >
                             {s.label}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </motion.div>
@@ -221,32 +233,32 @@ export default function Header() {
               </div>
 
               {navLinks.slice(2).map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   className="py-3 text-sm text-charcoal border-b border-mist hover:text-teal last:border-0 transition-colors duration-200"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
 
               <div className="pt-4 pb-2">
-                <a
-                  href="tel:+918882631413"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMobileOpen(false)}
+                <button
+                  onClick={handleBookNow}
                   className="flex items-center justify-center gap-2 w-full btn-primary font-sans text-sm px-5 py-3.5"
                 >
                   <CalendarCheck size={14} />
-                  Call Now
-                </a>
+                  Book Now
+                </button>
               </div>
             </nav>
           </motion.div>
         )}
       </AnimatePresence>
     </header>
+
+    <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
+    </>
   );
 }

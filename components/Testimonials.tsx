@@ -62,18 +62,6 @@ const fallbackReviews: Review[] = [
     reviewUrl: "",
     avatarColor: "bg-teal-mid/20 text-teal-light",
   },
-  {
-    id: "fallback-4",
-    authorName: "Namit Yadav",
-    authorUrl: "",
-    photoUrl: "",
-    rating: 5,
-    text: "Booked them for car dry cleaning and mattress sanitisation. Quick, seamless, on-time doorstep service with no messy water left behind.",
-    relativeTime: "Google review",
-    publishTime: "",
-    reviewUrl: "",
-    avatarColor: "bg-slate-teal/40 text-ivory-warm",
-  },
 ];
 
 const avatarColors = [

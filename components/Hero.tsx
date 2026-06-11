@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { CalendarCheck, MessageCircle, Search, Sparkles, ShieldCheck, Truck } from "lucide-react";
+import { CalendarCheck, MessageCircle, Truck, Leaf, Shirt, Zap } from "lucide-react";
 
 const banners = [
   "/img/Banner%20Images/1.webp",
@@ -15,10 +15,10 @@ const WA_LINK =
   "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20book%20an%20inspection%20visit%20for%20cleaning%20service";
 
 const trustBadges = [
-  { icon: Search,      label: "In-Person",        sub: "Inspection Visit" },
-  { icon: Sparkles,    label: "Eco-Luxury Safe &",     sub: "Odourless Solvents" },
-  { icon: ShieldCheck, label: "100% Premium Fabric &", sub: "Colour Protection" },
-  { icon: Truck,       label: "Same-Day",              sub: "On-Site Service Available" },
+  { icon: Truck, label: "Doorstep Cleaning",    sub: "Service at your door" },
+  { icon: Leaf,  label: "Safe & Pet-Friendly",  sub: "Chemical" },
+  { icon: Shirt, label: "Fabric Safe",          sub: "Cleaning Process" },
+  { icon: Zap,   label: "Same-Day Service",     sub: "Available" },
 ];
 
 const fadeUp = {
@@ -101,7 +101,7 @@ export default function Hero() {
           Premium Sofa, Carpet &amp;
           <br />
           <span className="relative inline-block">
-            <em className="not-italic text-teal-glow">Furnishing</em>
+            <em className="not-italic text-teal-glow">Upholstery </em>
             <motion.span
               className="absolute -bottom-1 left-0 w-full h-[3px] bg-gradient-to-r from-copper via-copper-light to-transparent rounded-full"
               initial={{ scaleX: 0 }}
@@ -109,10 +109,10 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.55 }}
             />
           </span>
-          {" "}Deep Cleaning
+          {" "}Cleaning Services
           <br />
           <span className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-normal italic text-stone-teal/50">
-            in Delhi
+            in Delhi NCR
           </span>
         </motion.h1>
 
@@ -165,13 +165,13 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-0"
         >
           <motion.a
-            href="#booking"
+            href="tel:+918882631413"
             className="btn-primary inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-semibold"
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
           >
             <CalendarCheck size={16} />
-            Book Inspection Visit
+            Call Now
           </motion.a>
 
           {/* divider */}

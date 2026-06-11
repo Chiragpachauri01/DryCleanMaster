@@ -1,55 +1,46 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { MessageCircle, Droplets, Wind } from "lucide-react";
 
 const WA_LINK =
   "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20know%20the%20exact%20pricing%20for%20cleaning%20services";
 
 const pricingData = [
   {
-    service: "Premium Luxury Sofa (Per Seat)",
+    service: "Premium Luxury Sofa",
+    unit: "Per Seat",
     dry: "₹299",
     wet: "₹349",
-    popular: true,
   },
   {
     service: "Office Executive Chair",
+    unit: "Per Chair",
     dry: "₹149",
     wet: "₹199",
-    popular: false,
   },
   {
-    service: "Premium Carpet / Rug (Per Sq. Ft.)",
+    service: "Premium Carpet / Rug",
+    unit: "Per Sq. Ft.",
     dry: "₹12",
     wet: "₹15",
-    popular: false,
   },
   {
     service: "King Size Premium Mattress",
+    unit: "Per Mattress",
     dry: "₹1,199",
     wet: "₹1,499",
-    popular: false,
   },
   {
-    service: "Premium Heavy Curtains (Per Panel)",
+    service: "Premium Heavy Curtains",
+    unit: "Per Panel",
     dry: "₹249",
     wet: "₹999",
-    popular: false,
-  },
-  {
-    service: "Luxury Sedan / SUV Car Interior",
-    dry: "₹2,499",
-    wet: "₹2,999",
-    popular: false,
   },
 ];
 
-type Mode = "dry" | "wet";
-
 export default function Pricing() {
-  const [mode, setMode] = useState<Mode>("dry");
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
@@ -65,7 +56,7 @@ export default function Pricing() {
           >
             <span className="w-5 h-[2px] bg-teal rounded-full" />
             <span className="text-teal font-sans text-xs uppercase tracking-[0.2em] font-semibold">
-              Indicative Pricing
+              Rate Card
             </span>
             <span className="w-5 h-[2px] bg-teal rounded-full" />
           </motion.span>
@@ -92,106 +83,81 @@ export default function Pricing() {
           </motion.p>
         </div>
 
-        {/* Toggle */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3 }}
-          className="flex justify-center mb-10"
-        >
-          <div className="inline-flex bg-mist border border-stone-teal/30 p-1 rounded-xl shadow-inner">
-            {(["dry", "wet"] as Mode[]).map((m) => (
-              <button
-                key={m}
-                onClick={() => setMode(m)}
-                className={`relative px-6 py-2.5 text-sm font-sans font-semibold rounded-lg transition-all duration-300 ${
-                  mode === m
-                    ? "bg-teal text-white shadow-md shadow-teal/35"
-                    : "text-slate-teal hover:text-teal"
-                }`}
-              >
-                {m === "dry" ? "Dry Cleaning" : "Wet / Shampoo Cleaning"}
-              </button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Table */}
+        {/* Rate Table */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.35 }}
-          className="overflow-hidden border border-stone-teal/25 rounded-2xl shadow-md shadow-teal/8"
+          transition={{ delay: 0.3 }}
+          className="overflow-hidden rounded-2xl border border-stone-teal/15 shadow-sm"
         >
           {/* Table header */}
-          <div className="grid grid-cols-[1fr_auto] bg-teal-deep px-6 md:px-8 py-4">
+          <div className="grid grid-cols-[1fr_auto_auto] bg-teal-deep px-5 md:px-8 py-4 gap-4">
             <span className="font-sans text-xs text-stone-teal/50 uppercase tracking-[0.15em]">
-              Furnishing / Service
+              Service
             </span>
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={mode}
-                initial={{ opacity: 0, y: -6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 6 }}
-                transition={{ duration: 0.2 }}
-                className="font-sans text-xs text-copper-light/90 uppercase tracking-[0.15em] text-right"
-              >
-                {mode === "dry" ? "Dry Cleaning" : "Wet / Shampoo"}
-              </motion.span>
-            </AnimatePresence>
+            <div className="flex items-center gap-1.5 justify-end min-w-[90px]">
+              <Wind size={12} className="text-copper-light/80" />
+              <span className="font-sans text-xs text-copper-light/80 uppercase tracking-[0.12em]">
+                Dry Clean
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 justify-end min-w-[100px]">
+              <Droplets size={12} className="text-copper-light/80" />
+              <span className="font-sans text-xs text-copper-light/80 uppercase tracking-[0.12em]">
+                Wet / Shampoo
+              </span>
+            </div>
           </div>
 
           {/* Rows */}
-          <div className="divide-y divide-mist">
+          <div className="bg-white divide-y divide-stone-teal/8">
             {pricingData.map((row, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0 }}
-                animate={inView ? { opacity: 1 } : {}}
-                transition={{ delay: 0.4 + i * 0.06 }}
-                className={`grid grid-cols-[1fr_auto] items-center px-6 md:px-8 py-4 md:py-5 group transition-colors duration-200 ${
-                  row.popular
-                    ? "bg-teal/8 border-l-4 border-teal"
-                    : "bg-ivory hover:bg-ivory-teal"
-                }`}
+                initial={{ opacity: 0, x: -8 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.35 + i * 0.06 }}
+                className="grid grid-cols-[1fr_auto_auto] items-center gap-4 px-5 md:px-8 py-4 md:py-5 hover:bg-stone-50 transition-colors duration-150"
               >
-                <div className="flex items-center gap-3">
-                  <span className="font-sans text-sm md:text-[0.95rem] text-charcoal/80">
-                    {row.service}
+                {/* Service name */}
+                <div className="flex flex-col gap-0.5">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-sans text-sm md:text-base text-charcoal/85 font-medium">
+                      {row.service}
+                    </span>
+                  </div>
+                  <span className="font-sans text-xs text-slate-teal/50">
+                    {row.unit}
                   </span>
-                  {row.popular && (
-                    <span className="hidden sm:inline font-sans text-[10px] bg-teal/12 text-teal border border-teal/25 px-2.5 py-0.5 rounded-full uppercase tracking-[0.1em] font-semibold">
-                      Most Popular
-                    </span>
-                  )}
                 </div>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={mode}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.18 }}
-                    className="text-right"
-                  >
-                    <span className="font-serif text-copper text-xl font-bold">
-                      {mode === "dry" ? row.dry : row.wet}
-                    </span>
-                    <span className="font-sans text-charcoal/40 text-xs ml-1">
-                      onwards
-                    </span>
-                  </motion.div>
-                </AnimatePresence>
+
+                {/* Dry price */}
+                <div className="flex flex-col items-end min-w-[90px]">
+                  <span className="font-serif text-xl md:text-2xl text-teal-deep font-bold">
+                    {row.dry}
+                  </span>
+                  <span className="font-sans text-[10px] text-charcoal/35 leading-none mt-0.5">
+                    onwards
+                  </span>
+                </div>
+
+                {/* Wet price */}
+                <div className="flex flex-col items-end min-w-[100px]">
+                  <span className="font-serif text-xl md:text-2xl text-teal-deep font-bold">
+                    {row.wet}
+                  </span>
+                  <span className="font-sans text-[10px] text-charcoal/35 leading-none mt-0.5">
+                    onwards
+                  </span>
+                </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Footer note */}
-          <div className="bg-mist/60 px-6 md:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          {/* Footer */}
+          <div className="px-5 md:px-8 py-4 bg-mist/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <p className="font-sans text-xs text-slate-teal/60">
-              * Prices are indicative starting rates. Final quote after
-              on-site inspection.
+              * Prices are indicative starting rates. Final quote after on-site inspection.
             </p>
             <a
               href={WA_LINK}

@@ -14,7 +14,6 @@ const services = [
   "Carpet Dry Cleaning",
   "Mattress Dry Cleaning",
   "Curtain Dry Cleaning",
-  "Car Interior Cleaning",
   "Other",
 ];
 
