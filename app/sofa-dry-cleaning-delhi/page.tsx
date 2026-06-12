@@ -60,6 +60,12 @@ const schemaService = {
     "@id": "https://www.drycleanmasters.com/#localbusiness",
     telephone: "+918882625522",
     url: "https://www.drycleanmasters.com/",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      bestRating: "5",
+      reviewCount: "12000",
+    },
   },
   areaServed: { "@type": "AdministrativeArea", name: "Delhi" },
   offers: {
@@ -68,12 +74,6 @@ const schemaService = {
     highPrice: "900",
     priceCurrency: "INR",
     offerCount: "15",
-  },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    bestRating: "5",
-    reviewCount: "12000",
   },
   serviceType: "Sofa Dry Cleaning",
   hasOfferCatalog: {
