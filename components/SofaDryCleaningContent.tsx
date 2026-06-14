@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import {
   CheckCircle,
   Phone,
@@ -177,6 +178,8 @@ export default function SofaDryCleaningContent() {
       {/* ── 1. HERO ──────────────────────────────────────────────────────────── */}
       <section ref={heroRef} className="bg-teal-deep teal-texture py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+          <div className="grid lg:grid-cols-[1fr_420px] gap-12 items-center">
+          <div>
           {/* Breadcrumb */}
           <motion.nav
             initial={{ opacity: 0 }}
@@ -313,6 +316,35 @@ export default function SofaDryCleaningContent() {
               All Delhi Areas Covered
             </span>
           </motion.div>
+          </div>
+
+          {/* Hero image — desktop only */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={heroInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="relative hidden lg:block"
+          >
+            <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden border border-teal/20 shadow-2xl shadow-black/40">
+              <Image
+                src="/img/sofa_cleaning/hero_banner.webp"
+                alt="Sofa dry cleaning service in Delhi - DryClean Masters"
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-teal-deep/60 via-transparent to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5">
+                <div className="bg-teal-deep/80 backdrop-blur-sm border border-teal/20 rounded-xl p-4">
+                  <p className="font-sans text-copper-light text-xs font-semibold uppercase tracking-wider mb-1">12,000+ Sofas Cleaned</p>
+                  <p className="font-serif text-ivory-warm text-sm italic leading-snug">
+                    "Fabric-safe treatments that restore your sofa to showroom condition — right at your doorstep."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -368,18 +400,33 @@ export default function SofaDryCleaningContent() {
             ))}
           </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={problemInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.5 }}
-            className="font-sans text-slate-teal/70 text-sm leading-relaxed mt-10 border-l-[3px] border-teal/25 pl-5 max-w-3xl"
-          >
-            Such a level of dirt and bacteria cannot be cleaned by a vacuum or a maid. It requires
-            professional sofa dry cleaning services in Delhi, a service that understands the difference
-            between a surface clean and a genuine deep sofa reformation. At DryClean Masters, we don&apos;t just
-            clean sofas, we restore them. And we do it at your doorstep, using fabric-specific treatments
-            that protect your sofa&apos;s upholstery while taking out what&apos;s living inside it.
-          </motion.p>
+          <div className="mt-10 grid lg:grid-cols-[1fr_360px] gap-8 items-start">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={problemInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.5 }}
+              className="font-sans text-slate-teal/70 text-sm leading-relaxed border-l-[3px] border-teal/25 pl-5"
+            >
+              Such a level of dirt and bacteria cannot be cleaned by a vacuum or a maid. It requires
+              professional sofa dry cleaning services in Delhi, a service that understands the difference
+              between a surface clean and a genuine deep sofa reformation. At DryClean Masters, we don&apos;t just
+              clean sofas, we restore them. And we do it at your doorstep, using fabric-specific treatments
+              that protect your sofa&apos;s upholstery while taking out what&apos;s living inside it.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={problemInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.55, duration: 0.6 }}
+              className="relative rounded-2xl overflow-hidden aspect-video border border-mist shadow-lg hidden lg:block"
+            >
+              <Image
+                src="/img/sofa_cleaning/image.webp"
+                alt="Sofa in Delhi home needing professional cleaning"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -710,22 +757,37 @@ export default function SofaDryCleaningContent() {
       {/* ── 6. MATERIAL-SPECIFIC PROTOCOLS ───────────────────────────────────── */}
       <section ref={materialRef} className="bg-ivory py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={materialInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <SectionTag>Fabric Expertise</SectionTag>
-            <h2 className="font-serif text-teal-deep text-3xl md:text-4xl font-bold mb-4 max-w-2xl leading-tight">
-              Material-Specific Cleaning Protocols:{" "}
-              <span className="italic font-normal text-charcoal/40">Every Fabric Is Different</span>
-            </h2>
-            <p className="font-sans text-slate-teal/70 text-sm leading-relaxed mb-12 max-w-3xl">
-              This is where DryClean Masters separates itself from generic cleaning companies. We don&apos;t apply
-              one product to every sofa. Every fabric has a specific chemistry, its own vulnerability, and a
-              unique cleaning method that works best for it.
-            </p>
-          </motion.div>
+          <div className="grid lg:grid-cols-[1fr_360px] gap-10 items-center mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={materialInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+            >
+              <SectionTag>Fabric Expertise</SectionTag>
+              <h2 className="font-serif text-teal-deep text-3xl md:text-4xl font-bold mb-4 max-w-2xl leading-tight">
+                Material-Specific Cleaning Protocols:{" "}
+                <span className="italic font-normal text-charcoal/40">Every Fabric Is Different</span>
+              </h2>
+              <p className="font-sans text-slate-teal/70 text-sm leading-relaxed max-w-xl">
+                This is where DryClean Masters separates itself from generic cleaning companies. We don&apos;t apply
+                one product to every sofa. Every fabric has a specific chemistry, its own vulnerability, and a
+                unique cleaning method that works best for it.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={materialInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="relative rounded-2xl overflow-hidden aspect-video border border-mist shadow-lg hidden lg:block"
+            >
+              <Image
+                src="/img/sofa_cleaning/image1.webp"
+                alt="Different sofa fabric types cleaned by DryClean Masters"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+          </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
@@ -1264,6 +1326,24 @@ export default function SofaDryCleaningContent() {
               </motion.div>
             ))}
           </div>
+
+          {/* Image strip after why choose cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={whyInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="mt-10 grid grid-cols-3 gap-4"
+          >
+            {[
+              "/img/sofa_cleaning/image2.webp",
+              "/img/sofa_cleaning/image3.webp",
+              "/img/sofa_cleaning/image4.webp",
+            ].map((src, i) => (
+              <div key={i} className="relative rounded-xl overflow-hidden aspect-video border border-mist">
+                <Image src={src} alt={`DryClean Masters sofa cleaning result ${i + 1}`} fill className="object-cover" />
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
@@ -1440,6 +1520,20 @@ export default function SofaDryCleaningContent() {
                   </div>
                 ))}
               </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={bookingFormInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="relative mt-8 rounded-xl overflow-hidden aspect-video border border-mist"
+              >
+                <Image
+                  src="/img/sofa_cleaning/image5.webp"
+                  alt="DryClean Masters sofa cleaning team at work in Delhi"
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
             </motion.div>
 
             {/* Right: Form */}

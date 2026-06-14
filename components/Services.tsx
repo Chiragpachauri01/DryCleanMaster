@@ -25,6 +25,7 @@ const dryServices = [
     img: "/img/service-carpet-dry.webp",
     price: "₹12/sq.ft",
     popular: false,
+    href: "/carpet-cleaning-services-delhi",
   },
   {
     num: "03",
@@ -73,6 +74,7 @@ const wetServices = [
     img: "/img/service-carpet-shampoo.webp",
     price: "₹15/sq.ft",
     popular: false,
+    href: "/carpet-cleaning-services-delhi",
   },
   {
     num: "03",
