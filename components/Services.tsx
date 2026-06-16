@@ -35,6 +35,7 @@ const dryServices = [
     img: "/img/service-chair-upholstery.webp",
     price: "₹149/chair",
     popular: false,
+    href: "/office-chair-cleaning-delhi",
   },
   {
     num: "04",
