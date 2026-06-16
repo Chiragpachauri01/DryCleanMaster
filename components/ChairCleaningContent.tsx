@@ -536,7 +536,7 @@ export default function ChairCleaningContent() {
                   ["Executive Chair (Fabric)", "From ₹199"],
                   ["Executive Chair (Leather)", "From ₹299"],
                   ["Dining Chair (Fabric Cushion)", "From ₹149"],
-                  ["Gaming Chair", "From ₹199"],
+                  ["Gaming Chair", "From ₹299"],
                   ["Premium / Velvet Chair", "From ₹249"],
                   ["Bulk Office (20+ Chairs)", "Custom Quote"],
                 ].map(([type, rate], i) => (
