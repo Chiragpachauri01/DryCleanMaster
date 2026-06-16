@@ -1846,58 +1846,7 @@ export default function CarpetCleaningContent() {
       </section>
 
       {/* ── 21. RELATED SERVICES ──────────────────────────────────────────────── */}
-      <section ref={relatedRef} className="bg-teal-dark teal-texture py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={relatedInView ? { opacity: 1, y: 0 } : {}}
-            className="mb-10"
-          >
-            <Tag>You Might Also Need</Tag>
-            <h2 className="font-serif text-ivory-warm text-3xl md:text-4xl font-bold mb-4 leading-tight">
-              While Our Team Is With You,{" "}
-              <span className="italic font-normal text-stone-teal/40">Complete Your Full Upholstery Care</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              {
-                title: "Commercial Chair Cleaning Service Delhi",
-                body: "Professional cleaning for office chairs, dining chairs, and executive seating.",
-                href: "/commercial-chair-cleaning-delhi",
-              },
-              {
-                title: "Best Sofa Dry Cleaners in Delhi",
-                body: "Fabric-specific sofa dry cleaning and leather restoration.",
-                href: "/sofa-dry-cleaning-delhi",
-              },
-              {
-                title: "Upholstery Dry Cleaning Charges in Delhi",
-                body: "Full pricing transparency for all upholstery types.",
-                href: "/sofa-dry-cleaning-delhi",
-              },
-            ].map(({ title, body, href }, i) => (
-              <motion.a
-                key={title}
-                href={href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={relatedInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.1 * i, duration: 0.5 }}
-                className="group bg-teal-deep border border-teal/15 rounded-xl p-6 hover:border-copper/30 transition-all block"
-              >
-                <div className="w-4 h-[2px] bg-copper/60 rounded-full mb-4" />
-                <h3 className="font-serif text-ivory-warm text-base font-semibold mb-2 group-hover:text-copper-light transition-colors">{title}</h3>
-                <p className="font-sans text-stone-teal/60 text-sm leading-relaxed mb-4">{body}</p>
-                <span className="inline-flex items-center gap-1.5 font-sans text-copper text-xs font-semibold">
-                  Learn More <ArrowRight size={12} />
-                </span>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      
       {/* ── 22. FINAL CTA — dark background ──────────────────────────────────── */}
       <section ref={ctaRef} className="bg-teal-deep teal-texture py-20 md:py-28">
         <div className="max-w-4xl mx-auto px-4 md:px-8 lg:px-12 text-center">
