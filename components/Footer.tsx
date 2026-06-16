@@ -21,7 +21,7 @@ const quickLinks = [
 
 const services = [
   { label: "Sofa Dry Cleaning", href: "/sofa-dry-cleaning-delhi" },
-  { label: "Carpet Dry Cleaning", href: "/#services" },
+  { label: "Carpet Cleaning", href: "/carpet-cleaning-services-delhi" },
   { label: "Mattress Dry Cleaning", href: "/#services" },
   { label: "Curtain Dry Cleaning", href: "/#services" },
 ];

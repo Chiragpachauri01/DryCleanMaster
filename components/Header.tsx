@@ -10,7 +10,7 @@ import BookingModal from "./BookingModal";
 
 const services = [
   { label: "Sofa Dry Cleaning", href: "/sofa-dry-cleaning-delhi" },
-  { label: "Carpet Dry Cleaning", href: "/#services" },
+  { label: "Carpet Cleaning", href: "/carpet-cleaning-services-delhi" },
   { label: "Chair Dry Cleaning", href: "/#services" },
   { label: "Upholstery Dry Cleaning", href: "/#services" },
   { label: "Mattress Dry Cleaning", href: "/#services" },
