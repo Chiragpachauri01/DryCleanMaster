@@ -49,7 +49,7 @@ const faqs = [
     a: "Our pricing starts at ₹200 per seat for standard fabric sofas with dry cleaning, and ₹250 per seat for wet shampoo cleaning. A 3-seater sofa dry clean starts from approximately ₹600. Leather sofa cleaning and polishing Delhi starts at ₹350 per seat. All prices are confirmed after a free in-person inspection.",
   },
   {
-    q: "How do I find reliable sofa dry cleaning near me in Delhi?",
+    q: "How often should a sofa be professionally cleaned?",
     a: "DryClean Masters provides doorstep sofa dry cleaning across all Delhi areas - South, North, East, West, and Central. You can book via our website, call us at +91 8882625522, or WhatsApp us for a same-day or next-day appointment.",
   },
   {
@@ -219,7 +219,7 @@ export default function SofaDryCleaningContent() {
             transition={{ delay: 0.15 }}
             className="font-serif text-ivory-warm text-3xl md:text-4xl xl:text-5xl font-bold leading-[1.1] mb-6 max-w-4xl"
           >
-            Sofa Dry Cleaning Services in Delhi:{" "}
+            Sofa Cleaning &amp; Dry Cleaning Services in Delhi NCR:{" "}
             <span className="italic font-normal text-stone-teal/55">
               Doorstep Deep Cleaning Starting ₹250 Per Seat
             </span>
@@ -358,8 +358,8 @@ export default function SofaDryCleaningContent() {
           >
             <SectionTag>The Reality</SectionTag>
             <h2 className="font-serif text-teal-deep text-3xl md:text-4xl font-bold mb-4 max-w-2xl leading-tight">
-              The Delhi Sofa Problem{" "}
-              <span className="italic font-normal text-charcoal/40">Nobody Talks About</span>
+              Why Sofas Get Dirty{" "}
+              <span className="italic font-normal text-charcoal/40">Faster Than You Think</span>
             </h2>
             <p className="font-sans text-slate-teal/70 text-sm leading-relaxed mb-12 max-w-3xl">
               Here&apos;s something most Delhi homeowners don&apos;t realise: your sofa is dirtier than it looks.
@@ -744,7 +744,7 @@ export default function SofaDryCleaningContent() {
                   Our expert recommendation:
                 </p>
                 <p className="font-sans text-stone-teal/60 text-xs leading-relaxed">
-                  During the free inspection visit, our certified technician assesses your sofa&apos;s fabric
+                  During the inspection, our certified technician assesses your sofa&apos;s fabric
                   type, stain profile, and care requirements, then recommends the best treatment. You should
                   never have to guess; we tell you exactly what your sofa needs and why.
                 </p>
@@ -1447,7 +1447,7 @@ export default function SofaDryCleaningContent() {
               <span className="italic font-normal text-charcoal/40">Complete Your Upholstery Care</span>
             </h2>
             <p className="font-sans text-slate-teal/70 text-sm leading-relaxed mb-12 max-w-3xl">
-              While our team is at your home for sofa cleaning, fabric couch and chair dry cleaning Delhi,
+              While our team is at your home for sofa cleaning, Fabric Couch &amp; Chair Cleaning,
               you might like to take the opportunity to extend the service to other upholstery. All of these
               are available as add-ons to your sofa dry cleaning services.
             </p>
@@ -1456,7 +1456,7 @@ export default function SofaDryCleaningContent() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               {
-                title: "Carpet Shampooing Service Delhi",
+                title: "Professional Carpet Shampooing Service",
                 body: "From premium Persian and Oriental rugs to wall-to-wall synthetic carpets.",
               },
               {
@@ -1464,14 +1464,15 @@ export default function SofaDryCleaningContent() {
                 body: "As mattresses accumulate the same dust mites, allergens, and moisture issues as sofas, it is recommended for a complete refresh.",
               },
               {
-                title: "Commercial Chair Cleaning Service Delhi",
+                title: "Office Chair Cleaning Service",
                 body: "Dining chairs, office chairs, reading chairs, headboards, and ottomans.",
+                link: "/office-chair-cleaning-delhi",
               },
               {
                 title: "Curtain On-Site Cleaning",
                 body: "We clean curtains without removing them from their rods. Heavy drapes, silk panels, blackout blinds, etc.",
               },
-            ].map(({ title, body }, i) => (
+            ].map(({ title, body, link }, i) => (
               <motion.div
                 key={title}
                 initial={{ opacity: 0, y: 24 }}
@@ -1480,7 +1481,11 @@ export default function SofaDryCleaningContent() {
                 className="border border-mist hover:border-teal/40 transition-all duration-300 rounded-xl bg-ivory-teal p-6"
               >
                 <div className="w-4 h-[2px] bg-teal rounded-full mb-4" />
-                <h3 className="font-serif text-teal-deep text-base font-semibold mb-2">{title}</h3>
+                {link ? (
+                  <a href={link} className="font-serif text-teal-deep text-base font-semibold mb-2 hover:text-teal transition-colors block">{title}</a>
+                ) : (
+                  <h3 className="font-serif text-teal-deep text-base font-semibold mb-2">{title}</h3>
+                )}
                 <p className="font-sans text-slate-teal/70 text-sm leading-relaxed">{body}</p>
               </motion.div>
             ))}
@@ -1500,8 +1505,8 @@ export default function SofaDryCleaningContent() {
             >
               <SectionTag>Book Now</SectionTag>
               <h2 className="font-serif text-teal-deep text-3xl md:text-4xl font-bold mb-4 max-w-xl leading-tight">
-                Book Your Free Sofa{" "}
-                <span className="italic font-normal text-charcoal/40">Inspection Visit</span>
+                Book Your{" "}
+                <span className="italic font-normal text-charcoal/40">Sofa Cleaning</span>
               </h2>
               <p className="font-sans text-slate-teal/70 text-sm leading-relaxed mb-8 max-w-md">
                 Fill in your details and our certified technician will visit, assess your sofa, and give

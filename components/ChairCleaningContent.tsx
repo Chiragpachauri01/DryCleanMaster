@@ -55,7 +55,7 @@ const faqs = [
     a: "Yes! Our anti-microbial treatment eliminates the bacterial source of the odour, not just the surface smell. However, chairs with severe odour buildup may need 2 sessions to eliminate it completely.",
   },
   {
-    q: "Do you handle bulk office chair cleaning in local areas?",
+    q: "Do you handle bulk office chair cleaning for businesses?",
     a: "Yes, bulk office chairs from 10 chairs upwards are a core part of our business. We would provide a team dedicated to large-volume jobs which can be completed in after-hours and weekend slots.",
   },
   {
@@ -71,7 +71,7 @@ const faqs = [
     a: "For chairs in daily use, consider professional cleaning every 3-6 months. House chairs can be cleaned every 6-8 months. But if it is a chair in a co-working space, quarterly cleaning would be the best option.",
   },
   {
-    q: "Do you offer same-day chair cleaning in Delhi?",
+    q: "Do you offer same-day chair cleaning services?",
     a: "Yes, for most areas when booked before noon. WhatsApp us your location and quantity, and we will come and clean your chairs on the same day.",
   },
   {
@@ -231,7 +231,7 @@ export default function ChairCleaningContent() {
             transition={{ delay: 0.18 }}
             className="font-sans text-stone-teal/65 text-sm leading-relaxed mb-8 max-w-2xl mx-auto"
           >
-            Chair Cleaning is not a luxury; it is a basic hygiene need that most offices and homes in Delhi have been ignoring for years. Most chairs in Delhi NCR are dirtier than the floors, and surprisingly, we never realise it until either the smell becomes unbearable or someone else points it out. Before you have to undergo any embarrassment for an uncleaned chair, our office chair cleaning services in Delhi are here to help you.
+            Chair Cleaning is not a luxury; it is a basic hygiene need that most offices and homes in Delhi have been ignoring for years. Most chairs in Delhi NCR are dirtier than the floors, and surprisingly, we never realise it until either the smell becomes unbearable or someone else points it out. Before you have to undergo any embarrassment for an uncleaned chair, our professional office chair cleaning services are here to help you.
           </motion.p>
 
           <motion.div
@@ -467,7 +467,7 @@ export default function ChairCleaningContent() {
             className="mt-10 border-t border-teal/20 pt-8 flex flex-wrap gap-4 items-center justify-between"
           >
             <p className="font-sans text-stone-teal/55 text-sm max-w-2xl">
-              Hence, an office chair with 2000+ hours of use does indeed become a hygiene problem, and nothing short of professional chair cleaning services in Delhi can solve this problem.
+              Hence, an office chair with 2000+ hours of use does indeed become a hygiene problem, and nothing short of professional chair cleaning can solve this problem.
             </p>
             <a href={WA_LINK} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 btn-whatsapp font-sans text-sm px-5 py-2.5 shrink-0">
@@ -641,7 +641,7 @@ export default function ChairCleaningContent() {
               <span className="italic font-normal text-charcoal/40">Across Delhi and Nearby Areas</span>
             </h2>
             <p className="font-sans text-slate-teal/70 text-sm leading-relaxed max-w-2xl mx-auto">
-              Our commercial chair cleaning service Delhi covers every chair type that you will find in your homes, offices, cafes, and clinics.
+              our commercial chair cleaning service covers every chair type that you will find in your homes, offices, cafes, and clinics.
             </p>
           </motion.div>
 
@@ -758,7 +758,7 @@ export default function ChairCleaningContent() {
               },
               {
                 scenario: "A client visit is scheduled for tomorrow",
-                body: "We provide same-day desk chair cleaning services Delhi. Your office will be ready before the meeting.",
+                body: "We provide same-day desk chair cleaning services. Your office will be ready before the meeting.",
                 emphasis: false,
               },
               {
@@ -897,7 +897,7 @@ export default function ChairCleaningContent() {
               <Shield size={18} className="text-teal mb-4" />
               <p className="font-sans text-xs text-teal font-semibold uppercase tracking-wider mb-2">Pro Tip</p>
               <p className="font-sans text-slate-teal/70 text-sm leading-relaxed">
-                If a spill or stain happens, do not rub it out; take a dry cotton cloth and absorb the excess liquid. Then, book professional chair cleaning services in Delhi.
+                If a spill or stain happens, do not rub it out; take a dry cotton cloth and absorb the excess liquid. Then, book professional chair cleaning services.
               </p>
             </motion.div>
           </div>

@@ -188,7 +188,7 @@ const schemaFAQ = {
     },
     {
       "@type": "Question",
-      name: "Do you clean office carpets in Delhi?",
+      name: "Do you clean office carpets and commercial spaces?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "Yes, office carpet cleaning services Delhi are our specialised service. We offer office-friendly hours, including weekend, early morning, and evening hours, so that your operations are not disrupted.",
@@ -204,7 +204,7 @@ const schemaFAQ = {
     },
     {
       "@type": "Question",
-      name: "How often should carpets be cleaned professionally in Delhi?",
+      name: "How often should carpets be professionally cleaned?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "For an average Delhi house with children and pets, every 3-6 months is a suitable time. For offices with high traffic, consider getting professional cleaning every 3-4 months.",

@@ -146,7 +146,7 @@ const schemaFAQ = {
     },
     {
       "@type": "Question",
-      name: "Do you handle bulk office chair cleaning in Delhi?",
+      name: "Do you handle bulk office chair cleaning for businesses?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "Yes, bulk office chairs from 10 chairs upwards are a core part of our business. We would provide a team dedicated to large-volume jobs which can be completed in after-hours and weekend slots.",
@@ -154,7 +154,7 @@ const schemaFAQ = {
     },
     {
       "@type": "Question",
-      name: "Do you offer same-day chair cleaning in Delhi?",
+      name: "Do you offer same-day chair cleaning services?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "Yes, for most areas when booked before noon. WhatsApp us your location and quantity, and we will come and clean your chairs on the same day.",
