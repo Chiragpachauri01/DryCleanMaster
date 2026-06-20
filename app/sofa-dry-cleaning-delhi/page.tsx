@@ -141,7 +141,7 @@ const schemaFAQ = {
     },
     {
       "@type": "Question",
-      name: "How do I find reliable sofa dry cleaning near me in Delhi?",
+      name: "How often should a sofa be professionally cleaned?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "DryClean Masters provides doorstep sofa dry cleaning across all Delhi areas - South, North, East, West, and Central. You can book via our website, call us at +91 8882625522, or WhatsApp us for a same-day or next-day appointment.",

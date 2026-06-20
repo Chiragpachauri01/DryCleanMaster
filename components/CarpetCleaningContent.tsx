@@ -75,7 +75,7 @@ const faqs = [
     a: "For most odours like food, dust, or mustiness, yes, the odour would go away completely. But for deep-set odours like pet urine, it would take specialised treatment using bio-enzymes. The results would be satisfactory.",
   },
   {
-    q: "Do you clean office carpets in Delhi?",
+    q: "Do you clean office carpets and commercial spaces?",
     a: "Yes, office carpet cleaning services Delhi are our specialised service. We offer office-friendly hours, including weekend, early morning, and evening hours, so that your operations are not disrupted.",
   },
   {
@@ -83,7 +83,7 @@ const faqs = [
     a: "Yes, we use commercial hot water extraction machines, HEPA vacuums, rotary pile grooming machines, and air-mover dryers to give a deep cleaning to your carpet.",
   },
   {
-    q: "How often should carpets be cleaned professionally in Delhi?",
+    q: "How often should carpets be professionally cleaned?",
     a: "For an average Delhi house with children and pets, every 3–6 months is a suitable time. For offices with high traffic, consider getting professional cleaning every 3–4 months.",
   },
 ];
@@ -211,7 +211,7 @@ export default function CarpetCleaningContent() {
               transition={{ delay: 0.1 }}
               className="font-serif text-ivory-warm text-3xl md:text-4xl xl:text-5xl font-bold leading-[1.1] mb-5 max-w-xl"
             >
-              Professional Carpet Cleaning Services in Delhi{" "}
+              Professional Carpet Cleaning Services in Delhi NCR{" "}
               <span className="italic font-normal text-stone-teal/45">
                 — Doorstep Deep Clean
               </span>
@@ -437,8 +437,8 @@ export default function CarpetCleaningContent() {
             >
               <Tag>Doorstep Service</Tag>
               <h2 className="font-serif text-ivory-warm text-3xl md:text-4xl font-bold mb-4 leading-tight">
-                Doorstep Carpet Cleaning in Delhi:{" "}
-                <span className="italic font-normal text-stone-teal/40">How It Works</span>
+                How Our Doorstep Carpet Cleaning{" "}
+                <span className="italic font-normal text-stone-teal/40">Service Works</span>
               </h2>
               <p className="font-sans text-stone-teal/65 text-sm leading-relaxed mb-6">
                 When you search carpet cleaning near me in Delhi, the ideal result isn't a pick-up-and-deliver laundry service. It is a team that comes to your home or office, cleans the carpet where it is, and leaves without you having to destroy your entire room.
@@ -713,8 +713,8 @@ export default function CarpetCleaningContent() {
           >
             <Tag>Pricing</Tag>
             <h2 className="font-serif text-ivory-warm text-3xl md:text-4xl font-bold mb-4 leading-tight max-w-2xl">
-              Carpet Cleaning Services{" "}
-              <span className="italic font-normal text-stone-teal/40">Prices in Delhi</span>
+              How Much Does Professional{" "}
+              <span className="italic font-normal text-stone-teal/40">Carpet Cleaning Cost?</span>
             </h2>
             <p className="font-sans text-stone-teal/65 text-sm leading-relaxed mb-4 max-w-3xl">
               The price depends on size of your carpet, type of fabric, the level of dirt and staining, the cleaning method required, and whether any special treatments are required. The final price our team tells you is the price you will pay — no hidden charges, no sudden surprises.
@@ -1274,7 +1274,7 @@ export default function CarpetCleaningContent() {
           >
             <Tag>Office Carpet Cleaning</Tag>
             <h2 className="font-serif text-teal-deep text-3xl md:text-4xl font-bold mb-4 leading-tight max-w-2xl">
-              Office Carpet Cleaning Services in Delhi
+              Commercial &amp; Office Carpet Cleaning Services
             </h2>
             <p className="font-sans text-slate-teal/70 text-sm leading-relaxed mb-4 max-w-3xl">
               An office carpet experiences a completely different level of traffic and hygiene problems than a home carpet. A corporate office carpet faces hundreds of shoes depositing outdoor pollution, chair wheels grinding dirt into the pile, food and beverage spills, air conditioning condensation, and appearance standards that a smelly carpet affects badly.
@@ -1434,7 +1434,7 @@ export default function CarpetCleaningContent() {
             <Tag>Why Us</Tag>
             <h2 className="font-serif text-ivory-warm text-3xl md:text-4xl font-bold mb-4 leading-tight max-w-2xl">
               Why Choose DryClean Masters{" "}
-              <span className="italic font-normal text-stone-teal/40">for Carpet Cleaning in Delhi</span>
+              <span className="italic font-normal text-stone-teal/40">for Carpet Cleaning</span>
             </h2>
           </motion.div>
 
