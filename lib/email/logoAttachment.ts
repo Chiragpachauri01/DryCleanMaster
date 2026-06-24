@@ -1,11 +1,11 @@
-import path from "path";
-
 export const LOGO_CID = "dcm-logo@drycleanmasters";
+
+const LOGO_URL = "https://www.drycleanmasters.com/img/Logo/DryCleanLogo-email.png";
 
 export function logoAttachment(): { filename: string; path: string; cid: string } {
   return {
     filename: "DryCleanLogo.png",
-    path: path.join(process.cwd(), "public/img/Logo/DryCleanLogo-email.png"),
+    path: LOGO_URL,
     cid: LOGO_CID,
   };
 }
