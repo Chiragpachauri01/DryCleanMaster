@@ -45,6 +45,7 @@ const dryServices = [
     img: "/img/service-mattress-dry.webp",
     price: "₹1,199/king",
     popular: false,
+    href: "/mattress-cleaning-services-delhi",
   },
   {
     num: "05",
