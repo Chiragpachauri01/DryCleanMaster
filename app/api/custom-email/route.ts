@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   try {
     const contentType = req.headers.get("content-type") || "";
     let to = "", cc = "", subject = "", body = "";
-    const attachments: nodemailer.Attachment[] = [logoAttachment()];
+    const attachments: { filename?: string; content?: Buffer; path?: string; cid?: string }[] = [logoAttachment()];
 
     if (contentType.includes("multipart/form-data")) {
       const formData = await req.formData();
