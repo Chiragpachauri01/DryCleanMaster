@@ -841,13 +841,15 @@ function EmptyState({ loading }: { loading: boolean }) {
   );
 }
 
+type AddBookingFormState = {
+  name: string; phone: string; email: string; service: string; serviceLabel: string;
+  city: string; cityLabel: string; preferredDate: string; preferredTime: string; details: string;
+  isPast: boolean; finalDate: string; finalTime: string; totalAmount: string; vendorPay: string; additionalExpense: string;
+};
+
 function AddBookingModal({ formData, setFormData, onSubmit, onClose }: {
-  formData: typeof import("react").useState<ReturnType<typeof Object>>[0] extends never ? never : {
-    name: string; phone: string; email: string; service: string; serviceLabel: string;
-    city: string; cityLabel: string; preferredDate: string; preferredTime: string; details: string;
-    isPast: boolean; finalDate: string; finalTime: string; totalAmount: string; vendorPay: string; additionalExpense: string;
-  };
-  setFormData: (v: unknown) => void; onSubmit: () => void; onClose: () => void;
+  formData: AddBookingFormState;
+  setFormData: React.Dispatch<React.SetStateAction<AddBookingFormState>>; onSubmit: () => void; onClose: () => void;
 }) {
   const canSubmit = formData.name?.length >= 3 && formData.phone?.length >= 10 && formData.service && formData.preferredDate && formData.preferredTime;
 
@@ -944,8 +946,17 @@ function AddBookingModal({ formData, setFormData, onSubmit, onClose }: {
   );
 }
 
+type EditFormState = {
+  name: string; phone: string; email: string;
+  preferredDate: string; preferredTime: string;
+  finalDate: string; finalTime: string;
+  details: string; exactLocation: string;
+  vendorPay: string; additionalExpense: string;
+  markAsCompleted: boolean; totalAmount: string;
+};
+
 function EditModal({ formData, setFormData, booking, onSubmit, onClose }: {
-  formData: Record<string, unknown>; setFormData: (v: unknown) => void;
+  formData: EditFormState; setFormData: React.Dispatch<React.SetStateAction<EditFormState>>;
   booking: Booking; onSubmit: () => void; onClose: () => void;
 }) {
   const isVendorJob = !!booking?.assignedVendorId;
