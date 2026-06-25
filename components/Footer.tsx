@@ -14,6 +14,7 @@ const quickLinks = [
   { label: "Pricing", href: "/#pricing" },
   { label: "Gallery", href: "/#gallery" },
   { label: "Blog", href: "/#blog" },
+  { label: "Web Stories", href: "/web-stories/" },
   { label: "Contact Us", href: "/contact" },
   { label: "Privacy Policy", href: "#privacy" },
   { label: "Terms of Service", href: "#terms" },

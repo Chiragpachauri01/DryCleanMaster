@@ -12,6 +12,7 @@ import FAQ from "@/components/FAQ";
 import HomeContactForm from "@/components/HomeContactForm";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import RelatedWebStories from "@/components/webstory/RelatedWebStories";
 
 export const metadata: Metadata = {
   title: "Premium Sofa and Carpet Cleaning in Delhi: DryClean Masters",
@@ -39,7 +40,8 @@ export default function Home() {
         <Pricing />
         <Testimonials />
         <FAQ />
-
+        {/* Latest web stories — after content, before footer */}
+        <RelatedWebStories pageType="home" max={6} heading="Fabric-Care Tips & Web Stories" />
       </main>
       <Footer />
       <FloatingWhatsApp />
