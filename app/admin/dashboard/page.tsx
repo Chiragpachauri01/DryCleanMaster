@@ -19,7 +19,7 @@ import {
 
 const STATUS_TONES: Record<string, string> = {
   New: "bg-amber-50 text-amber-700",
-  Confirmed: "bg-teal-50 text-teal-700",
+  Confirmed: "bg-emerald-50 text-emerald-700",
   Completed: "bg-sky-50 text-sky-700",
   Cancelled: "bg-red-50 text-red-700",
 };

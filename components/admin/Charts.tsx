@@ -104,7 +104,7 @@ export function HBarList({
 export function StatusBars({ counts }: { counts: Record<string, number> }) {
   const palette: Record<string, string> = {
     New: "bg-amber-500",
-    Confirmed: "bg-teal-600",
+    Confirmed: "bg-emerald-500",
     Completed: "bg-sky-600",
     Cancelled: "bg-red-500",
   };

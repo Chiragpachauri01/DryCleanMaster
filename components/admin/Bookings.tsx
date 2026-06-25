@@ -22,7 +22,7 @@ import {
 
 const statusStyles: Record<string, string> = {
   New: "bg-amber-50 text-amber-700 border-amber-200",
-  Confirmed: "bg-teal-50 text-teal-700 border-teal-200",
+  Confirmed: "bg-emerald-50 text-emerald-700 border-emerald-200",
   Completed: "bg-sky-50 text-sky-700 border-sky-200",
   Cancelled: "bg-red-50 text-red-700 border-red-200",
 };
@@ -244,7 +244,7 @@ export default function Bookings() {
 
   const stats = useMemo(() => [
     { label: "Leads", value: summary.leads, icon: Target, tone: "bg-amber-50 text-amber-700" },
-    { label: "Confirmed", value: summary.counts.Confirmed, icon: UserRoundCheck, tone: "bg-teal-50 text-teal-700" },
+    { label: "Confirmed", value: summary.counts.Confirmed, icon: UserRoundCheck, tone: "bg-emerald-50 text-emerald-700" },
     { label: "Completed", value: summary.counts.Completed, icon: CheckCircle2, tone: "bg-sky-50 text-sky-700" },
     { label: "Cancelled", value: summary.counts.Cancelled, icon: XCircle, tone: "bg-red-50 text-red-700" },
     { label: "Sales", value: formatMoney(summary.revenue), icon: IndianRupee, tone: "bg-violet-50 text-violet-700" },
