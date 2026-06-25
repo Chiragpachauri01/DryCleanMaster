@@ -317,7 +317,7 @@ export default function MattressCleaningContent() {
             initial={{ opacity: 0, x: 30 }}
             animate={heroInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="hidden lg:grid grid-rows-2 grid-cols-2 gap-3 py-10"
+            className="grid grid-rows-2 grid-cols-2 gap-3 pb-10 lg:py-10 h-[60vh] min-h-[380px] lg:h-auto lg:min-h-0"
           >
             <div className="relative col-span-2 row-span-1 rounded-2xl overflow-hidden border border-teal/20 shadow-xl">
               <Image

@@ -64,10 +64,10 @@ export default function Hero() {
             />
           </motion.div>
         </AnimatePresence>
-        {/* layered gradients: bottom-heavy for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-teal-deep via-teal-deep/75 to-teal-deep/30" />
+        {/* layered gradients: bottom-heavy for text legibility — lighter on mobile so banner images stay visible */}
+        <div className="absolute inset-0 bg-gradient-to-t from-teal-deep/80 via-teal-deep/45 to-teal-deep/10 md:from-teal-deep md:via-teal-deep/75 md:to-teal-deep/30" />
         {/* left-side extra darkening so headline pops */}
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-deep/60 via-teal-deep/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-teal-deep/30 via-transparent to-transparent md:from-teal-deep/60 md:via-teal-deep/20" />
         {/* subtle teal texture */}
         <div className="absolute inset-0 teal-texture opacity-20" />
       </div>
