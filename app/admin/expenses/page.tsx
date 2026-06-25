@@ -164,7 +164,7 @@ export default function ExpensesPage() {
 
   const kpis = [
     { label: "Completed revenue", value: money(totals.revenue), icon: IndianRupee, tone: "bg-teal-50 text-teal-700" },
-    { label: "Job expenses", value: money(totals.jobExpense), icon: TrendingDown, tone: "bg-orange-50 text-orange-500" },
+    { label: "Job expenses", value: money(totals.jobExpense), icon: TrendingDown, tone: "bg-amber-50 text-amber-600" },
     { label: "Overhead expenses", value: money(totals.overheadTotal), icon: Building2, tone: "bg-red-50 text-red-600" },
     { label: "Net profit", value: money(totals.profit), icon: TrendingUp, tone: totals.profit >= 0 ? "bg-violet-50 text-violet-700" : "bg-red-50 text-red-700" },
     { label: "Profit margin", value: `${totals.margin}%`, icon: Percent, tone: "bg-sky-50 text-sky-700" },

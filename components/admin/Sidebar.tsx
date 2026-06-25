@@ -145,7 +145,7 @@ export default function Sidebar() {
           </a>
           <button
             onClick={logout}
-            className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 px-4 py-3 text-sm font-bold text-white transition hover:bg-orange-600"
+            className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-rose-500 px-4 py-3 text-sm font-bold text-white transition hover:bg-rose-600"
           >
             <LogOut size={18} />
             Logout

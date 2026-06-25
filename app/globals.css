@@ -25,6 +25,21 @@
   --color-slate-teal: #36556E;
   --color-muted-teal: #66889D;
 
+  /* Admin chrome — remap the default `teal-*` numeric scale to the site's
+     aqua → navy ramp. The public site uses only the named tokens above, so
+     this scale is consumed exclusively by the /admin UI and keeps it on-brand. */
+  --color-teal-50: #ECFBFF;
+  --color-teal-100: #D5F3FC;
+  --color-teal-200: #B0E7F9;
+  --color-teal-300: #7FD6F4;
+  --color-teal-400: #38BDF4;
+  --color-teal-500: #0EA5E9;
+  --color-teal-600: #0284C7;
+  --color-teal-700: #0369A1;
+  --color-teal-800: #0A2A52;
+  --color-teal-900: #061B3A;
+  --color-teal-950: #04122A;
+
   /* Typography */
   --font-serif: var(--font-dm-serif, "DM Serif Display", Georgia, serif);
   --font-sans: var(--font-outfit, "Outfit", system-ui, sans-serif);
