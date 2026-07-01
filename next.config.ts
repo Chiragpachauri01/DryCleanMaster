@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        // Blog & web-story cover images uploaded via BlogSpot live in Firebase Storage.
+        protocol: "https",
+        hostname: "firebasestorage.googleapis.com",
+      },
     ],
   },
 };
