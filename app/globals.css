@@ -43,6 +43,14 @@
   /* Typography */
   --font-serif: var(--font-dm-serif, "DM Serif Display", Georgia, serif);
   --font-sans: var(--font-outfit, "Outfit", system-ui, sans-serif);
+
+  /* Body-copy sizes — gently bumped up and made fluid (mobile → desktop).
+     Only the small/base range is touched; `text-xl` and larger (headlines
+     and already-big text) keep Tailwind's defaults. */
+  --text-xs: clamp(0.78rem, 0.76rem + 0.06vw, 0.81rem);   /* ~12.5 → 13px */
+  --text-sm: clamp(0.9rem, 0.87rem + 0.12vw, 0.95rem);    /* ~14.4 → 15.2px */
+  --text-base: clamp(1.03rem, 1rem + 0.15vw, 1.1rem);     /* ~16.5 → 17.6px */
+  --text-lg: clamp(1.16rem, 1.12rem + 0.17vw, 1.22rem);   /* ~18.5 → 19.5px */
 }
 
 :root {
