@@ -11,7 +11,9 @@
 export const revalidate = 30;
 
 import { notFound }   from "next/navigation";
-import { adminDb }    from "@/firebase/firebase.admin";
+// Blog content lives in the shared BlogSpot project (quick-cleaning-services-20400),
+// which DryClean exposes as `qcsDb` (NOT `adminDb`, DryClean's own bookings project).
+import { qcsDb as adminDb } from "@/firebase/firebase.admin";
 import { BlogDetailLayout } from "@/components/blog/BlogLayouts";
 import TopBar from "@/components/TopBar";
 import Header from "@/components/Header";

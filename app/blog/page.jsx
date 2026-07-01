@@ -15,7 +15,9 @@
 export const revalidate = 60; // ISR: revalidate every 60 seconds
 
 import { Suspense }    from "react";
-import { adminDb }     from "@/firebase/firebase.admin";
+// Blog content lives in the shared BlogSpot project (quick-cleaning-services-20400),
+// which DryClean exposes as `qcsDb` (NOT `adminDb`, DryClean's own bookings project).
+import { qcsDb as adminDb } from "@/firebase/firebase.admin";
 import { autoExcerpt, collectAllTags } from "@/components/blog/BlogUtils";
 import BlogListClient  from "@/components/blog/BlogListClient";
 import Link from "next/link";
