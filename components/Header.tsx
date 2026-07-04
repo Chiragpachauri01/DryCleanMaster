@@ -12,9 +12,8 @@ const services = [
   { label: "Sofa Dry Cleaning", href: "/sofa-dry-cleaning-delhi" },
   { label: "Carpet Cleaning", href: "/carpet-cleaning-services-delhi" },
   { label: "Chair Dry Cleaning", href: "/office-chair-cleaning-delhi" },
-  { label: "Upholstery Dry Cleaning", href: "/#services" },
+  { label: "Office Cleaning", href: "/office-cleaning-services-delhi" },
   { label: "Mattress Dry Cleaning", href: "/mattress-cleaning-services-delhi" },
-  { label: "Curtain Dry Cleaning", href: "/#services" },
 ];
 
 const navLinks = [
