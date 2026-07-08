@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Phone,
   MessageCircle,
@@ -183,11 +184,31 @@ const included = [
   },
   {
     title: "Office Chair Cleaning",
-    body: "Fabric office chairs receive HEPA pre-vacuuming, fabric-safe extraction cleaning, and anti-microbial sanitisation. Executive leather chairs receive cleaning, conditioning, and polishing. Chair wheels and bases are cleaned separately. This is a specialist service that significantly affects both hygiene and chair longevity.",
+    body: (
+      <>
+        <Link
+          href="/office-chair-cleaning-delhi"
+          className="text-teal font-semibold underline underline-offset-2 decoration-teal/40 hover:text-teal-deep"
+        >
+          Fabric office chairs
+        </Link>{" "}
+        receive HEPA pre-vacuuming, fabric-safe extraction cleaning, and anti-microbial sanitisation. Executive leather chairs receive cleaning, conditioning, and polishing. Chair wheels and bases are cleaned separately. This is a specialist service that significantly affects both hygiene and chair longevity.
+      </>
+    ),
   },
   {
     title: "Office Carpet Cleaning",
-    body: "Office carpets in offices where there is a high-footfall receive extraction-based cleaning with our commercial-grade equipment. Carpet tiles are cleaned individually where required. Traffic lanes are restored, stains are treated, and anti-microbial solution is sprayed for sanitisation.",
+    body: (
+      <>
+        <Link
+          href="/carpet-cleaning-services-delhi"
+          className="text-teal font-semibold underline underline-offset-2 decoration-teal/40 hover:text-teal-deep"
+        >
+          Office carpets
+        </Link>{" "}
+        in offices where there is a high-footfall receive extraction-based cleaning with our commercial-grade equipment. Carpet tiles are cleaned individually where required. Traffic lanes are restored, stains are treated, and anti-microbial solution is sprayed for sanitisation.
+      </>
+    ),
   },
   {
     title: "Reception Area Cleaning",
