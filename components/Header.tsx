@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import BookingModal from "./BookingModal";
 
 const services = [
+  { label: "Home Deep Cleaning", href: "/home-deep-cleaning-services-delhi" },
   { label: "Sofa Dry Cleaning", href: "/sofa-dry-cleaning-delhi" },
   { label: "Carpet Cleaning", href: "/carpet-cleaning-services-delhi" },
   { label: "Chair Dry Cleaning", href: "/office-chair-cleaning-delhi" },
