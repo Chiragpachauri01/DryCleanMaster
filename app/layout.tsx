@@ -175,7 +175,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${dmSerif.variable} ${outfit.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${dmSerif.variable} ${outfit.variable}`}>
       <head>
         {/* ── Structured Data ── */}
         <script

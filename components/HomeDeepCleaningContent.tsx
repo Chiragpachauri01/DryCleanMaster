@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Phone,
   MessageCircle,
@@ -34,19 +35,15 @@ import {
   Warehouse,
   Users,
   Baby,
-  PawPrint,
   Briefcase,
   Building,
   BadgeCheck,
   Recycle,
-  Leaf,
-  ThumbsUp,
   Plus,
   Minus,
 } from "lucide-react";
 
 const PHONE = "tel:+918882631413";
-const PHONE_DISPLAY = "8882631413";
 const WA_LINK =
   "https://wa.me/918882631413?text=Hi%2C%20I%20want%20a%20quote%20for%20home%20deep%20cleaning%20services%20in%20Delhi%20NCR";
 
@@ -77,90 +74,125 @@ function fade(inView: boolean, delay = 0) {
   };
 }
 
-function CtaRow({
-  primary,
-  secondary,
-  primaryHref = WA_LINK,
-  secondaryHref = PHONE,
-  center,
-}: {
-  primary: string;
-  secondary: string;
-  primaryHref?: string;
-  secondaryHref?: string;
-  center?: boolean;
-}) {
-  const external = primaryHref.startsWith("http");
+/* Button row — renders the exact button labels from the source document.
+   "Call" labels go to tel:, "WhatsApp" labels go to wa.me, everything else
+   (booking / quote / contact prompts) also routes to WhatsApp as the
+   general enquiry channel. */
+function variantFor(label: string, index: number): "primary" | "copper" | "whatsapp" | "ghost" {
+  const l = label.toLowerCase();
+  if (l.includes("whatsapp")) return "whatsapp";
+  if (l.includes("call")) return "ghost";
+  return index % 2 === 0 ? "primary" : "copper";
+}
+
+function ButtonRow({ labels, center }: { labels: string[]; center?: boolean }) {
   return (
     <div className={`mt-10 flex flex-wrap gap-3 ${center ? "justify-center" : ""}`}>
-      <a
-        href={primaryHref}
-        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-        className="inline-flex items-center gap-2 btn-primary font-sans text-sm px-6 py-3"
-      >
-        {primary} <ArrowRight size={15} />
-      </a>
-      <a
-        href={secondaryHref}
-        {...(secondaryHref.startsWith("http")
-          ? { target: "_blank", rel: "noopener noreferrer" }
-          : {})}
-        className="inline-flex items-center gap-2 font-sans text-sm px-6 py-3 border-2 border-mist text-slate-teal rounded-lg hover:border-teal hover:text-teal transition-colors"
-      >
-        <MessageCircle size={14} /> {secondary}
-      </a>
+      {labels.map((label, i) => {
+        const variant = variantFor(label, i);
+        const href = variant === "ghost" ? PHONE : WA_LINK;
+        const cls =
+          variant === "primary"
+            ? "btn-primary"
+            : variant === "copper"
+            ? "btn-copper"
+            : variant === "whatsapp"
+            ? "btn-whatsapp"
+            : "border-2 border-mist text-slate-teal rounded-lg hover:border-teal hover:text-teal transition-colors";
+        return (
+          <a
+            key={label}
+            href={href}
+            {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            className={`inline-flex items-center gap-2 font-sans text-sm px-6 py-3 ${cls}`}
+          >
+            {variant === "ghost" && <Phone size={15} />}
+            {variant === "whatsapp" && <MessageCircle size={14} />}
+            {label}
+            {(variant === "primary" || variant === "copper") && <ArrowRight size={15} />}
+          </a>
+        );
+      })}
     </div>
   );
 }
 
-/* ── Data ────────────────────────────────────────────────────────────────── */
+/* ── Data (verbatim from source document) ───────────────────────────────── */
 
-const heroStats = [
-  { val: "4.9★", label: "Google Rating" },
-  { val: "15,000+", label: "Homes Cleaned" },
-  { val: "24/7", label: "Availability" },
+const heroBadges = [
+  "Verified Professionals",
+  "Same-Day Booking",
+  "Safe Cleaning Products",
+  "Delhi-Wide Coverage",
+  "Transparent Pricing",
 ];
 
 const signs = [
-  "Dust reappears on surfaces within 1-2 days of cleaning",
-  "Kitchen surfaces retain a persistent greasy residue",
-  "Bathroom odours persist despite regular cleaning",
-  "Household members are sneezing more often indoors",
-  "Your home feels unclean even though it appears tidy",
-  "A special event needs a deeper clean than routine maintenance",
-  "A recent move or renovation needs comprehensive sanitisation",
+  {
+    title: "Dust comes back within a day or two.",
+    body: "You dust the shelves, and two days later, that layer of dust is back again. This means that the source of this dust, which may be your ceiling fan, AC vent, fabric surface, etc, has not been addressed. Surface cleaning just moves around the dust; it doesn't remove it.",
+  },
+  {
+    title: "The kitchen always feels slightly greasy.",
+    body: "That greasy layer on the tiles, on the cabinet doors, and around the countertop, it does not happen from one cooking session. It develops after months of cooking vapours building up on top of each other. A cloth can never clean it off.",
+  },
+  {
+    title: "Bathrooms have a smell that doesn't go away.",
+    body: "Even after cleaning regularly, the hard water deposits on the bathroom surface and the bacteria that got built up in the tile joints do not go away, giving the bathroom a distinct smell.",
+  },
+  {
+    title: "Someone at home is sneezing more than usual.",
+    body: "If the sneezing stops when they step outside the home, the causes might be dust mites in mattresses or mold in the bathroom. They contain dust and other allergy triggers.",
+  },
+  {
+    title: "The home looks clean but doesn't feel clean.",
+    body: "Your room feels a little heavy, and you keep the windows open a lot more than you used to. It is just the general dullness that regular cleaning has not fixed.",
+  },
+  {
+    title: "Guests are coming, and the usual cleaning is not enough.",
+    body: "Before a festival, a family function, or guests staying over, a full house deep cleaning service handles everything your routine cleaning might have missed.",
+  },
+  {
+    title: "You just moved in or just moved out.",
+    body: "Construction dust from a renovation and the previous tenant's leftovers- they do not go away just with a broom. They specifically need a proper deep clean.",
+  },
 ];
 
 const serviceTypes = [
   {
-    label: "Full House Deep Cleaning",
+    label: "Full House Deep Cleaning Services",
     icon: Home,
-    frequency: "Every 3-6 months",
-    body: "Every room and every surface — kitchen, bathrooms, fans, floors, furniture, windows, and balconies included. This is our most complete service, designed to reset your entire home to a like-new standard.",
+    bestFor: "Homes that haven't had a deep clean in 3-6 months, or as a routine clean before or after monsoon.",
+    included: "Every room, every surface, including kitchen, bathrooms, fans, floors, furniture, windows, balconies,",
+    frequency: "Every 3-6 months for most Delhi NCR homes.",
   },
   {
     label: "Festival Cleaning",
     icon: Sun,
-    frequency: "1-2 times a year, before major celebrations",
-    body: "Focused on the areas guests actually see — living areas, entrances, and guest spaces. Booked heavily before Diwali and other major celebrations, so early booking is recommended.",
+    bestFor: "Before Diwali, Eid, Christmas, or any big family gathering.",
+    included: "Full home deep clean with extra focus on the living room, entrance, and guest areas.",
+    frequency: "Once or twice a year around major festivals.",
   },
   {
     label: "Move-In Cleaning",
     icon: Package,
-    frequency: "One-time, before furniture arrives",
-    body: "A complete top-to-bottom sanitisation of a new home before your furniture moves in. Ideal for freshly built or newly possessed apartments and villas.",
+    bestFor: "Families moving into a new rented or purchased home.",
+    included: "Complete top-to-bottom clean and sanitisation of the entire home before furniture arrives.",
+    frequency: "Once, before you move in.",
   },
   {
     label: "Move-Out Cleaning",
     icon: DoorOpen,
-    frequency: "End-of-tenancy, one-time",
-    body: "Designed to help you recover your security deposit, with before-and-after documentation of the property's condition included as part of the service.",
+    bestFor: "Tenants handing back a rented property and wanting the full deposit returned.",
+    included: "Full cleaning of all rooms to bring the home back to original condition, with before-and-after photos.",
+    frequency: "Once, at the end of tenancy.",
   },
   {
     label: "Post-Renovation Cleaning",
     icon: Hammer,
-    frequency: "Immediately after renovation work",
-    body: "Targets construction dust, paint particles, and sticky residue that regular cleaning cannot handle. Booked right after painters, carpenters, or contractors finish their work.",
+    bestFor: "Homes where any painting, tiling, or construction work has just been done.",
+    included: "Removal of construction dust, paint marks, and adhesive residue from all surfaces.",
+    frequency: "Once, immediately after renovation is complete.",
   },
 ];
 
@@ -207,188 +239,213 @@ const rooms = [
   {
     name: "Living Room",
     icon: Sofa,
-    duration: "45-60 min",
-    equipment: "Microfibre dusters, HEPA vacuum, floor machine",
-    tasks: "Ceiling cobwebs, fan blades, AC vents, switchboards, sofa exterior, windows, and floors.",
+    duration: "45-60 minutes",
+    equipment: "Microfibre dusters, HEPA vacuum, glass cleaner, floor scrubbing machine",
+    tasks: "Ceiling cobwebs, fan blades, AC vent covers, wall marks, switchboards, sofa exterior, furniture tops, glass surfaces, window sills, full floor scrub",
   },
   {
     name: "Bedrooms",
     icon: Bed,
-    duration: "30-45 min each",
-    equipment: "HEPA vacuum, extension dusters, floor scrubber",
-    tasks: "Ceiling fans, vents, wardrobe exteriors, under-bed areas, and full floor disinfection.",
+    duration: "30-45 minutes per bedroom",
+    equipment: "HEPA vacuum, extension dusters, microfibre cloths, floor scrubber",
+    tasks: "Ceiling fan, AC vent, switchboards, wardrobe exterior, window sills, under-bed area, floor scrubbing and disinfection",
   },
   {
     name: "Kitchen",
     icon: Utensils,
-    duration: "60-90 min",
-    equipment: "Degreaser, rotary scrubber, descaling agents",
-    tasks: "Tile degreasing, cabinet interiors and exteriors, chimney, countertop, and sink descaling.",
+    duration: "60-90 minutes",
+    equipment: "Degreaser, rotary scrubber, descaling agent, microfibre cloths, floor machine",
+    tasks: "Tile degreasing, cabinet interiors and exteriors, chimney exterior, countertop, sink descaling, appliance exteriors, floor deep clean",
   },
   {
     name: "Bathrooms",
     icon: ShowerHead,
-    duration: "30-45 min each",
-    equipment: "Descaling agents, grout brush, sanitiser",
-    tasks: "Toilet descaling, tile and grout cleaning, shower areas, and faucet descaling.",
+    duration: "30-45 minutes per bathroom",
+    equipment: "Descaling agent, grout brush, scrubbing machine, bactericidal sanitiser",
+    tasks: "Full toilet descaling, tiles and grout, shower area, sink, mirror, faucet descaling, exhaust fan, floor scrubbing",
   },
   {
     name: "Balcony",
     icon: Trees,
-    duration: "20-30 min",
-    equipment: "Pressure scrubber, floor solution",
-    tasks: "Floor scrubbing and railing cleaning.",
+    duration: "20-30 minutes",
+    equipment: "Pressure scrubber, floor cleaning solution, microfibre cloths",
+    tasks: "Floor scrubbing, railing and grille cleaning, ceiling if accessible",
   },
   {
     name: "Doors",
     icon: DoorOpen,
-    duration: "10 min each",
-    equipment: "Microfibre cloths, degreasers",
-    tasks: "Both sides, frames, and handles cleaned and degreased.",
+    duration: "10 minutes per door",
+    equipment: "Microfibre cloths, degreasing agents",
+    tasks: "Both sides of all doors, door frames, handles",
   },
   {
     name: "Windows",
     icon: Wind,
-    duration: "5 min each",
+    duration: "5 minutes per window",
     equipment: "Glass cleaning solutions",
-    tasks: "Glass panels, frames, and sills wiped streak-free.",
+    tasks: "Glass panels, frames, sills from the inside",
   },
   {
     name: "Switchboards",
     icon: ToggleLeft,
-    duration: "2-3 min each",
-    equipment: "Vacuum, sanitising solutions",
-    tasks: "Every switch and socket vacuumed and sanitised.",
+    duration: "2-3 minutes per switchboard",
+    equipment: "Vacuum cleaners and sanitising solutions",
+    tasks: "All switches and socket panels wiped and sanitised",
   },
   {
     name: "Fans",
     icon: Fan,
-    duration: "10 min each",
-    equipment: "Professional cleaning agents",
-    tasks: "Blades, housing, and centre cap fully cleaned.",
+    duration: "10 minutes per fan",
+    equipment: "Same agents",
+    tasks: "All ceiling fans including blades, housing, and centre cap",
   },
   {
     name: "Furniture",
     icon: Armchair,
-    duration: "30 min",
-    equipment: "Standard cleaning agents",
-    tasks: "Tops, sides, and legs of every accessible piece.",
+    duration: "30 minutes",
+    equipment: "Same agents",
+    tasks: "Tops, sides, and legs of all accessible furniture",
   },
   {
     name: "Cabinets",
     icon: Warehouse,
-    duration: "20 min",
-    equipment: "Standard cleaning agents",
-    tasks: "Exterior cleaned as standard; interiors cleaned on request.",
+    duration: "20 minutes",
+    equipment: "Same agents",
+    tasks: "Full exterior clean, interiors on request",
   },
   {
     name: "Floors",
     icon: Sparkles,
-    duration: "40 min",
-    equipment: "Scrubbing machine, disinfectant",
-    tasks: "Full scrub-down with a hygienic disinfectant treatment.",
+    duration: "40 minutes",
+    equipment: "Scrubbing machine and disinfectant solutions",
+    tasks: "Full scrub and disinfectant mop throughout the home",
   },
 ];
 
-const notIncluded = [
-  "Pest control services",
-  "Wall painting and repairs",
-  "Electrical or plumbing repairs",
-  "Exterior building cleaning",
-  "Permanent stain restoration",
-  "Waterproofing and mould treatment",
-  "Construction debris removal",
-  "Heavy furniture moving",
-  "Internal appliance servicing",
-  "Rooftop or inaccessible area cleaning",
-];
-
-const addOns = [
-  "Sofa deep cleaning",
-  "Mattress sanitisation",
-  "Curtain cleaning",
-  "Appliance interior cleaning",
-];
-
-const pricingTiers = [
-  { label: "1 BHK", price: "3,498", duration: "4-5 hours", popular: false },
-  { label: "2 BHK", price: "4,998", duration: "5-7 hours", popular: true },
-  { label: "3 BHK", price: "6,998", duration: "7-9 hours", popular: false },
-  { label: "4 BHK / Villa", price: "8,998", duration: "9-12 hours", popular: false },
+const notCovered = [
+  { title: "Pest Control", body: "It is a separate licensed service and we only clean surfaces, not infestations" },
+  { title: "Painting and Wall Repairs", body: "We clean scuff marks and surface stains, but we cannot repaint your walls." },
+  { title: "Electrical and Plumbing Repairs", body: "We clean around electrical fixtures, but we do not repair them." },
+  { title: "Exterior Building Cleaning", body: "Our services are for inside the home only. External cleaning is not in our scope." },
+  { title: "Permanent Stain Restoration", body: "Stains that have penetrated surfaces permanently may not respond to cleaning." },
+  { title: "Waterproofing and Mould Repairs", body: "We treat surface mould, but our services do not include waterproofing." },
+  { title: "Construction Debris Removal", body: "We clean dust and chemical residue, but bulk debris removal is a separate thing." },
+  { title: "Heavy Furniture Moving", body: "We clean around and beneath furniture, but large wardrobes and beds are cleaned around only. We cannot move them." },
+  { title: "Internal Appliance Servicing", body: "Appliance exteriors are cleaned, but AC servicing, fridge gas refilling, and similar internal work are not included." },
+  { title: "Unsafe or Inaccessible areas", body: "Rooftops, external windows, and other inaccessible areas are not covered in our services." },
 ];
 
 const pricingFactors = [
-  "Home size and number of rooms",
-  "Bathroom count",
-  "Current maintenance condition",
-  "Additional services selected",
+  { title: "Home Size:", body: <>More rooms mean more time, more team members, and more material. Hence, more cost.</> },
+  { title: "Number of Bathrooms:", body: <>Bathroom cleaning takes the most time in a deep clean. If you have a three-bathroom house, it would naturally cost more than one with one bathroom.</> },
+  { title: "Condition of the Home:", body: <>A home that gets regular maintenance is easier to clean than one that hasn&apos;t been deep cleaned in over a year.</> },
+  {
+    title: "Add-Ons",
+    body: (
+      <>
+        <Link href="/sofa-dry-cleaning-delhi" className="text-teal font-semibold underline underline-offset-2 decoration-teal/40 hover:text-teal-deep">
+          Sofa cleaning
+        </Link>
+        , mattress sanitisation, curtain cleaning, and appliance interior cleaning are charged separately but can be added to the same visit, which is more economical than a separate visit.
+      </>
+    ),
+  },
+];
+
+const pricingTiers = [
+  { label: "1 BHK", price: "3498" },
+  { label: "2 BHK", price: "4998" },
+  { label: "3 BHK", price: "6998" },
+  { label: "4 BHK / Villa", price: "8998" },
+];
+
+const durationRows = [
+  ["1 BHK Apartment", "4-5 hours"],
+  ["2 BHK Apartment", "5-7 hours"],
+  ["3 BHK Apartment", "7-9 hours"],
+  ["4 BHK / Villa", "9-12 hours"],
 ];
 
 const prepSteps = [
-  "Secure valuables and fragile items",
-  "Confine pets to one room",
-  "Ensure water and electricity accessibility",
-  "Clear countertops if possible (optional)",
+  { title: "Secure valuables:", body: "Jewellery, important documents, and fragile items should be put away." },
+  { title: "Keep pets in one room:", body: "Though our products are pet-safe, having pets in the room significantly slows down the cleaning process. What with their curiosity and all." },
+  { title: "Make sure water and electricity are accessible:", body: "The team would use your water and electricity, so make sure it can be accessed." },
+  { title: "Clear countertops if you can:", body: "It is not required, but removing personal items from surfaces speeds up the process, and you can take care of them well." },
 ];
 
 const guaranteedResults = [
-  "Visibly cleaner surfaces throughout",
-  "Hygienically clean kitchen and bathrooms",
-  "Dust-free fans, vents, and fixtures",
-  "Improved indoor air quality",
-  "Noticeably cleaner floors",
+  "Visibly cleaner surfaces in every room",
+  "Kitchen and bathroom are hygienically clean, not just surface-clean",
+  "Fans, vents, and light fixtures are dust-free",
+  "The air in every room is fresher",
+  "Floors under your feet feel different",
 ];
 
 const resultLimits = [
-  "Permanent surface stains may not fully disappear",
-  "Physically damaged surfaces (cracked tiles, peeling paint) are cleaned but not restored",
+  "Very old stains that have permanently changed the surface may not disappear completely. Our technician would inform you during the inspection.",
+  "Physically damaged surfaces, like cracked tiles and peeling paint, are not restored. They'd only be cleaned.",
 ];
 
 const processSteps = [
-  { title: "Booking", body: "Online, phone, or WhatsApp — confirming a slot takes under 2 minutes." },
-  { title: "Property Assessment", body: "A quick walkthrough on arrival to identify priority areas and confirm the plan." },
-  { title: "Setup", body: "Floor protection goes down and equipment gets organised before any cleaning starts." },
-  { title: "Systematic Deep Cleaning", body: "Room-by-room, ceiling-to-floor progression so nothing gets missed or re-soiled." },
-  { title: "Sanitisation", body: "Anti-microbial treatment applied to every high-touch surface in the home." },
-  { title: "Final Inspection", body: "A quality walkthrough with the team — any area is re-cleaned on the spot if it doesn't meet standard." },
+  {
+    title: "Booking",
+    body: "Call, WhatsApp, or book online by filling out the form. Tell us your home size, the date that you prefer, and any specific questions that you have. It will take less than two minutes.",
+  },
+  {
+    title: "In-person Assessment of Your Property",
+    body: "Our team will arrive and do a quick walk-through of your property before we touch anything. This helps us identify which areas need extra attention and confirms what add-on services your home might require. There will be no sudden surprises at the end of the job.",
+  },
+  {
+    title: "Setup and Preparation",
+    body: "We lay protective floor covers to avoid damage to any vulnerable floor surface; the equipment is organised, and the team briefs you on your priorities.",
+  },
+  {
+    title: "Deep Cleaning Room by Room",
+    body: "From ceiling to floor, every room is systematically covered. First, high surfaces are cleaned, then floors at the end.",
+  },
+  {
+    title: "Sanitisation",
+    body: "After physical cleaning is done, we sanitise all the high-touch points, including door handles, switchboards, faucets, and bathroom surfaces, with an anti-microbial spray.",
+  },
+  {
+    title: "Final Inspection and Handover",
+    body: "Our lead technician walks through your entire house and checks if any area is not up to standard. We re-clean any area left unsatisfactory immediately, and then we call the job complete.",
+  },
 ];
 
-const machinery = [
-  { label: "HEPA vacuum systems", body: "Capture fine dust and allergens that a standard vacuum leaves behind." },
-  { label: "Rotary floor scrubbers", body: "Professional-grade machines for a deeper floor clean than mopping alone." },
-];
-
-const materials = [
-  { label: "Microfibre & extension tools", body: "For ceilings, fans, and every hard-to-reach surface." },
-  { label: "Biodegradable degreasers", body: "Food-safe formulas for kitchen tiles, cabinets, and countertops." },
-  { label: "Hard-water descalers", body: "Purpose-built for Delhi's hard water bathroom and tap stains." },
-  { label: "Child & pet-safe products", body: "Non-toxic once dry, safe for homes with kids and pets." },
+const equipment = [
+  { title: "HEPA Vacuum Systems", body: "They capture fine dust particles that regular vacuum cleaners just push back into the air. We use these systems for all rooms, especially the bedrooms and living areas." },
+  { title: "Rotary Floor Scrubbing Machines", body: "Machine scrubbers clean tile and floor surfaces far better than manual scrubbing. They also prevent any physical damage that hard scrubbing might cause over time." },
+  { title: "Microfibre Tools and Dusters", body: "Microfibre cloths trap dust rather than moving it around. We use extension dusters that can reach ceiling fans and high surfaces and clean effectively." },
+  { title: "Eco-Friendly Degreasers", body: "We use biodegradable and food-safe degreasers that are effective on grease without leaving behind any harmful chemicals where food is prepared." },
+  { title: "Descaling Agents", body: "For hard water deposits in Delhi, our descaling agents remove calcium and mineral buildup without damaging the tiles." },
+  { title: "Child and Pet-Safe Products", body: "Once the chemicals dry out, they are non-toxic for households with pets, children, or elderly family members," },
 ];
 
 const differentiators = [
-  { title: "Verified Professionals", body: "Every technician on our team is background-checked before joining.", icon: BadgeCheck },
-  { title: "Advanced Equipment", body: "Professional-grade machinery that exceeds typical local cleaning standards.", icon: Sparkles },
-  { title: "Transparent Pricing", body: "Your cost is confirmed before we start — no surprises after the job is done.", icon: ShieldCheck },
-  { title: "Flexible Scheduling", body: "Round-the-clock availability, including weekends and same-day slots.", icon: Clock },
-  { title: "Dedicated Support", body: "A real person on phone or WhatsApp, not a generic support queue.", icon: MessageCircle },
-  { title: "Satisfaction Guarantee", body: "If any area doesn't meet our standard, we re-clean it for free.", icon: ThumbsUp },
+  { title: "Verified Professionals", body: "Every team member is background-verified before joining us. We don't send unknown people into your home.", icon: BadgeCheck },
+  { title: "Advanced Equipment", body: "We use professional-grade machines that most local services don't carry. Our results are better not only because we try harder, but also because the tools actually reach what basic equipment can't.", icon: Sparkles },
+  { title: "Transparent Pricing", body: "You get a confirmed price before the job starts. No changes during the job. No hidden charges later that you weren't told about.", icon: ShieldCheck },
+  { title: "Flexible Scheduling", body: "24-hours a day, seven days a week, including weekends. We are always available so you can schedule our services according to your comfort.", icon: Clock },
+  { title: "Dedicated Support", body: "A real person to call or WhatsApp before, during, or after the service. It's not a bot, but our service support agent solving all your queries in real-time.", icon: MessageCircle },
+  { title: "Satisfaction Guarantee", body: "If any part of the service doesn't meet what we promised, we redo it until it is up to the standard. No conditions.", icon: CheckCircle2 },
+  { title: "Delhi NCR -Specific Expertise", body: "We understand what makes Delhi NCR homes specifically harder to keep clean - hard water, construction dust, monsoon humidity, heavy outdoor pollution and our process is built around these problems to solve them effectively.", icon: MapPin },
 ];
 
-const targetSegments = [
-  { label: "Apartment dwellers", icon: Building },
-  { label: "Villa & independent house owners", icon: Home },
-  { label: "Tenants managing security deposits", icon: Package },
-  { label: "Families with young children", icon: Baby },
-  { label: "Households with pets", icon: PawPrint },
-  { label: "Senior citizen households", icon: Users },
-  { label: "Working professionals", icon: Briefcase },
+const whoBooks = [
+  { title: "Families in Apartments", body: "The majority of our bookings are in Delhi's residential areas, 2 and 3 BHK apartments. Every standard apartment layout is within our cleaning expertise.", icon: Building },
+  { title: "Villas and Independent Houses", body: "Larger houses with multiple floors, bathrooms, and bigger kitchens need our services quite often. These are handled by larger teams and the prices are quoted after a visit.", icon: Home },
+  { title: "Tenants Moving In or Moving Out", body: "Tenants moving out need to protect their security deposit, and landlords need cleaning between tenancies to maintain the property.", icon: Package },
+  { title: "Homes with Young Children", body: "Young families book more frequently, around every 2 to 3 months, because children create messes in every corner of the home and regular cleaning cannot keep up with it.", icon: Baby },
+  { title: "Senior Citizen Households", body: "Elderly residents who need a thorough clean but cannot do the heavy work themselves are our frequent customers. We take extra care with these bookings and make sure that nothing is unnecessarily disturbed.", icon: Users },
+  { title: "Working Professional Households", body: "Couples and individuals whose jobs are demanding and can manage basic maintenance but don't have the time or energy for a proper deep clean. Quarterly bookings keep their home at an optimum standard.", icon: Briefcase },
 ];
 
 const maintenanceTips = [
-  "Wipe kitchen surfaces daily after cooking",
-  "Clean AC filters every 2-3 months",
-  "Use doormats and remove shoes indoors",
-  "Consider a HEPA air purifier for allergy-sensitive members",
+  { title: "Wipe kitchen tiles and countertops after cooking every day.", body: "The deep clean removes the grease buildup, but daily wipes stop it from coming back." },
+  { title: "Get your AC filters cleaned every 2 to 3 months.", body: "A dusty AC filter undoes a lot of what a deep clean achieves for indoor air quality." },
+  { title: "Use a doormat and encourage leaving shoes at the door.", body: "A large part of indoor dust walks in from outside." },
+  { title: "For anyone with allergies, a HEPA air purifier in the bedroom can make a real difference between professional cleans.", body: "" },
 ];
 
 const coverageZones = [
@@ -399,70 +456,22 @@ const coverageZones = [
 ];
 
 const faqs = [
-  {
-    q: "How much does home deep cleaning cost in Delhi?",
-    a: "Our home deep cleaning services start at ₹3,498 for a 1 BHK apartment, ₹4,998 for a 2 BHK, ₹6,998 for a 3 BHK, and ₹8,998 for a 4 BHK or villa. Final costs are determined by home size, bathroom count, current condition, and any add-ons you select.",
-  },
-  {
-    q: "How long does a home deep cleaning take?",
-    a: "A 1 BHK typically takes 4-5 hours, a 2 BHK takes 5-7 hours, a 3 BHK takes 7-9 hours, and a 4 BHK or villa takes 9-12 hours. Actual time depends on the current condition of the home and any add-on services selected.",
-  },
-  {
-    q: "Do I need to be present during the entire cleaning?",
-    a: "Someone needs to provide house access and do a quick walkthrough with our team at the start. After that, you're free to leave and return in time for the final inspection.",
-  },
-  {
-    q: "Are your cleaning products safe for children and pets?",
-    a: "Yes, all our products are non-toxic and eco-friendly. That said, we recommend keeping children and pets away from the specific area being actively cleaned until it dries.",
-  },
-  {
-    q: "Do you offer same-day home deep cleaning in Delhi?",
-    a: "Yes, same-day service is available for most Delhi NCR locations when you book before noon.",
-  },
-  {
-    q: "Is your cleaning team background-verified?",
-    a: "Yes, every technician undergoes background verification before joining our team.",
-  },
-  {
-    q: "What payment methods do you accept?",
-    a: "We accept UPI, bank transfer, cash, and digital wallets. Payment is due after the service is completed.",
-  },
-  {
-    q: "What happens if I'm not satisfied with an area?",
-    a: "Any area that doesn't meet our cleaning standard is re-cleaned free of charge — just point it out during the final inspection.",
-  },
-  {
-    q: "Can you clean a home before we move in?",
-    a: "Yes, our move-in cleaning service is a complete top-to-bottom sanitisation, done before your furniture arrives.",
-  },
-  {
-    q: "How far in advance should I book festival cleaning?",
-    a: "Pre-Diwali slots fill up quickly, so we recommend booking at least a week in advance for festival cleaning.",
-  },
-  {
-    q: "Will the results look dramatic if this is my first deep clean?",
-    a: "Yes — first-time professional deep cleans usually produce a very visible before-and-after transformation, since dust and grime have often built up over months or years.",
-  },
-  {
-    q: "Do I need to provide any equipment or chemicals?",
-    a: "No. We bring all machinery, chemicals, and tools required. You only need to provide water and electricity access.",
-  },
-  {
-    q: "Can I ask the team to prioritise specific areas?",
-    a: "Yes, you can request specific area priorities during the initial walkthrough with our team.",
-  },
-  {
-    q: "How is villa cleaning priced differently?",
-    a: "Larger properties like villas are assessed on-site so we can quote accurately based on the team size and time required.",
-  },
-  {
-    q: "How often should I book a home deep cleaning?",
-    a: "Every 3-6 months for a typical household, and quarterly for homes with children, pets, or allergy-prone family members.",
-  },
-  {
-    q: "What's the difference between deep cleaning and regular cleaning?",
-    a: "Regular cleaning maintains a home's current condition. Deep cleaning addresses the areas and build-up that regular cleaning misses — inside cabinets, behind appliances, ceiling fans, grout, and more.",
-  },
+  { q: "How much does home deep cleaning cost in Delhi NCR?", a: "Home deep cleaning in Delhi NCR starts from 3498 for a 1 BHK house and 4998 for a 2 BHK. Final pricing would depend on your house's size, number of bathrooms, your house's condition, and any additional services. We would confirm the exact price before we start our job." },
+  { q: "How long does the cleaning take?", a: "A 1 BHK takes about 4 to 5 hours, while a 3 BHK can take up to 7 to 9 hours. Cleaning time also depends on the services you opt for." },
+  { q: "Do I need to be at home the whole time?", a: "Not necessarily. Someone just needs to walk us through the house and hand it over to us. Many customers leave after the walkthrough and return later only for inspection." },
+  { q: "Are your products safe for children and pets?", a: "Yes, completely. All our products are non-toxic and eco-friendly. We recommend keeping kids and pets away while we are cleaning. Once the surfaces are dry, everything is safe." },
+  { q: "Do you offer same-day home deep cleaning in Delhi NCR?", a: "Yes, for most Delhi NCR areas, when you book before noon, we can come on the same day and clean your house. Just WhatsApp us your location and your house size for a same-day slot confirmation." },
+  { q: "Do your team members come verified?", a: "Yes, every team member is background verified before joining. We do not send unverified people into our customers' homes. You can seek information from us on any person who comes to your house." },
+  { q: "What payment methods do you accept?", a: "UPI, bank transfer, cash, and all major digital wallets are acceptable. You only need to pay after the service is complete, not before." },
+  { q: "Is there a satisfaction guarantee?", a: "Yes. If any part of the service doesn't meet our standards, we return and re-clean that area at no extra charge." },
+  { q: "Do you do move-in cleaning for new homes?", a: "Yes, top-to-bottom sanitisation of the entire house is a part of our service before your furniture arrives. It is one of our most popular service types." },
+  { q: "Do you do festival cleaning before Diwali?", a: "Yes, festival slots, especially in the week before Diwali, book up very quickly. We recommend booking at least a week in advance to ensure you get your preferred slot." },
+  { q: "Can you clean a home that has never been professionally deep cleaned?", a: "Absolutely, and honestly, these show the most dramatic results. The before-and-after difference in a first-time deep clean is usually surprising. If you have never booked a deep clean before, now would be the best time to do that." },
+  { q: "Do you bring all your own equipment?", a: "Entirely. Machines, chemicals, cloths, mops - we bring everything ourselves. We might, however, need water and electricity from you." },
+  { q: "Can I ask for extra attention on specific areas?", a: "Yes, that is a part of our custom deep cleaning services in Delhi NCR. During the initial walkthrough, you can mention the areas that you want specific attention on. Our team would note that and ensure that these areas are given priority." },
+  { q: "Do you clean independent houses and villas?", a: "Yes. We inspect larger properties on-site and give you a price quote based on the team size needed and other factors." },
+  { q: "How often should I book a deep clean in Delhi NCR?", a: "Considering Delhi's pollution, every 3 to 6 months is optimum for most households. However, if your house has children, pets, or allergy-sensitive individuals, a three-month cycle would be the best choice for you. For working households too, quarterly booking might be the right rhythm." },
+  { q: "What is the difference between regular cleaning and deep cleaning?", a: "Regular cleaning is about the maintenance of the house; it keeps things from getting worse. Deep cleaning is restoring your house and reaching what regular cleaning has been missing. Think of this as a difference between wiping a kitchen and actually cleaning a kitchen." },
 ];
 
 /* ── Component ───────────────────────────────────────────────────────────── */
@@ -478,13 +487,15 @@ export default function HomeDeepCleaningContent() {
     types: useRef<HTMLDivElement>(null),
     gallery: useRef<HTMLDivElement>(null),
     rooms: useRef<HTMLDivElement>(null),
-    included: useRef<HTMLDivElement>(null),
+    notCovered: useRef<HTMLDivElement>(null),
     pricing: useRef<HTMLDivElement>(null),
-    prep: useRef<HTMLDivElement>(null),
+    serviceDay: useRef<HTMLDivElement>(null),
+    results: useRef<HTMLDivElement>(null),
     process: useRef<HTMLDivElement>(null),
     equipment: useRef<HTMLDivElement>(null),
     choose: useRef<HTMLDivElement>(null),
-    segments: useRef<HTMLDivElement>(null),
+    whoBooks: useRef<HTMLDivElement>(null),
+    maintenance: useRef<HTMLDivElement>(null),
     coverage: useRef<HTMLDivElement>(null),
     faq: useRef<HTMLDivElement>(null),
     cta: useRef<HTMLDivElement>(null),
@@ -495,13 +506,15 @@ export default function HomeDeepCleaningContent() {
     types: useInView(refs.types, { once: true, margin: "-60px" }),
     gallery: useInView(refs.gallery, { once: true, margin: "-60px" }),
     rooms: useInView(refs.rooms, { once: true, margin: "-60px" }),
-    included: useInView(refs.included, { once: true, margin: "-60px" }),
+    notCovered: useInView(refs.notCovered, { once: true, margin: "-60px" }),
     pricing: useInView(refs.pricing, { once: true, margin: "-60px" }),
-    prep: useInView(refs.prep, { once: true, margin: "-60px" }),
+    serviceDay: useInView(refs.serviceDay, { once: true, margin: "-60px" }),
+    results: useInView(refs.results, { once: true, margin: "-60px" }),
     process: useInView(refs.process, { once: true, margin: "-60px" }),
     equipment: useInView(refs.equipment, { once: true, margin: "-60px" }),
     choose: useInView(refs.choose, { once: true, margin: "-60px" }),
-    segments: useInView(refs.segments, { once: true, margin: "-60px" }),
+    whoBooks: useInView(refs.whoBooks, { once: true, margin: "-60px" }),
+    maintenance: useInView(refs.maintenance, { once: true, margin: "-60px" }),
     coverage: useInView(refs.coverage, { once: true, margin: "-60px" }),
     faq: useInView(refs.faq, { once: true, margin: "-60px" }),
     cta: useInView(refs.cta, { once: true, margin: "-60px" }),
@@ -509,13 +522,14 @@ export default function HomeDeepCleaningContent() {
 
   return (
     <main className="font-sans">
-      {/* ── HERO — full-bleed cinematic image, centered copy ───────────────── */}
+      {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/img/home_deep_cleaning/real_home_deep.webp"
             alt="DryClean Masters technicians performing a home deep cleaning in a Delhi NCR apartment"
             fill
+            sizes="100vw"
             className="object-cover"
             priority
           />
@@ -529,29 +543,36 @@ export default function HomeDeepCleaningContent() {
             <span className="text-teal-light">Home Deep Cleaning</span>
           </nav>
 
-          <Tag light>Home Deep Cleaning Services</Tag>
-
           <h1 className="text-ivory text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight mb-6">
-            The Deep Clean Your Home
-            <span className="block text-teal-light">Has Been Waiting For</span>
+            Professional Home Deep Cleaning
+            <span className="block text-teal-light">Services in Delhi NCR</span>
           </h1>
 
-          <p className="text-stone-teal/75 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10">
-            Verified professionals, eco-friendly products, and fixed pricing — for apartments,
-            villas, and independent houses across Delhi NCR.
-            <span className="block mt-2 text-teal-light font-semibold text-lg">
-              Starting ₹3,498
-            </span>
+          <p className="text-stone-teal/75 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+            Give your home a fresh start with professional deep cleaning designed to remove
+            built-up dust, grease, stains, and allergens from every room. Whether you live in an
+            apartment, villa, or independent house, our trained team delivers a thorough,
+            room-by-room clean using professional equipment and safe cleaning solutions across
+            Delhi NCR.
           </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+            {heroBadges.map((b) => (
+              <span
+                key={b}
+                className="inline-flex items-center gap-1.5 bg-teal/12 border border-teal/25 rounded-full px-3.5 py-1.5 text-xs font-semibold text-teal-light"
+              >
+                <CheckCircle2 size={13} /> {b}
+              </span>
+            ))}
+          </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
             <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 btn-copper text-sm px-6 py-3.5"
+              href={PHONE}
+              className="inline-flex items-center gap-2 text-sm px-6 py-3.5 border border-teal/40 text-teal-light rounded-lg hover:bg-teal/10 transition-colors"
             >
-              <Sparkles size={16} /> Get Instant Quote
+              <Phone size={15} /> Call Now
             </a>
             <a
               href={WA_LINK}
@@ -561,87 +582,80 @@ export default function HomeDeepCleaningContent() {
             >
               <MessageCircle size={16} /> WhatsApp Us
             </a>
-            <a
-              href={PHONE}
-              className="inline-flex items-center gap-2 text-sm px-6 py-3.5 border border-teal/40 text-teal-light rounded-lg hover:bg-teal/10 transition-colors"
-            >
-              <Phone size={15} /> {PHONE_DISPLAY}
-            </a>
           </div>
+
+          <p className="text-stone-teal/60 text-sm mt-6">
+            <Clock size={14} className="inline-block mr-1.5 -mt-0.5 text-teal-light" />
+            Timings: 24-hour service, 7-days a week
+          </p>
         </div>
 
         {/* Floating stat card, overlapping into next section */}
-        <div className="relative max-w-3xl mx-auto px-4">
-          <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-full grid grid-cols-3 gap-2 md:gap-4 bg-ivory rounded-2xl p-5 md:p-7 shadow-2xl shadow-black/20 border border-mist">
-            {heroStats.map((s) => (
-              <div key={s.label} className="text-center">
-                <p className="text-teal-deep text-xl md:text-3xl font-extrabold">{s.val}</p>
-                <p className="text-muted-teal text-[0.65rem] md:text-xs uppercase tracking-wide mt-1">
-                  {s.label}
-                </p>
-              </div>
-            ))}
+        <div className="relative max-w-2xl mx-auto px-4">
+          <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-full grid grid-cols-2 gap-2 md:gap-4 bg-ivory rounded-2xl p-5 md:p-7 shadow-2xl shadow-black/20 border border-mist">
+            <div className="text-center">
+              <p className="text-teal-deep text-xl md:text-3xl font-extrabold">4.9/5</p>
+              <p className="text-muted-teal text-[0.65rem] md:text-xs uppercase tracking-wide mt-1">
+                Google Rating
+              </p>
+            </div>
+            <div className="text-center">
+              <p className="text-teal-deep text-xl md:text-3xl font-extrabold">15,000+</p>
+              <p className="text-muted-teal text-[0.65rem] md:text-xs uppercase tracking-wide mt-1">
+                Homes Cleaned Across Delhi NCR
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── SIGNS — asymmetric intro + numbered checklist ──────────────────── */}
+      {/* ── IS YOUR HOME ASKING FOR A PROFESSIONAL DEEP CLEAN? ─────────────── */}
       <section ref={refs.signs} className="bg-ivory pt-24 md:pt-28 pb-20 md:pb-28">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 grid lg:grid-cols-[0.85fr_1.15fr] gap-14 items-start">
           <motion.div {...fade(inView.signs)}>
             <Tag>Warning Signs</Tag>
             <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-5">
-              Is It Time for a Professional Deep Clean?
+              Is Your Home Asking For a Professional Deep Clean?
             </h2>
-            <p className="text-slate-teal/75 text-base leading-relaxed mb-6">
-              DryClean Masters provides thorough home cleaning designed to eliminate accumulated
-              dust, grease, and allergens — for apartments, villas, and independent houses across
-              Delhi NCR. If any of these sound familiar, your home is overdue.
+            <p className="text-slate-teal/75 text-base leading-relaxed">
+              Most homes do not look clearly dirty; they just stop feeling fresh. If you walk into
+              your house and cannot feel the freshness anymore, your house might be asking for a
+              deep clean. Here are the signs to catch on:
             </p>
-            <div className="bg-ivory-teal border border-mist rounded-2xl p-6">
-              <p className="text-teal-deep font-semibold text-sm mb-3">
-                Recognise two or more signs?
-              </p>
-              <a
-                href={WA_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 btn-primary text-sm px-5 py-2.5"
-              >
-                Book a deep clean <ArrowRight size={14} />
-              </a>
-            </div>
           </motion.div>
 
           <div className="space-y-3">
             {signs.map((s, i) => (
               <motion.div
-                key={s}
+                key={s.title}
                 {...fade(inView.signs, 0.05 * i)}
-                className="flex items-center gap-4 bg-ivory-teal rounded-2xl px-6 py-4 hover:bg-mist/60 transition-colors"
+                className="flex gap-4 bg-ivory-teal rounded-2xl px-6 py-5 hover:bg-mist/60 transition-colors"
               >
                 <span className="shrink-0 w-9 h-9 rounded-full bg-teal-deep text-ivory flex items-center justify-center text-sm font-bold">
                   {i + 1}
                 </span>
-                <p className="text-slate-teal/85 text-sm md:text-base leading-snug">{s}</p>
+                <div>
+                  <p className="text-teal-deep font-bold text-sm md:text-base mb-1.5">{s.title}</p>
+                  <p className="text-slate-teal/75 text-sm leading-relaxed">{s.body}</p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
+
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+          <ButtonRow labels={["Book a Home Cleaning", "Contact us for queries"]} />
+        </div>
       </section>
 
-      {/* ── SERVICE TYPES — interactive tabs ───────────────────────────────── */}
+      {/* ── WHICH CLEANING SERVICE DO YOU ACTUALLY NEED? ───────────────────── */}
       <section ref={refs.types} className="bg-teal-deep teal-texture py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           <motion.div {...fade(inView.types)} className="text-center max-w-2xl mx-auto mb-14">
             <Tag light>Choose Your Service</Tag>
-            <h2 className="text-ivory text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-4">
-              Five Ways We Deep Clean Delhi NCR Homes
+            <h2 className="text-ivory text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
+              Which Cleaning Service Do You Actually Need?
             </h2>
-            <p className="text-stone-teal/70 text-base leading-relaxed">
-              Every home reaches out to us for a different reason. Pick the one that matches
-              yours.
-            </p>
           </motion.div>
 
           <motion.div {...fade(inView.types, 0.05)} className="flex flex-wrap justify-center gap-2 mb-10">
@@ -670,7 +684,7 @@ export default function HomeDeepCleaningContent() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.3 }}
-              className="grid md:grid-cols-[auto_1fr] gap-8 items-center bg-teal-dark/60 border border-teal/15 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto"
+              className="grid md:grid-cols-[auto_1fr] gap-8 items-start bg-teal-dark/60 border border-teal/15 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto"
             >
               <div className="w-16 h-16 rounded-2xl bg-teal/15 flex items-center justify-center shrink-0 mx-auto md:mx-0">
                 {(() => {
@@ -678,23 +692,29 @@ export default function HomeDeepCleaningContent() {
                   return <Icon size={28} className="text-teal-light" />;
                 })()}
               </div>
-              <div>
-                <h3 className="text-ivory text-2xl font-bold mb-2">{serviceTypes[activeType].label}</h3>
-                <span className="inline-block text-teal-light text-xs font-bold uppercase tracking-wider mb-4">
+              <div className="space-y-4">
+                <h3 className="text-ivory text-2xl font-bold">{serviceTypes[activeType].label}</h3>
+                <p className="text-stone-teal/75 text-sm leading-relaxed">
+                  <span className="text-teal-light font-bold">Best for: </span>
+                  {serviceTypes[activeType].bestFor}
+                </p>
+                <p className="text-stone-teal/75 text-sm leading-relaxed">
+                  <span className="text-teal-light font-bold">What&apos;s included: </span>
+                  {serviceTypes[activeType].included}
+                </p>
+                <p className="text-stone-teal/75 text-sm leading-relaxed">
+                  <span className="text-teal-light font-bold">Ideal frequency: </span>
                   {serviceTypes[activeType].frequency}
-                </span>
-                <p className="text-stone-teal/70 text-base leading-relaxed">
-                  {serviceTypes[activeType].body}
                 </p>
               </div>
             </motion.div>
           </AnimatePresence>
 
-          <CtaRow center primary="Ask which service fits your home" secondary="Speak to our team" secondaryHref={PHONE} />
+          <ButtonRow center labels={["Same-day slots available", "Secure your preferred slot now"]} />
         </div>
       </section>
 
-      {/* ── REAL PHOTOS GALLERY — bento grid ───────────────────────────────── */}
+      {/* ── REAL PHOTOS GALLERY (bonus — actual job photos) ─────────────────── */}
       <section ref={refs.gallery} className="bg-ivory py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           <motion.div {...fade(inView.gallery)} className="text-center max-w-2xl mx-auto mb-14">
@@ -703,8 +723,7 @@ export default function HomeDeepCleaningContent() {
               A Deep Clean, Documented On-Site
             </h2>
             <p className="text-slate-teal/75 text-base leading-relaxed">
-              No stock photography — these are candid shots from an actual DryClean Masters home
-              deep cleaning job in Delhi NCR.
+              Candid shots from an actual DryClean Masters home deep cleaning job in Delhi NCR.
             </p>
           </motion.div>
 
@@ -719,6 +738,7 @@ export default function HomeDeepCleaningContent() {
                   src={p.src}
                   alt={p.alt}
                   fill
+                  sizes={p.span ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-teal-deep/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -728,23 +748,17 @@ export default function HomeDeepCleaningContent() {
               </motion.div>
             ))}
           </div>
-
-          <CtaRow center primary="See the results in your own home" secondary="Book an inspection" secondaryHref={WA_LINK} />
         </div>
       </section>
 
-      {/* ── ROOM-BY-ROOM — accordion ───────────────────────────────────────── */}
+      {/* ── WHAT'S INCLUDED — room-by-room accordion ───────────────────────── */}
       <section ref={refs.rooms} className="bg-ivory-teal py-20 md:py-28">
         <div className="max-w-4xl mx-auto px-4 md:px-8">
           <motion.div {...fade(inView.rooms)} className="text-center mb-12">
             <Tag>Full Scope</Tag>
-            <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-4">
-              What We Clean, Room by Room
+            <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
+              What&apos;s Included in Our Home Deep Cleaning Service?
             </h2>
-            <p className="text-slate-teal/75 text-base leading-relaxed">
-              Tap a room to see exactly what's covered, the equipment we use, and roughly how
-              long it takes.
-            </p>
           </motion.div>
 
           <div className="space-y-3">
@@ -786,7 +800,7 @@ export default function HomeDeepCleaningContent() {
                         <div className="px-5 md:px-6 pb-5 pl-[4.25rem] space-y-2">
                           <p className="text-slate-teal/80 text-sm leading-relaxed">{r.tasks}</p>
                           <p className="text-muted-teal text-xs">
-                            <span className="font-semibold">Equipment:</span> {r.equipment}
+                            <span className="font-semibold">Tools Used:</span> {r.equipment}
                           </p>
                           <p className="sm:hidden text-muted-teal text-xs inline-flex items-center gap-1.5">
                             <Timer size={12} /> {r.duration}
@@ -802,175 +816,234 @@ export default function HomeDeepCleaningContent() {
         </div>
       </section>
 
-      {/* ── INCLUDED / NOT INCLUDED — split panel ──────────────────────────── */}
-      <section ref={refs.included} className="bg-ivory py-20 md:py-28">
+      {/* ── WHAT WE DON'T COVER ─────────────────────────────────────────────── */}
+      <section ref={refs.notCovered} className="bg-ivory py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
-          <motion.div {...fade(inView.included)} className="text-center max-w-2xl mx-auto mb-14">
+          <motion.div {...fade(inView.notCovered)} className="text-center max-w-2xl mx-auto mb-14">
             <Tag>Scope, Clearly Defined</Tag>
             <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
-              What's In the Service — and What Isn't
+              What We Don&apos;t Cover: Honest and Upfront
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <motion.div {...fade(inView.included, 0.05)} className="bg-teal-deep teal-texture rounded-3xl p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <CheckCircle2 size={22} className="text-teal-light" />
-                <h3 className="text-ivory font-bold text-lg">Covered as Standard</h3>
-              </div>
-              <p className="text-stone-teal/70 text-sm leading-relaxed mb-5">
-                Every room in the room-by-room breakdown above, plus these add-ons available on
-                request:
-              </p>
-              <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5">
-                {addOns.map((a) => (
-                  <li key={a} className="flex items-start gap-2 text-stone-teal/85 text-sm">
-                    <CheckCircle2 size={15} className="text-teal-light shrink-0 mt-0.5" /> {a}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            <motion.div {...fade(inView.included, 0.1)} className="bg-ivory-teal border border-mist rounded-3xl p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <XCircle size={22} className="text-muted-teal" />
-                <h3 className="text-teal-deep font-bold text-lg">Not Part of This Service</h3>
-              </div>
-              <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5">
-                {notIncluded.map((n) => (
-                  <li key={n} className="flex items-start gap-2 text-slate-teal/70 text-sm">
-                    <XCircle size={15} className="text-muted-teal/60 shrink-0 mt-0.5" /> {n}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── PRICING — cards ─────────────────────────────────────────────────── */}
-      <section ref={refs.pricing} className="bg-ivory-teal py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
-          <motion.div {...fade(inView.pricing)} className="text-center max-w-2xl mx-auto mb-14">
-            <Tag>Transparent Pricing</Tag>
-            <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-4">
-              Fixed Pricing, By Home Size
-            </h2>
-            <p className="text-slate-teal/75 text-base leading-relaxed">
-              Final quotes are confirmed after a quick property assessment — the price we quote
-              is the price you pay, with no hidden charges.
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
-            {pricingTiers.map((t, i) => (
+          <div className="grid sm:grid-cols-2 gap-4 mb-12">
+            {notCovered.map((n, i) => (
               <motion.div
-                key={t.label}
-                {...fade(inView.pricing, 0.05 * i)}
-                className={`relative rounded-3xl p-7 flex flex-col ${
-                  t.popular
-                    ? "bg-teal-deep teal-texture text-ivory shadow-xl shadow-teal/20 lg:-translate-y-3"
-                    : "bg-ivory border border-mist"
-                }`}
+                key={n.title}
+                {...fade(inView.notCovered, 0.03 * i)}
+                className="flex gap-3 bg-ivory-teal border border-mist rounded-2xl p-5"
               >
-                {t.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-copper-light text-teal-deep text-[0.65rem] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-                    Most Booked
-                  </span>
-                )}
-                <h3 className={`font-bold text-base mb-3 ${t.popular ? "text-teal-light" : "text-teal-deep"}`}>
-                  {t.label}
-                </h3>
-                <p className={`text-3xl font-extrabold mb-1 ${t.popular ? "text-ivory" : "text-teal-deep"}`}>
-                  ₹{t.price}
-                </p>
-                <p className={`text-xs uppercase tracking-wide mb-6 ${t.popular ? "text-stone-teal/60" : "text-muted-teal"}`}>
-                  starting price
-                </p>
-                <p className={`flex items-center gap-1.5 text-sm mb-6 ${t.popular ? "text-stone-teal/80" : "text-slate-teal/75"}`}>
-                  <Timer size={14} /> {t.duration}
-                </p>
-                <a
-                  href={WA_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`mt-auto inline-flex items-center justify-center gap-2 text-sm font-semibold px-5 py-3 rounded-lg transition-colors ${
-                    t.popular
-                      ? "bg-copper-light text-teal-deep hover:bg-teal-light"
-                      : "bg-teal/10 text-teal-deep hover:bg-teal/20"
-                  }`}
-                >
-                  Get This Quote <ArrowUpRight size={14} />
-                </a>
+                <XCircle size={18} className="text-muted-teal shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-teal-deep font-semibold text-sm mb-1">{n.title}</p>
+                  <p className="text-slate-teal/70 text-sm leading-relaxed">{n.body}</p>
+                </div>
               </motion.div>
             ))}
           </div>
 
-          <motion.div {...fade(inView.pricing, 0.15)} className="grid md:grid-cols-[1fr_auto] gap-6 items-center bg-ivory border border-mist rounded-2xl p-6 md:p-7">
-            <div>
-              <p className="text-teal-deep font-semibold text-sm mb-2">Final pricing depends on:</p>
-              <div className="flex flex-wrap gap-2">
-                {pricingFactors.map((f) => (
-                  <span key={f} className="text-xs bg-mist/60 text-slate-teal/80 rounded-full px-3 py-1.5">
-                    {f}
-                  </span>
-                ))}
-              </div>
+          <motion.div {...fade(inView.notCovered, 0.1)} className="bg-teal-deep teal-texture rounded-3xl p-8">
+            <h3 className="text-ivory font-bold text-lg mb-5">Want to add these on?</h3>
+            <div className="flex flex-wrap gap-x-8 gap-y-3 mb-5">
+              <span className="inline-flex items-center gap-2 text-stone-teal/85 text-sm">
+                <CheckCircle2 size={15} className="text-teal-light" /> Sofa Deep Cleaning
+              </span>
+              <span className="inline-flex items-center gap-2 text-stone-teal/85 text-sm">
+                <CheckCircle2 size={15} className="text-teal-light" />
+                <Link
+                  href="/mattress-cleaning-services-delhi"
+                  className="underline underline-offset-2 decoration-teal-light/40 hover:text-teal-light"
+                >
+                  Mattress Sanitisation
+                </Link>
+              </span>
+              <span className="inline-flex items-center gap-2 text-stone-teal/85 text-sm">
+                <CheckCircle2 size={15} className="text-teal-light" /> Curtain Cleaning
+              </span>
+              <span className="inline-flex items-center gap-2 text-stone-teal/85 text-sm">
+                <CheckCircle2 size={15} className="text-teal-light" /> Appliance Interior Cleaning
+              </span>
             </div>
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 btn-primary text-sm px-6 py-3 shrink-0"
-            >
-              Request a custom quote <ArrowRight size={14} />
-            </a>
+            <p className="text-stone-teal/70 text-sm">
+              All these are available as add-ons to any home deep cleaning booking.
+            </p>
           </motion.div>
+
+          <ButtonRow
+            labels={["Add Services to your Booking", "Get Instant Comprehensive Price Quote", "Talk to Our Customer Support"]}
+          />
         </div>
       </section>
 
-      {/* ── PREP + RESULTS ──────────────────────────────────────────────────── */}
-      <section ref={refs.prep} className="bg-ivory py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12 grid md:grid-cols-2 gap-6">
-          <motion.div {...fade(inView.prep)} className="bg-ivory-teal border border-mist rounded-3xl p-8">
+      {/* ── HOW MUCH DOES HOME DEEP CLEANING COST IN DELHI NCR? ─────────────── */}
+      <section ref={refs.pricing} className="bg-ivory-teal py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+          <motion.div {...fade(inView.pricing)} className="max-w-3xl mb-14">
+            <Tag>Transparent Pricing</Tag>
+            <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-4">
+              How Much Does Home Deep Cleaning Cost in Delhi NCR?
+            </h2>
+            <p className="text-slate-teal/75 text-base leading-relaxed">
+              There are some factors that drive home deep cleaning cost in Delhi NCR:
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-6 mb-6">
+            {pricingFactors.map((f, i) => (
+              <motion.div
+                key={f.title}
+                {...fade(inView.pricing, 0.05 * i)}
+                className="flex gap-4 bg-ivory rounded-2xl p-6 border border-mist"
+              >
+                <span className="mt-0.5 shrink-0 w-7 h-7 rounded-lg bg-teal/10 text-teal flex items-center justify-center text-sm font-bold">
+                  {i + 1}
+                </span>
+                <div>
+                  <h4 className="text-teal-deep font-bold text-base mb-1">{f.title}</h4>
+                  <p className="text-slate-teal/70 text-sm leading-relaxed">{f.body}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.h3 {...fade(inView.pricing, 0.1)} className="text-teal-deep text-lg font-bold mb-6">
+            Pricing Table
+          </motion.h3>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+            {pricingTiers.map((t, i) => (
+              <motion.div
+                key={t.label}
+                {...fade(inView.pricing, 0.05 * i)}
+                className={`rounded-3xl p-7 ${
+                  i === 1
+                    ? "bg-teal-deep teal-texture text-ivory shadow-xl shadow-teal/20 lg:-translate-y-3"
+                    : "bg-ivory border border-mist"
+                }`}
+              >
+                <h3 className={`font-bold text-base mb-3 ${i === 1 ? "text-teal-light" : "text-teal-deep"}`}>
+                  {t.label}
+                </h3>
+                <p className={`text-3xl font-extrabold mb-1 ${i === 1 ? "text-ivory" : "text-teal-deep"}`}>
+                  ₹{t.price}
+                </p>
+                <p className={`text-xs uppercase tracking-wide ${i === 1 ? "text-stone-teal/60" : "text-muted-teal"}`}>
+                  Starting Price
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.p {...fade(inView.pricing, 0.15)} className="text-slate-teal/75 text-base leading-relaxed">
+            Prices are confirmed after the initial assessment. What we will quote then is what you
+            will be paying.
+          </motion.p>
+
+          <ButtonRow labels={["Get a Free Custom Quote", "Call or WhatsApp with your house size and preferred slot"]} />
+        </div>
+      </section>
+
+      {/* ── WHAT TO EXPECT ON SERVICE DAY ────────────────────────────────────── */}
+      <section ref={refs.serviceDay} className="bg-ivory py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
+          <motion.div {...fade(inView.serviceDay)} className="text-center max-w-2xl mx-auto mb-14">
             <Tag>Before We Arrive</Tag>
-            <h3 className="text-teal-deep text-xl font-bold mb-5">A Quick Prep Checklist</h3>
-            <ul className="space-y-3">
-              {prepSteps.map((p) => (
-                <li key={p} className="flex items-start gap-2.5 text-slate-teal/80 text-sm">
-                  <CheckCircle2 size={17} className="text-teal shrink-0 mt-0.5" /> {p}
-                </li>
-              ))}
-            </ul>
+            <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
+              What to Expect on Service Day
+            </h2>
           </motion.div>
 
-          <motion.div {...fade(inView.prep, 0.08)} className="bg-ivory-teal border border-mist rounded-3xl p-8">
-            <Tag>What to Expect</Tag>
-            <h3 className="text-teal-deep text-xl font-bold mb-5">Guaranteed Results</h3>
-            <ul className="space-y-2.5 mb-6">
-              {guaranteedResults.map((g) => (
-                <li key={g} className="flex items-start gap-2.5 text-slate-teal/80 text-sm">
-                  <CheckCircle2 size={17} className="text-teal shrink-0 mt-0.5" /> {g}
-                </li>
-              ))}
-            </ul>
-            <div className="border-t border-mist pt-5 space-y-2">
-              <p className="text-muted-teal text-xs font-bold uppercase tracking-wider">Honest limitations</p>
-              {resultLimits.map((r) => (
-                <p key={r} className="text-slate-teal/60 text-sm leading-relaxed">{r}</p>
-              ))}
-            </div>
+          <motion.h3 {...fade(inView.serviceDay, 0.05)} className="text-teal-deep text-lg font-bold mb-5">
+            How long will the clean take?
+          </motion.h3>
+          <motion.div {...fade(inView.serviceDay, 0.08)} className="rounded-2xl overflow-hidden border border-mist shadow-sm bg-ivory mb-4">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="bg-teal-deep text-ivory">
+                  <th className="px-5 py-3.5 font-semibold">Property</th>
+                  <th className="px-5 py-3.5 font-semibold">Estimated Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {durationRows.map((row, i) => (
+                  <tr key={row[0]} className={i % 2 ? "bg-ivory-teal" : "bg-ivory"}>
+                    <td className="px-5 py-3.5 font-semibold text-teal-deep">{row[0]}</td>
+                    <td className="px-5 py-3.5 text-slate-teal/75">{row[1]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </motion.div>
+          <motion.p {...fade(inView.serviceDay, 0.1)} className="text-slate-teal/70 text-sm mb-14">
+            Time spent depends on the current home condition and any add-ons booked.
+          </motion.p>
+
+          <motion.h3 {...fade(inView.serviceDay, 0.12)} className="text-teal-deep text-lg font-bold mb-2">
+            How to Prepare?
+          </motion.h3>
+          <motion.p {...fade(inView.serviceDay, 0.14)} className="text-slate-teal/75 text-base leading-relaxed mb-6">
+            We keep it simple; you do not need to do much. Just do these few things to help the
+            team get started fast:
+          </motion.p>
+
+          <div className="grid sm:grid-cols-2 gap-5">
+            {prepSteps.map((p, i) => (
+              <motion.div key={p.title} {...fade(inView.serviceDay, 0.05 * i)} className="flex gap-3 bg-ivory-teal border border-mist rounded-2xl p-5">
+                <CheckCircle2 size={18} className="text-teal shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-teal-deep font-semibold text-sm mb-1">{p.title}</p>
+                  <p className="text-slate-teal/70 text-sm leading-relaxed">{p.body}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <ButtonRow labels={["Request a Callback", "Book Your Home Cleaning Service in Minutes"]} />
         </div>
       </section>
 
-      {/* ── PROCESS — vertical timeline ─────────────────────────────────────── */}
+      {/* ── WHAT RESULTS CAN YOU EXPECT ──────────────────────────────────────── */}
+      <section ref={refs.results} className="bg-ivory-teal py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
+          <motion.div {...fade(inView.results)} className="text-center max-w-2xl mx-auto mb-14">
+            <Tag>What to Expect</Tag>
+            <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
+              What Results Can You Expect After a Professional Home Deep Cleaning?
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <motion.div {...fade(inView.results, 0.05)} className="bg-ivory rounded-3xl p-8 border border-mist">
+              <ul className="space-y-3">
+                {guaranteedResults.map((g) => (
+                  <li key={g} className="flex items-start gap-2.5 text-slate-teal/80 text-sm">
+                    <CheckCircle2 size={17} className="text-teal shrink-0 mt-0.5" /> {g}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+            <motion.div {...fade(inView.results, 0.1)} className="bg-ivory rounded-3xl p-8 border border-mist">
+              <ul className="space-y-3">
+                {resultLimits.map((r) => (
+                  <li key={r} className="flex items-start gap-2.5 text-slate-teal/70 text-sm">
+                    <XCircle size={17} className="text-muted-teal shrink-0 mt-0.5" /> {r}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+
+          <ButtonRow labels={["Bring back the shine to your home - Book now", "24-hour slots available"]} />
+        </div>
+      </section>
+
+      {/* ── HOW DOES OUR PROCESS WORK ────────────────────────────────────────── */}
       <section ref={refs.process} className="bg-teal-deep teal-texture py-20 md:py-28">
         <div className="max-w-4xl mx-auto px-4 md:px-8">
           <motion.div {...fade(inView.process)} className="text-center mb-16">
             <Tag light>Step by Step</Tag>
             <h2 className="text-ivory text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
-              Our Six-Step Deep Cleaning Process
+              How Does Our Home Deep Cleaning Process Work?
             </h2>
           </motion.div>
 
@@ -997,71 +1070,48 @@ export default function HomeDeepCleaningContent() {
             </div>
           </div>
 
-          <CtaRow center primary="Book your six-step deep clean" secondary="Talk to us first" secondaryHref={PHONE} />
+          <ButtonRow center labels={["Call for a Home Deep Cleaning", "Limited time cleaning offers"]} />
         </div>
       </section>
 
-      {/* ── EQUIPMENT & PRODUCTS ────────────────────────────────────────────── */}
+      {/* ── EQUIPMENT AND PRODUCTS ───────────────────────────────────────────── */}
       <section ref={refs.equipment} className="bg-ivory py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
           <motion.div {...fade(inView.equipment)} className="text-center max-w-2xl mx-auto mb-14">
             <Tag>Behind the Clean</Tag>
             <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
-              The Equipment and Products We Use
+              What Are the Equipment and Products We Use?
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-10">
-            <motion.div {...fade(inView.equipment, 0.05)}>
-              <h3 className="text-teal-deep font-bold text-sm uppercase tracking-wider mb-5 flex items-center gap-2">
-                <Wind size={16} className="text-teal" /> Machinery
-              </h3>
-              <div className="space-y-4">
-                {machinery.map((m) => (
-                  <div key={m.label} className="flex gap-4 bg-ivory-teal rounded-2xl p-5">
-                    <Sparkles size={18} className="text-teal shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-teal-deep font-semibold text-sm mb-1">{m.label}</p>
-                      <p className="text-slate-teal/70 text-sm leading-relaxed">{m.body}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div {...fade(inView.equipment, 0.1)}>
-              <h3 className="text-teal-deep font-bold text-sm uppercase tracking-wider mb-5 flex items-center gap-2">
-                <Droplets size={16} className="text-teal" /> Cleaning Materials
-              </h3>
-              <div className="space-y-4">
-                {materials.map((m) => (
-                  <div key={m.label} className="flex gap-4 bg-ivory-teal rounded-2xl p-5">
-                    <Leaf size={18} className="text-teal shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-teal-deep font-semibold text-sm mb-1">{m.label}</p>
-                      <p className="text-slate-teal/70 text-sm leading-relaxed">{m.body}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {equipment.map((e, i) => (
+              <motion.div
+                key={e.title}
+                {...fade(inView.equipment, 0.05 * i)}
+                className="bg-ivory-teal rounded-2xl p-6 border border-mist"
+              >
+                <div className="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center mb-4">
+                  <Droplets size={18} className="text-teal" />
+                </div>
+                <h3 className="text-teal-deep font-bold text-base mb-2">{e.title}</h3>
+                <p className="text-slate-teal/70 text-sm leading-relaxed">{e.body}</p>
+              </motion.div>
+            ))}
           </div>
+
+          <ButtonRow labels={["A cleaner home starts here", "Get a complete home refresh today"]} />
         </div>
       </section>
 
-      {/* ── WHY DRYCLEAN MASTERS — icon-top cards ──────────────────────────── */}
+      {/* ── WHY DELHI NCR FAMILIES CHOOSE US ─────────────────────────────────── */}
       <section ref={refs.choose} className="bg-ivory-teal py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           <motion.div {...fade(inView.choose)} className="text-center max-w-2xl mx-auto mb-14">
             <Tag>Our Promise</Tag>
-            <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-4">
-              Why Delhi NCR Homes Choose DryClean Masters
+            <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
+              Why Do Delhi NCR Families Choose DryClean Masters for Home Deep Cleaning?
             </h2>
-            <p className="text-slate-teal/75 text-base leading-relaxed">
-              Delhi NCR expertise means solutions built for hard water, construction dust,
-              monsoon humidity, and pollution — problems generic cleaning crews aren't set up
-              for.
-            </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -1083,71 +1133,91 @@ export default function HomeDeepCleaningContent() {
             })}
           </div>
 
-          <CtaRow center primary="Book with a team you can trust" secondary="Chat with us first" />
+          <ButtonRow labels={["Book trusted home deep cleaning experts in Delhi NCR", "Get an instant cleaning estimate"]} />
         </div>
       </section>
 
-      {/* ── WHO WE SERVE — chip cloud ──────────────────────────────────────── */}
-      <section ref={refs.segments} className="bg-ivory py-20 md:py-28">
-        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-          <motion.div {...fade(inView.segments)} className="mb-10">
+      {/* ── WHO BOOKS OUR SERVICES ───────────────────────────────────────────── */}
+      <section ref={refs.whoBooks} className="bg-ivory py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+          <motion.div {...fade(inView.whoBooks)} className="text-center max-w-2xl mx-auto mb-14">
             <Tag>Who We Serve</Tag>
             <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
-              Built for Every Kind of Delhi NCR Household
+              Who Books Our Home Deep Cleaning Services?
             </h2>
           </motion.div>
 
-          <motion.div {...fade(inView.segments, 0.06)} className="flex flex-wrap justify-center gap-3 mb-14">
-            {targetSegments.map((s) => {
-              const Icon = s.icon;
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {whoBooks.map((w, i) => {
+              const Icon = w.icon;
               return (
-                <span
-                  key={s.label}
-                  className="inline-flex items-center gap-2 bg-ivory-teal border border-mist rounded-full px-5 py-2.5 text-sm text-slate-teal/85 font-medium"
+                <motion.div
+                  key={w.title}
+                  {...fade(inView.whoBooks, 0.05 * i)}
+                  className="bg-ivory-teal rounded-2xl p-6 border border-mist"
                 >
-                  <Icon size={15} className="text-teal" /> {s.label}
-                </span>
+                  <div className="flex items-center gap-3 mb-3">
+                    <Icon size={18} className="text-teal shrink-0" />
+                    <h3 className="text-teal-deep font-bold text-base">{w.title}</h3>
+                  </div>
+                  <p className="text-slate-teal/70 text-sm leading-relaxed">{w.body}</p>
+                </motion.div>
               );
             })}
-          </motion.div>
+          </div>
 
-          <motion.div {...fade(inView.segments, 0.1)} className="bg-teal-deep teal-texture rounded-3xl p-8 md:p-10 text-left grid md:grid-cols-[1fr_auto] gap-6 items-center">
-            <div>
-              <p className="text-teal-light text-xs font-bold uppercase tracking-wider mb-2">
-                Maintenance Tips
-              </p>
-              <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-2">
-                {maintenanceTips.map((m) => (
-                  <li key={m} className="flex items-start gap-2 text-stone-teal/80 text-sm">
-                    <Recycle size={14} className="text-teal-light shrink-0 mt-0.5" /> {m}
-                  </li>
-                ))}
-              </ul>
-              <p className="text-stone-teal/60 text-xs mt-4">
-                Recommended frequency: every 3-6 months, quarterly for households with children,
-                pets, or allergy-prone members.
-              </p>
-            </div>
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 btn-copper text-sm px-6 py-3 shrink-0"
-            >
-              Set a cleaning schedule <ArrowRight size={14} />
-            </a>
-          </motion.div>
+          <ButtonRow labels={["Festival Slots Early Booking Available", "Custom Cleaning Services - Book Today"]} />
         </div>
       </section>
 
-      {/* ── COVERAGE AREAS — chip grid by zone ─────────────────────────────── */}
-      <section ref={refs.coverage} className="bg-ivory-teal py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
-          <motion.div {...fade(inView.coverage)} className="text-center max-w-2xl mx-auto mb-14">
-            <Tag>Service Area</Tag>
-            <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
-              Where We Provide Home Deep Cleaning
+      {/* ── HOW TO KEEP YOUR HOME CLEAN FOR LONGER ───────────────────────────── */}
+      <section ref={refs.maintenance} className="bg-ivory-teal py-20 md:py-28">
+        <div className="max-w-4xl mx-auto px-4 md:px-8">
+          <motion.div {...fade(inView.maintenance)} className="text-center mb-4">
+            <Tag>Maintenance Tips</Tag>
+            <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-4">
+              How Can You Keep Your Home Clean for Longer After a Deep Clean?
             </h2>
+            <p className="text-slate-teal/75 text-base leading-relaxed">
+              How to keep your home clean longer after a professional deep clean.
+            </p>
+          </motion.div>
+
+          <div className="space-y-3 mt-10">
+            {maintenanceTips.map((m, i) => (
+              <motion.div key={m.title} {...fade(inView.maintenance, 0.05 * i)} className="flex gap-3 bg-ivory rounded-2xl p-5">
+                <Recycle size={18} className="text-teal shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-teal-deep font-semibold text-sm">{m.title}</p>
+                  {m.body && <p className="text-slate-teal/70 text-sm leading-relaxed mt-1">{m.body}</p>}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.p {...fade(inView.maintenance, 0.2)} className="mt-8 text-slate-teal/75 text-base leading-relaxed">
+            These small daily habits after a proper deep clean can significantly extend the
+            results of a deep clean.
+          </motion.p>
+
+          <ButtonRow labels={["Book Scheduled Contracts", "Maintain a Cleaner, Fresher Home"]} />
+        </div>
+      </section>
+
+      {/* ── COVERAGE AREAS ────────────────────────────────────────────────────── */}
+      <section ref={refs.coverage} className="bg-ivory py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
+          <motion.div {...fade(inView.coverage)} className="max-w-3xl mb-14">
+            <Tag>Service Area</Tag>
+            <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight mb-4">
+              Where Do We Provide Home Deep Cleaning Services in Delhi NCR?
+            </h2>
+            <p className="text-slate-teal/75 text-base leading-relaxed">
+              DryClean Masters provides professional home deep cleaning services across Delhi NCR
+              for apartments, villas, builder floors, and independent houses. Whether you&apos;re
+              preparing for a festival, moving into a new home, or scheduling routine maintenance,
+              our trained teams are available in most residential neighbourhoods across the city.
+            </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 gap-5">
@@ -1155,39 +1225,32 @@ export default function HomeDeepCleaningContent() {
               <motion.div
                 key={z.zone}
                 {...fade(inView.coverage, 0.05 * i)}
-                className="bg-ivory rounded-2xl p-6 border border-mist"
+                className="bg-ivory-teal rounded-2xl p-6 border border-mist"
               >
                 <div className="flex items-center gap-2 mb-4">
                   <MapPin size={16} className="text-teal" />
                   <h3 className="text-teal-deep font-bold text-base">{z.zone}</h3>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <ul className="space-y-2">
                   {z.areas.map((a) => (
-                    <span key={a} className="text-xs bg-mist/60 text-slate-teal/80 rounded-full px-3 py-1.5">
-                      {a}
-                    </span>
+                    <li key={a} className="text-slate-teal/75 text-sm">
+                      Home Deep Cleaning in {a}
+                    </li>
                   ))}
-                </div>
+                </ul>
               </motion.div>
             ))}
           </div>
-
-          <motion.p {...fade(inView.coverage, 0.15)} className="mt-8 text-center text-slate-teal/70 text-sm">
-            Don't see your area listed? We're likely still serving it —
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="text-teal font-semibold hover:underline ml-1">
-              ask us on WhatsApp
-            </a>.
-          </motion.p>
         </div>
       </section>
 
-      {/* ── FAQ — two-column accordion ──────────────────────────────────────── */}
-      <section ref={refs.faq} className="bg-ivory py-20 md:py-28">
+      {/* ── FAQ ──────────────────────────────────────────────────────────────── */}
+      <section ref={refs.faq} className="bg-ivory-teal py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
           <motion.div {...fade(inView.faq)} className="text-center max-w-2xl mx-auto mb-14">
             <Tag>Questions Answered</Tag>
             <h2 className="text-teal-deep text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
-              Frequently Asked Questions
+              FAQs
             </h2>
           </motion.div>
 
@@ -1202,7 +1265,7 @@ export default function HomeDeepCleaningContent() {
                       <motion.div
                         key={faq.q}
                         {...fade(inView.faq, 0.02 * i)}
-                        className="border border-mist rounded-2xl overflow-hidden bg-ivory-teal"
+                        className="border border-mist rounded-2xl overflow-hidden bg-ivory"
                       >
                         <button
                           onClick={() => setOpen(isOpen ? null : i)}
@@ -1233,13 +1296,14 @@ export default function HomeDeepCleaningContent() {
         </div>
       </section>
 
-      {/* ── FINAL CTA — bold centered banner ───────────────────────────────── */}
+      {/* ── READY FOR A CLEANER, HEALTHIER HOME? ─────────────────────────────── */}
       <section ref={refs.cta} className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/img/home_deep_cleaning/52.webp"
             alt="DryClean Masters team completing a home deep cleaning in a Delhi NCR living room"
             fill
+            sizes="100vw"
             className="object-cover"
           />
           <div className="absolute inset-0 bg-teal-deep/90" />
@@ -1247,29 +1311,32 @@ export default function HomeDeepCleaningContent() {
 
         <div className="relative max-w-3xl mx-auto px-4 md:px-8 py-20 md:py-28 text-center">
           <Tag light>Get Started</Tag>
-          <h2 className="text-ivory text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-6">
-            Book Your Home Deep Cleaning Today
+          <h2 className="text-ivory text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-2">
+            Ready for a Cleaner, Healthier Home?
           </h2>
-          <p className="text-stone-teal/75 text-base leading-relaxed mb-10 max-w-xl mx-auto">
-            Verified professionals, non-toxic products, and fixed pricing — across Delhi, Noida,
-            Gurgaon, Faridabad, and Ghaziabad. We provide the staff, the equipment, and the
-            flexibility; you just enjoy the result.
+          <p className="text-teal-light font-semibold text-lg mb-8">
+            Professional Home Deep Cleaning Services Across Delhi NCR.
           </p>
 
+          <div className="space-y-4 text-stone-teal/75 text-base leading-relaxed mb-8 max-w-xl mx-auto">
+            <p>
+              Now that you know what all is included, how much it costs, how long it takes, and
+              exactly what to expect, you only have one thing left to do.
+            </p>
+            <p className="text-ivory font-semibold">Call us and ask away everything you need to!</p>
+            <p>
+              Whether it&apos;s a full house deep cleaning service before the festive season, or a
+              deep clean your house has been asking for, we are ready whenever you are.
+            </p>
+            <p className="text-ivory font-semibold">24 hours. Every day. All of Delhi.</p>
+          </div>
+
           <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 btn-copper text-sm px-6 py-3.5"
-            >
-              <Sparkles size={16} /> Get an Instant Quote
-            </a>
             <a
               href={PHONE}
               className="inline-flex items-center gap-2 text-sm px-6 py-3.5 border border-teal/40 text-teal-light rounded-lg hover:bg-teal/10 transition-colors"
             >
-              <Phone size={15} /> Call {PHONE_DISPLAY}
+              <Phone size={15} /> Call Now
             </a>
             <a
               href={WA_LINK}
@@ -1277,12 +1344,28 @@ export default function HomeDeepCleaningContent() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 btn-whatsapp text-sm px-6 py-3.5"
             >
-              <MessageCircle size={16} /> WhatsApp Now
+              <MessageCircle size={16} /> WhatsApp Us
+            </a>
+            <a
+              href={WA_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 btn-copper text-sm px-6 py-3.5"
+            >
+              <Sparkles size={16} /> Get Free Quote
+            </a>
+            <a
+              href={WA_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 btn-primary text-sm px-6 py-3.5"
+            >
+              Book Service <ArrowUpRight size={15} />
             </a>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            {["Verified team", "Fixed pricing", "24/7 booking", "Full Delhi NCR coverage"].map((f) => (
+            {["Verified Team", "Safe Products", "Transparent Pricing", "Guaranteed Satisfaction"].map((f) => (
               <span key={f} className="inline-flex items-center gap-1.5 text-stone-teal/80 text-sm">
                 <CheckCircle2 size={15} className="text-teal-light" /> {f}
               </span>
