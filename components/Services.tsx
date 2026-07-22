@@ -98,6 +98,29 @@ const wetServices = [
   },
 ];
 
+const fullSpaceServices = [
+  {
+    num: "01",
+    title: "Home Deep Cleaning",
+    desc: "Full top-to-bottom deep cleaning for apartments, villas, and independent houses across Delhi NCR. Kitchen degreasing, bathroom descaling, floor scrubbing, and dust removal from every corner — move-in, move-out, festival, and post-renovation ready.",
+    tag: "Move-in · Move-out · Festival",
+    img: "/img/home_deep_cleaning/real_home_deep.webp",
+    price: "₹3,498/home",
+    popular: true,
+    href: "/home-deep-cleaning-services-delhi",
+  },
+  {
+    num: "02",
+    title: "Office Cleaning",
+    desc: "Professional office and commercial space cleaning covering workstations, carpets, reception areas, pantries, and washrooms. Flexible after-hours and weekend scheduling keeps your business operations running without disruption.",
+    tag: "Workstations · Pantry · Washrooms",
+    img: "/img/office_cleaning_Delhi/1.webp",
+    price: "₹6/sq.ft",
+    popular: false,
+    href: "/office-cleaning-services-delhi",
+  },
+];
+
 const WA_LINK =
   "https://wa.me/918882631413?text=Hi%2C%20I%20want%20to%20enquire%20about%20your%20cleaning%20services";
 
@@ -212,8 +235,10 @@ function ServiceCard({
 export default function Services() {
   const dryRef = useRef<HTMLDivElement>(null);
   const wetRef = useRef<HTMLDivElement>(null);
+  const fullRef = useRef<HTMLDivElement>(null);
   const dryInView = useInView(dryRef, { once: true, margin: "-60px" });
   const wetInView = useInView(wetRef, { once: true, margin: "-60px" });
+  const fullInView = useInView(fullRef, { once: true, margin: "-60px" });
 
   return (
     <section id="services">
@@ -336,6 +361,68 @@ export default function Services() {
               className="inline-flex items-center gap-2 btn-whatsapp font-sans text-sm px-8 py-3.5"
             >
               Enquire About Wet Cleaning
+              <ArrowRight size={14} />
+            </a>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ── Category C: Full-Space Cleaning (light, dedicated pages) ── */}
+      <div className="bg-ivory-teal py-20 md:py-28" ref={fullRef}>
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 mb-14">
+            <div>
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={fullInView ? { opacity: 1 } : {}}
+                className="inline-flex items-center gap-2 mb-4"
+              >
+                <span className="w-5 h-[2px] bg-copper rounded-full" />
+                <span className="text-copper font-sans text-xs uppercase tracking-[0.2em] font-semibold">
+                  Category C
+                </span>
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 18 }}
+                animate={fullInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="font-serif text-teal-deep text-3xl md:text-4xl xl:text-5xl font-bold leading-[1.1]"
+              >
+                Complete Home &amp; Office
+                <br />
+                <span className="italic font-normal text-charcoal/45">Cleaning Services</span>
+              </motion.h2>
+            </div>
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={fullInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="self-end font-sans text-slate-teal/70 text-sm leading-relaxed border-l-[3px] border-copper/25 pl-5"
+            >
+              Beyond single-item dry cleaning — full top-to-bottom cleaning for
+              entire homes and workplaces, with dedicated teams and pricing.
+            </motion.p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
+            {fullSpaceServices.map((s, i) => (
+              <ServiceCard key={i} {...s} index={i} inView={fullInView} />
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={fullInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.5 }}
+            className="mt-10 flex justify-center"
+          >
+            <a
+              href={WA_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 btn-primary font-sans text-sm px-8 py-3.5"
+            >
+              Enquire About Home &amp; Office Cleaning
               <ArrowRight size={14} />
             </a>
           </motion.div>
