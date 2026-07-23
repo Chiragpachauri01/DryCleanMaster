@@ -49,78 +49,31 @@ export const metadata: Metadata = {
 const schemaService = {
   "@context": "https://schema.org",
   "@type": "Service",
+  "@id": "https://www.drycleanmasters.com/office-chair-cleaning-delhi#service",
   name: "Office Chair Cleaning Services in Delhi",
+  url: "https://www.drycleanmasters.com/office-chair-cleaning-delhi",
+  serviceType: "Office Chair Dry Cleaning",
+  category: "Commercial Cleaning Service",
   description:
-    "Professional doorstep office chair cleaning services in Delhi NCR. Deep extraction, anti-microbial sanitisation, same-day service for all chair types. Starting ₹149/chair.",
+    "DryClean Masters provides professional Office Chair Cleaning Services in Delhi for offices, coworking spaces, corporate buildings, educational institutions and commercial workplaces. Our Corporate Chair Dry Cleaning Delhi service removes dust, stains, body oils, bacteria and allergens from fabric, mesh and upholstered office chairs using low-moisture cleaning methods and professional extraction equipment. Whether you are searching for Office Chair Shampooing Near Me, Commercial Chair Cleaning Service Delhi or Desk Chair Cleaning Services Delhi, our trained technicians deliver doorstep service across Delhi NCR. We also offer transparent Office Chair Dry Cleaning Charges based on chair type, quantity and cleaning requirements.",
   provider: {
-    "@type": "LocalBusiness",
-    name: "DryClean Masters",
     "@id": "https://www.drycleanmasters.com/#localbusiness",
-    telephone: "+918882631413",
-    url: "https://www.drycleanmasters.com/",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      bestRating: "5",
-      reviewCount: "12000",
+  },
+  areaServed: {
+    "@type": "AdministrativeArea",
+    name: "Delhi NCR",
+  },
+  audience: {
+    "@type": "BusinessAudience",
+    audienceType:
+      "Corporate Offices, Businesses, Educational Institutions, Coworking Spaces",
+  },
+  availableChannel: {
+    "@type": "ServiceChannel",
+    serviceLocation: {
+      "@type": "AdministrativeArea",
+      name: "Delhi NCR",
     },
-  },
-  areaServed: { "@type": "AdministrativeArea", name: "Delhi NCR" },
-  offers: {
-    "@type": "AggregateOffer",
-    lowPrice: "149",
-    highPrice: "299",
-    priceCurrency: "INR",
-    offerCount: "7",
-  },
-  serviceType: "Chair Cleaning",
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Chair Cleaning Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Standard Office / Task Chair Cleaning",
-          description: "Deep extraction cleaning for standard office chairs",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "149",
-          priceCurrency: "INR",
-          unitText: "per chair",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Executive Chair Cleaning (Fabric)",
-          description: "Professional cleaning for executive fabric chairs",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "199",
-          priceCurrency: "INR",
-          unitText: "per chair",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Executive Chair Cleaning (Leather)",
-          description: "Leather-safe cleaning and conditioning for executive chairs",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "299",
-          priceCurrency: "INR",
-          unitText: "per chair",
-        },
-      },
-    ],
   },
 };
 

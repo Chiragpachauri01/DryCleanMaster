@@ -51,79 +51,23 @@ export const metadata: Metadata = {
 const schemaService = {
   "@context": "https://schema.org",
   "@type": "Service",
+  "@id": "https://www.drycleanmasters.com/sofa-dry-cleaning-delhi#service",
   name: "Sofa Dry Cleaning Services in Delhi",
+  url: "https://www.drycleanmasters.com/sofa-dry-cleaning-delhi",
   description:
-    "Professional doorstep sofa dry cleaning services in Delhi. Fabric-safe treatments for velvet, suede, leather, and all upholstery types. Starting ₹200 per seat.",
+    "DryClean Masters offers professional Sofa Dry Cleaning Services in Delhi for fabric and leather sofas at residential and commercial locations. People searching for Sofa dry cleaning near me can book our Doorstep sofa dry cleaning in Delhi, which includes fabric inspection, vacuuming, stain treatment and deep dirt extraction. Our Sofa shampooing service Delhi customers choose is suitable for compatible upholstery fabrics, while Sofa dry cleaning charges in Delhi depend on the sofa size, fabric type, condition and number of seats. We also provide Leather sofa cleaning and polishing Delhi services using a suitable cleaning and conditioning process for leather upholstery.",
+  serviceType: "Professional Sofa Dry Cleaning",
+  category: "Sofa and Upholstery Cleaning Service",
+  areaServed: {
+    "@type": "City",
+    name: "Delhi",
+  },
   provider: {
     "@type": "LocalBusiness",
-    name: "DryClean Masters",
     "@id": "https://www.drycleanmasters.com/#localbusiness",
-    telephone: "+918882625522",
+    name: "DryClean Masters",
     url: "https://www.drycleanmasters.com/",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      bestRating: "5",
-      reviewCount: "12000",
-    },
-  },
-  areaServed: { "@type": "AdministrativeArea", name: "Delhi" },
-  offers: {
-    "@type": "AggregateOffer",
-    lowPrice: "200",
-    highPrice: "900",
-    priceCurrency: "INR",
-    offerCount: "15",
-  },
-  serviceType: "Sofa Dry Cleaning",
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Sofa Dry Cleaning Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Fabric Sofa Dry Cleaning",
-          description: "Dry cleaning for fabric, cotton, polyester sofas",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "200",
-          priceCurrency: "INR",
-          unitText: "per seat",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Velvet Sofa Dry Cleaning",
-          description: "Specialist dry cleaning for velvet sofas",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "250",
-          priceCurrency: "INR",
-          unitText: "per seat",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Leather Sofa Cleaning and Polishing",
-          description:
-            "Deep cleaning, conditioning, and polishing for leather sofas",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "700",
-          priceCurrency: "INR",
-          unitText: "full package per seat",
-        },
-      },
-    ],
+    telephone: "+91-8882631413",
   },
 };
 
