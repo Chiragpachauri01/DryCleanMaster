@@ -49,92 +49,22 @@ export const metadata: Metadata = {
 const schemaService = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Home Deep Cleaning Services in Delhi NCR",
+  "@id": "https://www.drycleanmasters.com/home-deep-cleaning-services-delhi#service",
+  name: "Home Deep Cleaning Services in Delhi",
+  url: "https://www.drycleanmasters.com/home-deep-cleaning-services-delhi",
   description:
-    "Professional home deep cleaning services in Delhi NCR for apartments, villas, and independent houses. Full house deep cleaning, festival cleaning, move-in and move-out cleaning, and post-renovation cleaning. Starting ₹3,498.",
-  provider: {
-    "@type": "LocalBusiness",
-    name: "DryClean Masters",
-    "@id": "https://www.drycleanmasters.com/#localbusiness",
-    telephone: "+918882631413",
-    url: "https://www.drycleanmasters.com/",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      bestRating: "5",
-      reviewCount: "15000",
-    },
-  },
-  areaServed: { "@type": "AdministrativeArea", name: "Delhi NCR" },
-  offers: {
-    "@type": "AggregateOffer",
-    lowPrice: "3498",
-    highPrice: "8998",
-    priceCurrency: "INR",
-    offerCount: "4",
-  },
+    "DryClean Masters provides Home Deep Cleaning Services in Delhi for apartments, flats, villas and independent houses. Our Deep Cleaning Services in Delhi include kitchens, bathrooms, bedrooms, living rooms, balconies, floors, windows and other accessible areas. Customers looking for Home Cleaning Services in Delhi, House Cleaning Services in Delhi or a Full House Deep Cleaning Service can contact our team to confirm availability in their location.",
   serviceType: "Home Deep Cleaning",
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Home Deep Cleaning Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "1 BHK Home Deep Cleaning",
-          description: "Full home deep cleaning for a 1 BHK apartment",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "3498",
-          priceCurrency: "INR",
-          unitText: "per home",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "2 BHK Home Deep Cleaning",
-          description: "Full home deep cleaning for a 2 BHK apartment",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "4998",
-          priceCurrency: "INR",
-          unitText: "per home",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "3 BHK Home Deep Cleaning",
-          description: "Full home deep cleaning for a 3 BHK apartment",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "6998",
-          priceCurrency: "INR",
-          unitText: "per home",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "4 BHK / Villa Home Deep Cleaning",
-          description: "Full home deep cleaning for a 4 BHK apartment or villa",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "8998",
-          priceCurrency: "INR",
-          unitText: "per home",
-        },
-      },
-    ],
+  category: "Home Cleaning Service",
+  areaServed: {
+    "@type": "City",
+    name: "Delhi",
+  },
+  provider: {
+    "@type": "Organization",
+    "@id": "https://www.drycleanmasters.com/#organization",
+    name: "DryClean Masters",
+    url: "https://www.drycleanmasters.com/",
   },
 };
 

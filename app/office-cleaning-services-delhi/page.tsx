@@ -49,31 +49,20 @@ export const metadata: Metadata = {
 const schemaService = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Office Cleaning Services in Delhi NCR",
-  description:
-    "Professional office cleaning, commercial office cleaning and office deep cleaning services in Delhi NCR. Workstation, chair, carpet, reception, pantry, washroom and high-touch sanitisation with flexible after-hours scheduling. Starting ₹6 per sq.ft.",
-  provider: {
-    "@type": "LocalBusiness",
-    name: "DryClean Masters",
-    "@id": "https://www.drycleanmasters.com/#localbusiness",
-    telephone: "+918882631413",
-    url: "https://www.drycleanmasters.com/",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      bestRating: "5",
-      reviewCount: "12000",
-    },
-  },
-  areaServed: { "@type": "AdministrativeArea", name: "Delhi NCR" },
-  offers: {
-    "@type": "AggregateOffer",
-    lowPrice: "2999",
-    highPrice: "9998",
-    priceCurrency: "INR",
-    offerCount: "4",
-  },
+  "@id": "https://www.drycleanmasters.com/office-cleaning-services-delhi#service",
+  name: "Office Cleaning Services in Delhi",
+  url: "https://www.drycleanmasters.com/office-cleaning-services-delhi",
   serviceType: "Office Cleaning",
+  category: "Commercial Cleaning Service",
+  description:
+    "DryClean Masters provides professional Office Cleaning Services in Delhi for businesses of all sizes. Our trained team delivers office deep cleaning services across Delhi NCR for corporate offices, startups, coworking spaces, retail offices and commercial workplaces. Whether you need a reliable office cleaning company for routine maintenance, commercial office cleaning, corporate office cleaning or one-time office deep cleaning services in Delhi NCR, we use professional equipment and safe cleaning methods to clean workstations, meeting rooms, cabins, reception areas, pantries, washrooms, glass partitions, floors and other accessible office spaces with minimal disruption to your business operations.",
+  provider: {
+    "@id": "https://www.drycleanmasters.com/#localbusiness",
+  },
+  areaServed: {
+    "@type": "AdministrativeArea",
+    name: "Delhi NCR",
+  },
 };
 
 const schemaFAQ = {

@@ -49,92 +49,19 @@ export const metadata: Metadata = {
 const schemaService = {
   "@context": "https://schema.org",
   "@type": "Service",
+  "@id": "https://www.drycleanmasters.com/mattress-cleaning-services-delhi#service",
   name: "Mattress Cleaning Services in Delhi",
+  url: "https://www.drycleanmasters.com/mattress-cleaning-services-delhi",
   description:
-    "Professional doorstep mattress deep cleaning and sanitisation services in Delhi. UV-C sanitisation, bio-enzymatic stain treatment, and low-moisture extraction. Starting from ₹399.",
+    "DryClean Masters provides professional mattress cleaning services Delhi residents can book conveniently at their doorstep. Our bed mattress cleaning services and mattress deep cleaning services help remove embedded dust, dirt, stains, unpleasant odours and allergens from different types of mattresses. Customers looking for mattress cleaning at home, mattress cleaning in Delhi or mattress dry cleaning Delhi can schedule an on-site service according to their mattress type and condition. We also provide mattress sanitization services to improve mattress hygiene and freshness.",
+  serviceType: "Mattress Cleaning and Sanitization",
+  category: "Mattress Cleaning Service",
+  areaServed: {
+    "@type": "City",
+    name: "Delhi",
+  },
   provider: {
-    "@type": "LocalBusiness",
-    name: "DryClean Masters",
     "@id": "https://www.drycleanmasters.com/#localbusiness",
-    telephone: "+918882631413",
-    url: "https://www.drycleanmasters.com/",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      bestRating: "5",
-      reviewCount: "9000",
-    },
-  },
-  areaServed: { "@type": "AdministrativeArea", name: "Delhi" },
-  offers: {
-    "@type": "AggregateOffer",
-    lowPrice: "399",
-    highPrice: "999",
-    priceCurrency: "INR",
-    offerCount: "6",
-  },
-  serviceType: "Mattress Cleaning",
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Mattress Cleaning Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Single Mattress Deep Cleaning",
-          description: "Deep cleaning for single mattresses with UV-C sanitisation",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "399",
-          priceCurrency: "INR",
-          unitText: "per mattress",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Double Mattress Deep Cleaning",
-          description: "Deep cleaning for double mattresses with UV-C sanitisation",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "599",
-          priceCurrency: "INR",
-          unitText: "per mattress",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Queen Mattress Deep Cleaning",
-          description: "Deep cleaning for queen size mattresses with UV-C sanitisation",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "699",
-          priceCurrency: "INR",
-          unitText: "per mattress",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "King Mattress Deep Cleaning",
-          description: "Deep cleaning for king size mattresses with UV-C sanitisation",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "999",
-          priceCurrency: "INR",
-          unitText: "per mattress",
-        },
-      },
-    ],
   },
 };
 

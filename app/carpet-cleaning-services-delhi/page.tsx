@@ -51,78 +51,19 @@ export const metadata: Metadata = {
 const schemaService = {
   "@context": "https://schema.org",
   "@type": "Service",
+  "@id": "https://www.drycleanmasters.com/carpet-cleaning-services-delhi#service",
   name: "Carpet Cleaning Services in Delhi",
+  url: "https://www.drycleanmasters.com/carpet-cleaning-services-delhi",
   description:
-    "Professional doorstep carpet cleaning services in Delhi. Deep stain removal, carpet shampooing, sanitisation for homes, offices, and rugs. Starting ₹8/sq.ft.",
+    "DryClean Masters provides professional Carpet Cleaning Services in Delhi for homes, offices and commercial spaces. Whether you are searching for Carpet Cleaning Near Me, Carpet Shampooing Service Delhi, Doorstep Carpet Cleaning Delhi, Office Carpet Cleaning Services Delhi or Best Rug Cleaners in Delhi, our trained team delivers deep carpet cleaning, stain removal, shampooing, sanitisation and odour removal using professional equipment at your doorstep across Delhi.",
+  serviceType: "Carpet Cleaning Service",
+  category: "Cleaning Service",
+  areaServed: {
+    "@type": "AdministrativeArea",
+    name: "Delhi NCR",
+  },
   provider: {
-    "@type": "LocalBusiness",
-    name: "DryClean Masters",
     "@id": "https://www.drycleanmasters.com/#localbusiness",
-    telephone: "+918882631413",
-    url: "https://www.drycleanmasters.com/",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      bestRating: "5",
-      reviewCount: "12000",
-    },
-  },
-  areaServed: { "@type": "AdministrativeArea", name: "Delhi" },
-  offers: {
-    "@type": "AggregateOffer",
-    lowPrice: "500",
-    highPrice: "1500",
-    priceCurrency: "INR",
-    offerCount: "10",
-  },
-  serviceType: "Carpet Cleaning",
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Carpet Cleaning Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Synthetic Carpet Cleaning",
-          description: "Hot water extraction for nylon and polyester carpets",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "8",
-          priceCurrency: "INR",
-          unitText: "per sq.ft",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Wool Carpet Cleaning",
-          description: "pH-neutral wet extraction for wool carpets",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "12",
-          priceCurrency: "INR",
-          unitText: "per sq.ft",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Silk Carpet Cleaning",
-          description: "Specialist dry cleaning for silk carpets",
-        },
-        priceSpecification: {
-          "@type": "UnitPriceSpecification",
-          price: "18",
-          priceCurrency: "INR",
-          unitText: "per sq.ft",
-        },
-      },
-    ],
   },
 };
 

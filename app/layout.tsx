@@ -82,52 +82,6 @@ const schemaLocalBusiness = {
     "Professional doorstep dry cleaning services in Delhi NCR specializing exclusively in premium furniture, upholstery, sofa, carpet, and office chair deep cleaning. We do NOT provide clothing laundry services.",
 };
 
-const schemaService = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "Dry Cleaning Services in Delhi",
-  provider: {
-    "@type": "LocalBusiness",
-    name: "DryClean Masters",
-    url: "https://www.drycleanmasters.com/",
-    logo: "https://www.drycleanmasters.com/img/Logo/DryCleanLogo-transparent.png",
-  },
-  areaServed: { "@type": "AdministrativeArea", name: "Delhi NCR" },
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Furnishing and Upholstery Cleaning Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Sofa Dry Cleaning",
-          description:
-            "Deep foam extraction, stain removal, and sanitization for fabric, suede, and velvet sofas.",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Carpet Dry Cleaning",
-          description:
-            "Low-moisture shampooing and deep dirt extraction for residential rugs and commercial carpets.",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Office Chair Dry Cleaning",
-          description:
-            "Bulk mesh and fabric desk chair dry cleaning for corporate offices with zero workspace downtime.",
-        },
-      },
-    ],
-  },
-};
-
 const schemaOrganization = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -181,10 +135,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaLocalBusiness) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaService) }}
         />
         <script
           type="application/ld+json"

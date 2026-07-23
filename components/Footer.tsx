@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Phone, Mail, MessageCircle, MapPin, Star } from "lucide-react";
@@ -30,6 +31,28 @@ const services = [
 ];
 
 export default function Footer() {
+  const [rating, setRating] = useState(4.9);
+  const [reviewCount, setReviewCount] = useState(400);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetch("/api/google-reviews")
+      .then((res) => res.json())
+      .then((data: { ok: boolean; rating: number | null; userRatingCount: number | null }) => {
+        if (!isMounted || !data.ok) return;
+        if (data.rating) setRating(data.rating);
+        if (data.userRatingCount) setReviewCount(data.userRatingCount);
+      })
+      .catch(() => {
+        // Keep fallback rating/count when Google Places is unavailable.
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <footer id="contact" className="bg-teal-deep teal-texture">
       {/* Top CTA bar */}
@@ -40,8 +63,10 @@ export default function Footer() {
               {[...Array(5)].map((_, i) => (
                 <Star key={i} size={11} className="text-copper-light fill-copper-light" />
               ))}
-              <span className="font-sans text-copper-light text-xs font-semibold ml-1">4.9</span>
-              <span className="font-sans text-stone-teal/40 text-xs">· 400+ Google Reviews</span>
+              <span className="font-sans text-copper-light text-xs font-semibold ml-1">{rating.toFixed(1)}</span>
+              <span className="font-sans text-stone-teal/40 text-xs">
+                · {reviewCount.toLocaleString("en-IN")}+ Google Reviews
+              </span>
             </div>
             <p className="font-sans text-stone-teal/50 text-xs uppercase tracking-[0.2em] mb-1">
               Ready for a Master Clean?

@@ -15,9 +15,9 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import RelatedWebStories from "@/components/webstory/RelatedWebStories";
 
 export const metadata: Metadata = {
-  title: "Premium Sofa and Carpet Cleaning in Delhi: DryClean Masters",
+  title: "DryClean Masters | Home & Office Cleaning Services in Delhi NCR",
   description:
-    "Looking for professional dry cleaning services in Delhi? DryClean Masters offers same-day dry clean service at home for sofas, carpets, etc. Contact us today!",
+    "Professional Home & Office Cleaning Services in Delhi NCR. Sofa, Carpet, Mattress, Office Chair, Restaurant & Deep Cleaning with Same-Day Doorstep Service.",
   keywords:
     "sofa dry cleaning Delhi, carpet cleaning Delhi, mattress cleaning, upholstery cleaning, wet cleaning, fabric shampoo, premium cleaning service",
   alternates: {

@@ -58,46 +58,6 @@ const dryServices = [
   },
 ];
 
-const wetServices = [
-  {
-    num: "01",
-    title: "Sofa Wet Cleaning & Shampooing",
-    desc: "High-foaming fabric shampoo treatment followed by powerful vacuum extraction to remove deep food stains, oil marks, and sweat odours. Ideal for heavily soiled sofas that need deep penetration cleaning beyond what dry methods can achieve.",
-    tag: "Deep Stain · Oil · Odour",
-    img: "/img/service-sofa-wet-shampoo.webp",
-    price: "₹349/seat",
-    popular: true,
-  },
-  {
-    num: "02",
-    title: "Carpet Shampoo Cleaning",
-    desc: "Deep wet injection cleaning that penetrates heavy traffic areas of your carpet to revive compressed fibres and colours. Recommended for carpets with stubborn stains, embedded grime, or significant foot-traffic wear.",
-    tag: "Heavy Traffic · Colour Revival",
-    img: "/img/service-carpet-shampoo.webp",
-    price: "₹15/sq.ft",
-    popular: false,
-    href: "/carpet-cleaning-services-delhi",
-  },
-  {
-    num: "03",
-    title: "Deep Wet Upholstery Treatment",
-    desc: "Specialised water-based stain-dissolving treatment for highly soiled fabric linings and cushions. Our extraction process removes residue cleanly, leaving upholstery fresh and dry within hours.",
-    tag: "Fabric Lining · Cushions",
-    img: "/img/service-upholstery-wet.webp",
-    price: "₹199/chair",
-    popular: false,
-  },
-  {
-    num: "04",
-    title: "Fabric Shampoo Treatment",
-    desc: "pH-balanced conditioning shampoo application that restores the natural softness and shine of luxury furnishing fabrics. Leaves no sticky residue and no harsh chemical smell after treatment.",
-    tag: "pH-Balanced · Conditioning",
-    img: "/img/service-fabric-shampoo.webp",
-    price: "₹999+",
-    popular: false,
-  },
-];
-
 const fullSpaceServices = [
   {
     num: "01",
@@ -234,10 +194,8 @@ function ServiceCard({
 
 export default function Services() {
   const dryRef = useRef<HTMLDivElement>(null);
-  const wetRef = useRef<HTMLDivElement>(null);
   const fullRef = useRef<HTMLDivElement>(null);
   const dryInView = useInView(dryRef, { once: true, margin: "-60px" });
-  const wetInView = useInView(wetRef, { once: true, margin: "-60px" });
   const fullInView = useInView(fullRef, { once: true, margin: "-60px" });
 
   return (
@@ -305,69 +263,7 @@ export default function Services() {
         </div>
       </div>
 
-      {/* ── Category B: Wet Cleaning (dark teal) ── */}
-      <div className="bg-teal-deep py-20 md:py-28 teal-texture" ref={wetRef}>
-        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
-          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 mb-14">
-            <div>
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={wetInView ? { opacity: 1 } : {}}
-                className="inline-flex items-center gap-2 mb-4"
-              >
-                <span className="w-5 h-[2px] bg-copper rounded-full" />
-                <span className="text-copper font-sans text-xs uppercase tracking-[0.2em] font-semibold">
-                  Category B
-                </span>
-              </motion.span>
-              <motion.h2
-                initial={{ opacity: 0, y: 18 }}
-                animate={wetInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="font-serif text-ivory-warm text-3xl md:text-4xl xl:text-5xl font-bold leading-[1.1]"
-              >
-                Advanced Wet
-                <br />
-                <span className="italic font-normal text-stone-teal/40">Cleaning Services</span>
-              </motion.h2>
-            </div>
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={wetInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="self-end font-sans text-stone-teal/55 text-sm leading-relaxed border-l-[3px] border-copper/25 pl-5"
-            >
-              Deep-penetration shampoo and extraction treatments for heavily
-              soiled furnishings. Industrial precision, zero chemical aftermath.
-            </motion.p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-5">
-            {wetServices.map((s, i) => (
-              <ServiceCard key={i} {...s} dark index={i} inView={wetInView} />
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={wetInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.5 }}
-            className="mt-10 flex justify-center"
-          >
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 btn-whatsapp font-sans text-sm px-8 py-3.5"
-            >
-              Enquire About Wet Cleaning
-              <ArrowRight size={14} />
-            </a>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* ── Category C: Full-Space Cleaning (light, dedicated pages) ── */}
+      {/* ── Category B: Full-Space Cleaning (light, dedicated pages) ── */}
       <div className="bg-ivory-teal py-20 md:py-28" ref={fullRef}>
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 mb-14">
@@ -379,7 +275,7 @@ export default function Services() {
               >
                 <span className="w-5 h-[2px] bg-copper rounded-full" />
                 <span className="text-copper font-sans text-xs uppercase tracking-[0.2em] font-semibold">
-                  Category C
+                  Category B
                 </span>
               </motion.span>
               <motion.h2
